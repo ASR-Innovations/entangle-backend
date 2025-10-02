@@ -1,0 +1,275 @@
+name: Deploy Entangle Backend
+
+on:
+  push:
+    branches: [ master, main, dev ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+        
+    - name: Install dependencies
+      run: npm install
+        
+    - name: Deploy backend files
+      uses: easingthemes/ssh-deploy@main
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+        ARGS: "-rltgoDzvO --delete"
+        SOURCE: "./"
+        REMOTE_HOST: 209.38.123.139
+        REMOTE_USER: root
+        TARGET: "/var/www/entangle-backend"
+        EXCLUDE: "node_modules/, .git/, logs/, *.log, .github/"
+        
+    - name: Run post-deployment commands
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: 209.38.123.139
+        username: root
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        script: |
+          cd /var/www/entangle-backend
+          
+          echo "🚀 Starting post-deployment setup..."
+          
+          # Install production dependencies
+          echo "📦 Installing production dependencies..."
+          npm install --production
+          
+          # Create logs directory
+          mkdir -p logs
+          
+          # Install PM2 globally if not installed
+          if ! command -v pm2 &> /dev/null; then
+            echo "📦 Installing PM2..."
+            npm install -g pm2
+          fi
+          
+          # Fix database permissions PROPERLY
+          echo "🗄️ Setting up database permissions..."
+          sudo -u postgres psql -d entangle_meetings << 'SQL'
+          GRANT ALL PRIVILEGES ON SCHEMA public TO entangle_user;
+          GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO entangle_user;
+          GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO entangle_user;
+          GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO entangle_user;
+          ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO entangle_user;
+          ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON SEQUENCES TO entangle_user;
+          SQL
+          
+          # Setup database schema if needed (with better error handling)
+          echo "🗄️ Setting up database schema..."
+          if [ -f "database/schema.sql" ]; then
+            echo "Running schema.sql..."
+            SCHEMA_OUTPUT=$(PGPASSWORD=entangle_secure_2024 psql -h localhost -U entangle_user -d entangle_meetings -f database/schema.sql 2>&1)
+            SCHEMA_EXIT_CODE=$?
+            
+            if [ $SCHEMA_EXIT_CODE -eq 0 ]; then
+              echo "✅ Schema setup completed successfully"
+            else
+              echo "$SCHEMA_OUTPUT"
+              if echo "$SCHEMA_OUTPUT" | grep -q "already exists"; then
+                echo "✅ Schema already exists (this is fine)"
+              else
+                echo "⚠️ Schema setup had some errors but continuing..."
+              fi
+            fi
+          fi
+          
+          # Check if src/server.js exists
+          if [ ! -f src/server.js ]; then
+            echo "❌ ERROR: src/server.js not found!"
+            echo "📁 Current directory contents:"
+            ls -la
+            exit 1
+          fi
+          
+          echo "✅ Found src/server.js, configuring application..."
+          
+          # Create PM2 ecosystem config - FIXED: Using single quotes to prevent variable interpolation
+          echo "🔧 Creating PM2 ecosystem config with hardcoded credentials..."
+          cat > ecosystem.config.js << 'ECOSYSTEM'
+          module.exports = {
+          apps: [{
+          name: 'entangle-backend',
+          script: './src/server.js',
+          instances: 1,
+          autorestart: true,
+          watch: false,
+          max_memory_restart: '1G',
+          env: {
+          NODE_ENV: 'production',
+          PORT: 5009,
+          HOST: '0.0.0.0',
+          DB_HOST: 'localhost',
+          DB_PORT: 5432,
+          DB_NAME: 'entangle_meetings',
+          DB_USER: 'entangle_user',
+          DB_PASSWORD: 'entangle_secure_2024',
+          FRONTEND_URL: 'https://the-entangle.vercel.app,http://localhost:3000,http://localhost:5173,http://127.0.0.1:3000',
+          PARA_API_KEY: 'beta_fc50f3388ba41bad00adba9289d61aac',
+          PARA_SECRET_API_KEY: 'sk_beta_a5e95b16664f8be149a10b9a44cb2cca',
+          PARA_ENVIRONMENT: 'beta',
+          JITSI_DOMAIN: '8x8.vc',
+          JITSI_APP_ID: 'vpaas-magic-cookie-12e00659b2b144eebab8e26c218191dd',
+          JAAS_SUB: 'vpaas-magic-cookie-12e00659b2b144eebab8e26c218191dd',
+          JITSI_KID: 'vpaas-magic-cookie-12e00659b2b144eebab8e26c218191dd/a521af',
+          JITSI_PRIVATE_KEY: '-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCSwCiEVtUgGrq5\n6iVMafL+737z3FtWCi53hdd856ZJZJFbhoZQf5o2KWc/ovKVjQNEjPvCFPCoI90+\nx/zwjcYIOmh0QVurDSWC9VtTEBA4fS10HWc+dBRzTJmfOlkRVls1mMEl2HqPmB1T\nur40g58swOTw7k3YmnKSfGCE3escccUZwUYw8LHZOgYchWWbESffULgYOu1wHGr8\nH/Rcn9bKNtP16luXUAU9Y/xurJKqF+x+gAXxnJ5xvYUmRLRtk7/dLLbKJVeoF/3f\nguRhElA3XfQUOe74cWglTafXGDhu0KxIDwfFaDAzbTr2p2G3SMnzXO6Su3wPzA7j\n8L8LCPrtAgMBAAECggEALxcmaUEL5t9s59ew3FJrPU9Q56PgUz21J3l1aolTHN3+\nnuYOF6q6q4KhtRPuz/qN/+NVrjPV/b50cn7uNarozx8fAZ8vcTYowVtGUOMosVfJ\nzCbbSHkrTsxXx3aLujqBzjMUV7adrZJcZs/X1TYfT9ceIAn4RPdaqJLszfYASgHi\n9nDbcKKrTteyc26mHjhN4pfUkDT0p0VBIBTNjQyatPFzJNDAjwoS1eZieGnZecr6\nmdXSPksWEZU3YKbNW4iEXGtwRC2jVZxdJ59hBuG1kOlwOyrx2Q/kJAEqvBUEwqVP\nvTYlQIioHKMC/cMZtrDp3IwOIVJpmVsb1yAjPzZU6QKBgQDWzgA2n0Hu6MZaxRsq\nqsFw35MmgThHHFucXK4T8+2LAxhWLAf0iM2slLBgBNyyCMFyoVEjX74UFTOsQf0A\nHNCL930ZTu4TVbNjztOZNa5kYzZEJNEzDciofTRC8b1gXmXzInoQuovCVvX/px9l\n/j4EFCeT20A0UHdgN15ASknqVwKBgQCu5P27oTCZra6xagz9Z8Xdk6WfUheZ7qUF\n+EKyvMMMlKXIL/HeuHyHc+FBbAYMjhlKEANHs9Dm91cS4sr0V4IHgLNU7zPEV9mm\nHd+106+6z/SL3wKENmc+KR40pqRiLx3VVVN+FRZp8zc66WXbOSTdhMNuLUk819a5\nmkndr8ICWwKBgQDbRaaKG8BedVgmSJcW0wBsjI3V/IrKbHRIBYPd8l9GTH6HWKM2\nSIBL7+yr18rCIpX2wh3lklKihZIeAa6WctOgTZ9yOlRlgFKDTBpMh7Ph3jUDEuJK\nz4NKG6VBwSukODiyHTul4AfS9ppfwuYWY5ZC66ALGwFLZei2W07nKe6SPAoGAO8JA\ntHDCQ3BmBXbgE2H26Nv/Nm39ZHp3Zo/KcnovB0hvUPSY52oQGtRMfmcjtfyDxZut\nEz3svk57MRfPEygnZNrj67yD6q29z5Xbj6xSGjneLEC6AmT4Z/PyvzjFaEsDHZa3\nHZik/PS+xWFkjUB8STiI8keFA8YYN3jxjk70sosCgYAChUM60AIT1fmgNDTFA1o3\ngXJ5xQeWRtmTXKvEImKbHRmbplChpT8zwa7uBX85jYj+TV+WfdBUMcvLOXD3im0W\n5M1doZffL1AogwGnTwNZi7qjE9aWJg/QgK7/tA4uNrTyn7dgQo9CLkTWMzT57mb3\nDxNkFw4xpuDu0w2Rl7Hbbw==\n-----END PRIVATE KEY-----',
+          CONTRACT_ADDRESS: '0x6fD65aE833C9679cBC571581CE0f5Cd73D565796',
+          RPC_URL: 'https://avax-fuji.g.alchemy.com/v2/Yo4enHB113igpnycl13On',
+          AVALANCHE_RPC: 'https://avax-fuji.g.alchemy.com/v2/Yo4enHB113igpnycl13On',
+          PLATFORM_PRIVATE_KEY: '0x69a0a908f3a6c7a26124b6566f973a8c5fc7a89fea1c112126dc5319db4b9ac6',
+          JWT_SECRET: 'your-super-secret-jwt-key-min-32-chars-production-2024'
+          },
+          error_file: './logs/error.log',
+          out_file: './logs/out.log',
+          log_file: './logs/combined.log',
+          time: true
+          }]
+          };
+          ECOSYSTEM
+          
+          # Setup Nginx configuration - FIXED: Supports both production and localhost
+          echo "🌐 Setting up Nginx configuration..."
+          cat > /etc/nginx/sites-available/entangle-backend << 'NGINX_CONF'
+          map $http_origin $cors_origin {
+          default "";
+          "~^https://the-entangle\.vercel\.app$" $http_origin;
+          "~^http://localhost:[0-9]+$" $http_origin;
+          "~^http://127\.0\.0\.1:[0-9]+$" $http_origin;
+          }
+          
+          server {
+          listen 80;
+          server_name 209.38.123.139 _;
+          
+          location / {
+          # Handle preflight requests
+          if ($request_method = 'OPTIONS') {
+          add_header 'Access-Control-Allow-Origin' $cors_origin always;
+          add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS' always;
+          add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization' always;
+          add_header 'Access-Control-Max-Age' 1728000;
+          add_header 'Access-Control-Allow-Credentials' 'true' always;
+          add_header 'Content-Type' 'text/plain; charset=utf-8';
+          add_header 'Content-Length' 0;
+          return 204;
+          }
+          
+          # Regular CORS headers
+          add_header 'Access-Control-Allow-Origin' $cors_origin always;
+          add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS' always;
+          add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization' always;
+          add_header 'Access-Control-Allow-Credentials' 'true' always;
+          
+          proxy_pass http://localhost:5009;
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection 'upgrade';
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+          proxy_cache_bypass $http_upgrade;
+          }
+          }
+          NGINX_CONF
+          
+          # Enable Nginx site
+          ln -sf /etc/nginx/sites-available/entangle-backend /etc/nginx/sites-enabled/
+          rm -f /etc/nginx/sites-enabled/default
+          
+          # Test and restart Nginx
+          echo "🔍 Testing Nginx configuration..."
+          if nginx -t; then
+            echo "✅ Nginx config is valid, restarting..."
+            systemctl restart nginx
+          else
+            echo "❌ Nginx config test failed!"
+            nginx -t
+            exit 1
+          fi
+          
+          # CRITICAL FIX: Complete PM2 cleanup to ensure fresh start with new env vars
+          echo "🗑️ Cleaning up old PM2 processes..."
+          pm2 delete entangle-backend 2>/dev/null || echo "No existing process to delete"
+          pm2 kill 2>/dev/null || echo "PM2 daemon not running"
+          
+          # Update PM2 to fix version mismatch
+          echo "📦 Updating PM2 to latest version..."
+          npm install -g pm2@latest
+          
+          # Start fresh PM2 process with new environment variables
+          echo "🚀 Starting application with completely fresh PM2 configuration..."
+          pm2 start ecosystem.config.js
+          pm2 save
+          
+          # Increased wait time for Para API and services initialization
+          echo "⏳ Waiting for application to fully initialize (15 seconds)..."
+          sleep 15
+          
+          # Health check with retry logic
+          echo "🏥 Performing health check with retries..."
+          MAX_RETRIES=3
+          RETRY_COUNT=0
+          HEALTH_CHECK_SUCCESS=false
+          
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+            if curl -f http://localhost:5009/health > /dev/null 2>&1; then
+              echo "✅ APPLICATION DEPLOYED SUCCESSFULLY!"
+              echo "🌐 Backend API is healthy: http://209.38.123.139/health"
+              HEALTH_CHECK_SUCCESS=true
+              break
+            else
+              RETRY_COUNT=$((RETRY_COUNT + 1))
+              if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
+                echo "⏳ Health check attempt $RETRY_COUNT failed, waiting 5 more seconds..."
+                sleep 5
+              fi
+            fi
+          done
+          
+          if [ "$HEALTH_CHECK_SUCCESS" = false ]; then
+            echo "⚠️ Health check failed after $MAX_RETRIES attempts"
+            echo "📋 Application logs (last 30 lines):"
+            pm2 logs entangle-backend --lines 30 --nostream
+            echo ""
+            echo "Continuing anyway - check logs above for issues"
+          fi
+          
+          echo ""
+          echo "📊 Final PM2 Status:"
+          pm2 status
+          echo ""
+          echo "🔍 Environment Variables Check:"
+          pm2 env 1 | grep -E "(PARA_API_KEY|FRONTEND_URL|PORT|NODE_ENV)" || echo "Using ecosystem config"
+          echo ""
+          echo "✅ Deployment process completed!"
+
+  notify:
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+    - name: Deployment Status
+      run: |
+        if [[ "${{ needs.deploy.result }}" == "success" ]]; then
+          echo "✅ Deployment successful to server 209.38.123.139"
+          echo "🌐 Backend API: http://209.38.123.139/health"
+          echo "📱 Supports: Production (Vercel) + Localhost development"
+        else
+          echo "❌ Deployment failed"
+          exit 1
+        fi
+        

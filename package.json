@@ -1,0 +1,42 @@
+{
+  "name": "meeting-auction-backend",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "jest",
+    "test:server": "node test-backend-server.js",
+    "test:auto": "node start-server-and-test.js",
+    "test:contract": "node test-contract-integration.js",
+    "test:meeting": "node test-meeting-nft-gating.js",
+    "test:all-functions": "node test-all-contract-functions.js",
+    "test:auction-ending": "node test-auction-ending-logic.js",
+    "test:auction-apis": "node test-auction-apis-focused.js",
+    "test:auction-apis-auto": "node start-server-and-test-auctions.js",
+    "test:comprehensive": "npm run test:auto && npm run test:all-functions && npm run test:auction-ending"
+  },
+  "dependencies": {
+    "@getpara/server-sdk": "2.0.0-alpha.51",
+    "@lit-protocol/constants": "^2.2.0",
+    "@lit-protocol/lit-node-client": "^2.2.0",
+    "axios": "^1.5.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.3.1",
+    "ethers": "^6.15.0",
+    "express": "^4.18.2",
+    "helmet": "^7.0.0",
+    "joi": "^18.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "node-cron": "^3.0.3",
+    "pg": "^8.11.3",
+    "redis": "^4.6.8",
+    "socket.io": "^4.7.2",
+    "web3": "^4.1.1",
+    "winston": "^3.10.0"
+  },
+  "devDependencies": {
+    "jest": "^29.6.4",
+    "nodemon": "^3.0.1"
+  }
+}

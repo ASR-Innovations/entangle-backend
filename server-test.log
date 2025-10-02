@@ -1,0 +1,83 @@
+
+> meeting-auction-backend@1.0.0 dev
+> nodemon src/server.js
+
+[33m[nodemon] 3.1.10[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): *.*[39m
+[33m[nodemon] watching extensions: js,mjs,cjs,json[39m
+[32m[nodemon] starting `node src/server.js`[39m
+[32minfo[39m: JaaS JWT configuration found - tokens will be generated {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[31merror[39m: Failed to initialize Lit Protocol: the litNetwork specified in the LitNodeClient config not found in LIT_NETWORKS {"errorCode":"LitNodeClientBadConfigError","errorKind":"Config","service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+(node:32209) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[33mwarn[39m: Meeting Service: Lit Protocol not configured {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: Meeting Service initialized {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: PostgreSQL connected {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: Database tables created/verified from schema.sql {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: Database setup completed successfully {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: Contract service wallet initialized {"network":"FUJI","service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44","walletAddress":"0x25FE6F74131e9d92FeB849F96427a9e7967A6b24"}
+[32minfo[39m: Contract service initialized {"contractAddress":"0x9171Cf8E1d3c7EBf7bf8866CcD2c8C58512A3Be8","hasWallet":true,"network":"FUJI","rpcUrl":"https://avax-fuji.g.alchemy.com/v2/Yo4enHB113igpnycl13On","service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: Contract service initialized {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: Auction cron service wallet initialized {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44","walletAddress":"0x25FE6F74131e9d92FeB849F96427a9e7967A6b24"}
+[32minfo[39m: Auction cron service initialized {"contractAddress":"0x9171Cf8E1d3c7EBf7bf8866CcD2c8C58512A3Be8","hasWallet":true,"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: 🤖 STARTING AUCTION CRON SERVICE {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: ⏰ Schedule: Every 2 minutes {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: 💼 Wallet: 0x25FE6F74131e9d92FeB849F96427a9e7967A6b24 {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: 📝 Contract: 0x9171Cf8E1d3c7EBf7bf8866CcD2c8C58512A3Be8 {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: ============================================================ {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: 🎬 Running initial auction check in 5 seconds... {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: 🟢 Auction cron job started successfully! {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: 📊 Next automatic check in 2 minutes... {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: Auction cron service started {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: Server running on port 5009 {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: Para integration backend initialized successfully {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:44"}
+[32minfo[39m: 🔍 INITIAL CHECK at 2025-09-30T13:07:49.074Z {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:49"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:49"}
+[32minfo[39m: 📦 Current block: 46496150 {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:49"}
+[32minfo[39m: 🏷️  Total auctions in contract: 8 {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:49"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:49"}
+[32minfo[39m:   📌 Auction 1: Active (ends at block 46402791) {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:49"}
+[32minfo[39m:   📌 Auction 2: Active (ends at block 46431582) {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:50"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:50"}
+[32minfo[39m:   📌 Auction 4: Active (ends at block 46450838) {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:50"}
+[32minfo[39m:   📌 Auction 5: Active (ends at block 46409996) {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:50"}
+[32minfo[39m:   📌 Auction 6: Active (ends at block 46412380) {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:51"}
+[32minfo[39m:   📌 Auction 7: Active (ends at block 46432443) {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:51"}
+[32minfo[39m:   📌 Auction 8: Active (ends at block 46458411) {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:51"}
+[32minfo[39m: 📊 Found 7 active auctions out of 8 total {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:51"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:51"}
+[32minfo[39m:   🎯 Auction 1: ENDED without bids - processing auction {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:51"}
+[32minfo[39m:   🎯 Auction 2: ENDED without bids - processing auction {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:52"}
+[32minfo[39m:   🎯 Auction 4: ENDED without bids - processing auction {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:52"}
+[32minfo[39m:   🎯 Auction 5: ENDED with winner 0x0CB9D7191C9dD544a9994DCE38211bFb7097307E (bid: 0.2 AVAX) {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:52"}
+[32minfo[39m:   🎯 Auction 6: ENDED with winner 0x0CB9D7191C9dD544a9994DCE38211bFb7097307E (bid: 0.19 AVAX) {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:52"}
+[32minfo[39m:   🎯 Auction 7: ENDED without bids - processing auction {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:53"}
+[32minfo[39m:   🎯 Auction 8: ENDED without bids - processing auction {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:53"}
+[32minfo[39m: 🚀 Processing 7 auction(s) ready to end... {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:53"}
+[32minfo[39m: 🔄 Processing auction 1... {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:53"}
+[32minfo[39m: 🎯 PROCESSING ENDED AUCTION 1 {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:53"}
+[32minfo[39m:    👤 Creator: 0x25FE6F74131e9d92FeB849F96427a9e7967A6b24 {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:53"}
+[32minfo[39m:    🏆 Winner: 0x0000000000000000000000000000000000000000 {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:53"}
+[32minfo[39m:    💰 Winning bid: 0.0 AVAX {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:53"}
+[32minfo[39m: 🔗 Step 1: Ending auction 1 on blockchain... {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:53"}
+[32minfo[39m: ⛽ Sending endAuction transaction for auction 1... {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:53"}
+[32minfo[39m: 💼 Using wallet: 0x25FE6F74131e9d92FeB849F96427a9e7967A6b24 {"service":"meeting-auction-backend","timestamp":"2025-09-30 21:07:53"}
+[32m[nodemon] restarting child process[39m
+[32m[nodemon] starting `node src/server.js`[39m
+node:events:491
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: read EIO
+    at TTY.onStreamRead (node:internal/stream_base_commons:216:20)
+Emitted 'error' event on ReadStream instance at:
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  errno: -5,
+  code: 'EIO',
+  syscall: 'read'
+}
+
+Node.js v23.3.0

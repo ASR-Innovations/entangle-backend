@@ -1,0 +1,899 @@
+[32minfo[39m: JaaS JWT configuration found - tokens will be generated {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:21"}
+[32minfo[39m: Meeting Service initialized {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:21"}
+[32minfo[39m: 🚀 Starting server initialization... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:21"}
+[32minfo[39m: 📊 Step 1: Connecting to database... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:21"}
+[32minfo[39m: 🔍 Checking database configuration... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:21"}
+[32minfo[39m: 📡 Testing database connection... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:21"}
+(node:25115) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[32minfo[39m: ✅ PostgreSQL connection successful {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:21"}
+[32minfo[39m: 📋 Creating/verifying database tables... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:21"}
+[32minfo[39m: Database tables created/verified from schema.sql {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:21"}
+[32minfo[39m: ✅ Database tables ready {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:21"}
+[32minfo[39m: ✅ Database connected successfully {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:21"}
+[32minfo[39m: 📝 Step 2: Initializing contract service... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:21"}
+[32minfo[39m: 🔗 Connecting to FUJI blockchain at https://avax-fuji.g.alchemy.com/v2/Yo4enHB113igpnycl13On... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:21"}
+[32minfo[39m: 🧪 Testing blockchain connection... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:21"}
+[32minfo[39m: ✅ Connected to chain ID: 43113 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: ✅ Contract service wallet initialized {"network":"FUJI","service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22","walletAddress":"0x25FE6F74131e9d92FeB849F96427a9e7967A6b24"}
+[32minfo[39m: ✅ Contract service fully initialized {"contractAddress":"0x9171Cf8E1d3c7EBf7bf8866CcD2c8C58512A3Be8","hasWallet":true,"network":"FUJI","service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: ✅ Contract service initialized {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: ⏰ Step 3: Starting auction cron service... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: Auction cron service wallet initialized {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22","walletAddress":"0x25FE6F74131e9d92FeB849F96427a9e7967A6b24"}
+[32minfo[39m: Auction cron service initialized {"contractAddress":"0x9171Cf8E1d3c7EBf7bf8866CcD2c8C58512A3Be8","hasWallet":true,"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: 🤖 STARTING AUCTION CRON SERVICE {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: ⏰ Schedule: Every 2 minutes {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: 💼 Wallet: 0x25FE6F74131e9d92FeB849F96427a9e7967A6b24 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: 📝 Contract: 0x9171Cf8E1d3c7EBf7bf8866CcD2c8C58512A3Be8 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: ============================================================ {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: 🎬 Running initial auction check in 5 seconds... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: 🟢 Auction cron job started successfully! {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: 📊 Next automatic check in 2 minutes... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: ✅ Auction cron service started {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: 📹 Step 4: Initializing Jitsi service... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: ✅ Jitsi service ready {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: 🌐 Step 5: Starting HTTP server on port 5009... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: ✅ Server running on port 5009 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: 🎉 Para integration backend initialized successfully {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: 📡 Health check available at: http://localhost:5009/health {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:22"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:25"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:25"}
+[32minfo[39m: Wallet address updated for user 1 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:25"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:25"}
+[32minfo[39m: 🔗 Connecting to FUJI blockchain at https://avax-fuji.g.alchemy.com/v2/Yo4enHB113igpnycl13On... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:25"}
+[32minfo[39m: 🧪 Testing blockchain connection... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:25"}
+[32minfo[39m: ✅ Connected to chain ID: 43113 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:25"}
+[32minfo[39m: ✅ Contract service wallet initialized {"network":"FUJI","service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:25","walletAddress":"0x25FE6F74131e9d92FeB849F96427a9e7967A6b24"}
+[32minfo[39m: ✅ Contract service fully initialized {"contractAddress":"0x9171Cf8E1d3c7EBf7bf8866CcD2c8C58512A3Be8","hasWallet":true,"network":"FUJI","service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:25"}
+[32minfo[39m: Auction 3 recorded for Para user email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:25"}
+[32minfo[39m: 🔍 INITIAL CHECK at 2025-10-01T16:33:27.255Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:27"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:27"}
+[32minfo[39m: 📦 Current block: 46534457 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:27"}
+[32minfo[39m: 🏷️  Total auctions in contract: 17 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:27"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:27"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:28"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:28"}
+[32minfo[39m:   🔄 Auction 3: Ended but not processed - needs processing {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:28"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:28"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:29"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:29"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:29"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:29"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:30"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:30"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:30"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:31"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:31"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:31"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:31"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:32"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:32"}
+[32minfo[39m: 📊 Found 2 active auctions out of 17 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:32"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:32"}
+[32minfo[39m:   🎯 Auction 3: ENDED without bids - processing auction {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:32"}
+[32minfo[39m:   🕐 Auction 17: Active (40513 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:32"}
+[32minfo[39m: 🚀 Processing 1 auction(s) ready to end... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:32"}
+[32minfo[39m: 🔄 Processing auction 3... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:32"}
+[32minfo[39m: 🎯 PROCESSING ENDED AUCTION 3 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:32"}
+[32minfo[39m:    👤 Creator: 0x6daa02F03f05D7330ec10F12E66Ac3db0Cd7718d {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:32"}
+[32minfo[39m:    🏆 Winner: 0x0000000000000000000000000000000000000000 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:32"}
+[32minfo[39m:    💰 Winning bid: 0.0 AVAX {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:32"}
+[32minfo[39m: 🔗 Step 1: Auction 3 already ended on blockchain, skipping... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:32"}
+[32minfo[39m: 📊 Step 2: Getting updated auction data... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:32"}
+[32minfo[39m: 🎬 Step 4: Creating Jitsi meeting... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:33"}
+[32minfo[39m: Meeting room created: auction-3-1759336413074 (expires: Thu Oct 02 2025 01:33:33 GMT+0800 (Singapore Standard Time)) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:33"}
+[31merror[39m: Failed to generate JWT token: secretOrPrivateKey must be an asymmetric key when using RS256 {"service":"meeting-auction-backend","stack":"Error: secretOrPrivateKey must be an asymmetric key when using RS256\n    at module.exports [as sign] (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/node_modules/jsonwebtoken/sign.js:130:22)\n    at JitsiService.generateToken (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/JitsiService.js:132:25)\n    at JitsiService.createAuctionMeeting (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/JitsiService.js:184:30)\n    at AuctionCronService.createMeetingForAuction (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:323:29)\n    at AuctionCronService.processSingleAuction (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:251:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async AuctionCronService.processEndedAuctions (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:209:9)\n    at async Timeout._onTimeout (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:98:9)","timestamp":"2025-10-02 00:33:33"}
+[32minfo[39m: Auction meeting created: auction-3-1759336413074 for auction 3 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:33"}
+[31merror[39m: Failed to update database for auction 3: null value in column "creator_access_token" of relation "meetings" violates not-null constraint {"code":"23502","column":"creator_access_token","detail":"Failing row contains (6, 3, auction-3-1759336413074, {\"subject\": \"Auction 3 Meeting\", \"enableClosePage\": false, \"inte..., null, null, https://8x8.vc/vpaas-magic-cookie-12e00659b2b144eebab8e26c218191..., 2025-10-01 16:33:33.261857, null, 2025-10-01 16:33:33.261857).","file":"execMain.c","length":465,"line":"2006","name":"error","routine":"ExecConstraints","schema":"public","service":"meeting-auction-backend","severity":"ERROR","stack":"error: null value in column \"creator_access_token\" of relation \"meetings\" violates not-null constraint\n    at /Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/node_modules/pg-pool/index.js:45:11\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async AuctionCronService.updateAuctionInDatabase (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:401:9)\n    at async AuctionCronService.processSingleAuction (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:264:7)\n    at async AuctionCronService.processEndedAuctions (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:209:9)\n    at async Timeout._onTimeout (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:98:9)","table":"meetings","timestamp":"2025-10-02 00:33:33"}
+[32minfo[39m: Meeting scheduled on-chain for auction 3 {"meetingRoomId":"auction-3-1759336413074","service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:39","transactionHash":"0xfb4e183f625529cc1f4fb93dfa34e29152c00d48b42b28bb443b418ccaaded80"}
+[32minfo[39m: Successfully processed auction 3 {"hasWinner":false,"meetingCreated":true,"nftTokenId":"0","service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:39"}
+[32minfo[39m: ✅ Initial auction check completed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:33:39"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T16:34:00.292Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:00"}
+[32minfo[39m: 📦 Current block: 46534473 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:00"}
+[32minfo[39m: 🏷️  Total auctions in contract: 17 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:00"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:00"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:01"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:01"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:02"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:02"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:02"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:03"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:03"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:03"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:03"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:04"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:04"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:04"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:05"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:05"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:05"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:05"}
+[32minfo[39m: 📊 Found 1 active auctions out of 17 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:05"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:05"}
+[32minfo[39m:   🕐 Auction 17: Active (40497 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:06"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:06"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 5832ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:06"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:34:06"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T16:36:00.498Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:00"}
+[32minfo[39m: 📦 Current block: 46534524 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:00"}
+[32minfo[39m: 🏷️  Total auctions in contract: 17 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:01"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:01"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:01"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:02"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:02"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:02"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:02"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:03"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:03"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:03"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:04"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:04"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:04"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:04"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:05"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:05"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:05"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:05"}
+[32minfo[39m: 📊 Found 1 active auctions out of 17 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:05"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:05"}
+[32minfo[39m:   🕐 Auction 17: Active (40446 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:06"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:06"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 5520ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:06"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:36:06"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T16:38:00.626Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:00"}
+[32minfo[39m: 📦 Current block: 46534577 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:00"}
+[32minfo[39m: 🏷️  Total auctions in contract: 17 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:01"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:01"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:01"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:02"}
+[32minfo[39m:   🔄 Auction 4: Ended but not processed - needs processing {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:02"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:02"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:03"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:03"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:03"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:04"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:04"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:04"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:04"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:05"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:05"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:05"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:05"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:06"}
+[32minfo[39m: 📊 Found 2 active auctions out of 17 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:06"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:06"}
+[32minfo[39m:   🎯 Auction 4: ENDED without bids - processing auction {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:06"}
+[32minfo[39m:   🕐 Auction 17: Active (40393 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:06"}
+[32minfo[39m: 🚀 Processing 1 auction(s) ready to end... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:06"}
+[32minfo[39m: 🔄 Processing auction 4... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:06"}
+[32minfo[39m: 🎯 PROCESSING ENDED AUCTION 4 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:06"}
+[32minfo[39m:    👤 Creator: 0x6daa02F03f05D7330ec10F12E66Ac3db0Cd7718d {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:06"}
+[32minfo[39m:    🏆 Winner: 0x0000000000000000000000000000000000000000 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:06"}
+[32minfo[39m:    💰 Winning bid: 0.0 AVAX {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:06"}
+[32minfo[39m: 🔗 Step 1: Auction 4 already ended on blockchain, skipping... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:06"}
+[32minfo[39m: 📊 Step 2: Getting updated auction data... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:06"}
+[32minfo[39m: 🎬 Step 4: Creating Jitsi meeting... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:06"}
+[32minfo[39m: Meeting room created: auction-4-1759336686959 (expires: Thu Oct 02 2025 01:38:06 GMT+0800 (Singapore Standard Time)) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:06"}
+[31merror[39m: Failed to generate JWT token: secretOrPrivateKey must be an asymmetric key when using RS256 {"service":"meeting-auction-backend","stack":"Error: secretOrPrivateKey must be an asymmetric key when using RS256\n    at module.exports [as sign] (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/node_modules/jsonwebtoken/sign.js:130:22)\n    at JitsiService.generateToken (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/JitsiService.js:132:25)\n    at JitsiService.createAuctionMeeting (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/JitsiService.js:184:30)\n    at AuctionCronService.createMeetingForAuction (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:323:29)\n    at AuctionCronService.processSingleAuction (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:251:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async AuctionCronService.processEndedAuctions (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:209:9)\n    at async job.cron.schedule.scheduled [as _execution] (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:76:9)","timestamp":"2025-10-02 00:38:06"}
+[32minfo[39m: Auction meeting created: auction-4-1759336686959 for auction 4 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:06"}
+[31merror[39m: Failed to update database for auction 4: null value in column "creator_access_token" of relation "meetings" violates not-null constraint {"code":"23502","column":"creator_access_token","detail":"Failing row contains (8, 4, auction-4-1759336686959, {\"subject\": \"Auction 4 Meeting\", \"enableClosePage\": false, \"inte..., null, null, https://8x8.vc/vpaas-magic-cookie-12e00659b2b144eebab8e26c218191..., 2025-10-01 16:38:07.774099, null, 2025-10-01 16:38:07.774099).","file":"execMain.c","length":465,"line":"2006","name":"error","routine":"ExecConstraints","schema":"public","service":"meeting-auction-backend","severity":"ERROR","stack":"error: null value in column \"creator_access_token\" of relation \"meetings\" violates not-null constraint\n    at /Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/node_modules/pg-pool/index.js:45:11\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async AuctionCronService.updateAuctionInDatabase (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:401:9)\n    at async AuctionCronService.processSingleAuction (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:264:7)\n    at async AuctionCronService.processEndedAuctions (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:209:9)\n    at async job.cron.schedule.scheduled [as _execution] (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:76:9)","table":"meetings","timestamp":"2025-10-02 00:38:07"}
+[32minfo[39m: Meeting scheduled on-chain for auction 4 {"meetingRoomId":"auction-4-1759336686959","service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:13","transactionHash":"0xfd5061a841823e386ad4c7403a45082a62be5fd1c0dafd5ec18c0d9c3ae1c446"}
+[32minfo[39m: Successfully processed auction 4 {"hasWinner":false,"meetingCreated":true,"nftTokenId":"0","service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:13"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 13321ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:13"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:38:13"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T16:40:00.763Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:00"}
+[32minfo[39m: 📦 Current block: 46534626 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:01"}
+[32minfo[39m: 🏷️  Total auctions in contract: 17 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:01"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:01"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:02"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:02"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:02"}
+[32minfo[39m:   🔄 Auction 5: Ended but not processed - needs processing {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:03"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:03"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:03"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:03"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:04"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:04"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:04"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:05"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:05"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:05"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:06"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:06"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:06"}
+[32minfo[39m: 📊 Found 2 active auctions out of 17 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:06"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:06"}
+[32minfo[39m:   🎯 Auction 5: ENDED with winner 0x0CB9D7191C9dD544a9994DCE38211bFb7097307E (bid: 0.2 AVAX) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:06"}
+[32minfo[39m:   🕐 Auction 17: Active (40344 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:07"}
+[32minfo[39m: 🚀 Processing 1 auction(s) ready to end... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:07"}
+[32minfo[39m: 🔄 Processing auction 5... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:07"}
+[32minfo[39m: 🎯 PROCESSING ENDED AUCTION 5 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:07"}
+[32minfo[39m:    👤 Creator: 0x6daa02F03f05D7330ec10F12E66Ac3db0Cd7718d {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:07"}
+[32minfo[39m:    🏆 Winner: 0x0CB9D7191C9dD544a9994DCE38211bFb7097307E {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:07"}
+[32minfo[39m:    💰 Winning bid: 0.2 AVAX {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:07"}
+[32minfo[39m: 🔗 Step 1: Auction 5 already ended on blockchain, skipping... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:07"}
+[32minfo[39m: 📊 Step 2: Getting updated auction data... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:07"}
+[32minfo[39m: 🎨 NFT minted successfully! Token ID: 1 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:07"}
+[32minfo[39m: 🎬 Step 4: Creating Jitsi meeting... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:07"}
+[32minfo[39m: Meeting room created: auction-5-1759336807613 (expires: Thu Oct 02 2025 01:40:07 GMT+0800 (Singapore Standard Time)) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:07"}
+[31merror[39m: Failed to generate JWT token: secretOrPrivateKey must be an asymmetric key when using RS256 {"service":"meeting-auction-backend","stack":"Error: secretOrPrivateKey must be an asymmetric key when using RS256\n    at module.exports [as sign] (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/node_modules/jsonwebtoken/sign.js:130:22)\n    at JitsiService.generateToken (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/JitsiService.js:132:25)\n    at JitsiService.createAuctionMeeting (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/JitsiService.js:184:30)\n    at AuctionCronService.createMeetingForAuction (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:323:29)\n    at AuctionCronService.processSingleAuction (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:251:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async AuctionCronService.processEndedAuctions (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:209:9)\n    at async job.cron.schedule.scheduled [as _execution] (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:76:9)","timestamp":"2025-10-02 00:40:07"}
+[32minfo[39m: Auction meeting created: auction-5-1759336807613 for auction 5 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:07"}
+[31merror[39m: Failed to update database for auction 5: null value in column "creator_access_token" of relation "meetings" violates not-null constraint {"code":"23502","column":"creator_access_token","detail":"Failing row contains (10, 5, auction-5-1759336807613, {\"subject\": \"Auction 5 Meeting\", \"enableClosePage\": false, \"inte..., null, null, https://8x8.vc/vpaas-magic-cookie-12e00659b2b144eebab8e26c218191..., 2025-10-01 16:40:07.723583, null, 2025-10-01 16:40:07.723583).","file":"execMain.c","length":466,"line":"2006","name":"error","routine":"ExecConstraints","schema":"public","service":"meeting-auction-backend","severity":"ERROR","stack":"error: null value in column \"creator_access_token\" of relation \"meetings\" violates not-null constraint\n    at /Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/node_modules/pg-pool/index.js:45:11\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async AuctionCronService.updateAuctionInDatabase (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:401:9)\n    at async AuctionCronService.processSingleAuction (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:264:7)\n    at async AuctionCronService.processEndedAuctions (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:209:9)\n    at async job.cron.schedule.scheduled [as _execution] (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:76:9)","table":"meetings","timestamp":"2025-10-02 00:40:07"}
+[32minfo[39m: Meeting scheduled on-chain for auction 5 {"meetingRoomId":"auction-5-1759336807613","service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:14","transactionHash":"0x0fc950b060b9539cc679632c942fde29bd45fc9c4afea80b1aaa59faebb7c291"}
+[32minfo[39m: Successfully processed auction 5 {"hasWinner":false,"meetingCreated":true,"nftTokenId":"1","service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:14"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 13259ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:14"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:40:14"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T16:42:00.891Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:00"}
+[32minfo[39m: 📦 Current block: 46534676 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:01"}
+[32minfo[39m: 🏷️  Total auctions in contract: 17 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:01"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:01"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:02"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:02"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:03"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:03"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:03"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:04"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:04"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:04"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:05"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:05"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:05"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:05"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:06"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:06"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:06"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:07"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:07"}
+[32minfo[39m: 📊 Found 1 active auctions out of 17 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:07"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:07"}
+[32minfo[39m:   🕐 Auction 17: Active (40294 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:07"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:07"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 6704ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:07"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:42:07"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T16:44:00.022Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:00"}
+[32minfo[39m: 📦 Current block: 46534724 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:00"}
+[32minfo[39m: 🏷️  Total auctions in contract: 17 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:00"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:00"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:01"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:01"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:01"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:02"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:02"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:02"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:03"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:03"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:03"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:03"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:04"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:04"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:04"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:04"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:05"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:05"}
+[32minfo[39m: 📊 Found 1 active auctions out of 17 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:05"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:05"}
+[32minfo[39m:   🕐 Auction 17: Active (40246 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:05"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:05"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 5609ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:05"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:44:05"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T16:46:00.156Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:00"}
+[32minfo[39m: 📦 Current block: 46534770 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:00"}
+[32minfo[39m: 🏷️  Total auctions in contract: 17 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:00"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:00"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:01"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:01"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:02"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:02"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:02"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:03"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:03"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:03"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:04"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:04"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:04"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:05"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:05"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:06"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:06"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:06"}
+[32minfo[39m: 📊 Found 1 active auctions out of 17 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:06"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:06"}
+[32minfo[39m:   🕐 Auction 17: Active (40200 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:06"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:06"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 6645ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:06"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:46:06"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T16:48:00.290Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:00"}
+[32minfo[39m: 📦 Current block: 46534816 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:00"}
+[32minfo[39m: 🏷️  Total auctions in contract: 17 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:00"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:00"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:01"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:01"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:01"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:02"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:02"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:02"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:03"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:03"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:03"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:03"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:04"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:04"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:04"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:05"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:05"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:05"}
+[32minfo[39m: 📊 Found 1 active auctions out of 17 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:05"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:05"}
+[32minfo[39m:   🕐 Auction 17: Active (40154 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:05"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:05"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 5534ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:05"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:48:05"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T16:50:00.419Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:00"}
+[32minfo[39m: 📦 Current block: 46534875 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:00"}
+[32minfo[39m: 🏷️  Total auctions in contract: 17 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:00"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:00"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:01"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:02"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:02"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:02"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:03"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:03"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:03"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:04"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:04"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:04"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:04"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:05"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:05"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:05"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:06"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:06"}
+[32minfo[39m: 📊 Found 1 active auctions out of 17 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:06"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:06"}
+[32minfo[39m:   🕐 Auction 17: Active (40095 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:06"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:06"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 6255ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:06"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:50:06"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T16:52:00.551Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:00"}
+[32minfo[39m: 📦 Current block: 46534929 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:00"}
+[32minfo[39m: 🏷️  Total auctions in contract: 17 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:01"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:01"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:01"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:02"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:02"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:02"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:03"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:03"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:03"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:03"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:04"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:04"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:04"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:04"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:05"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:05"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:05"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:06"}
+[32minfo[39m: 📊 Found 1 active auctions out of 17 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:06"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:06"}
+[32minfo[39m:   🕐 Auction 17: Active (40041 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:06"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:06"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 5696ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:06"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:52:06"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T16:54:00.687Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:00"}
+[32minfo[39m: 📦 Current block: 46534979 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:01"}
+[32minfo[39m: 🏷️  Total auctions in contract: 17 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:01"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:01"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:02"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:02"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:03"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:03"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:03"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:04"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:04"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:05"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:05"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:06"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:06"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:06"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:07"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:07"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:07"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:08"}
+[32minfo[39m: 📊 Found 1 active auctions out of 17 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:08"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:08"}
+[32minfo[39m:   🕐 Auction 17: Active (39991 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:08"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:08"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 8049ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:08"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:54:08"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T16:56:00.823Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:00"}
+[32minfo[39m: 📦 Current block: 46535027 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:01"}
+[32minfo[39m: 🏷️  Total auctions in contract: 17 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:01"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:01"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:02"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:02"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:02"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:03"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:03"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:04"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:04"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:04"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:05"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:05"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:06"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:06"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:06"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:07"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:07"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:07"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:08"}
+[32minfo[39m: 📊 Found 1 active auctions out of 17 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:08"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:08"}
+[32minfo[39m:   🕐 Auction 17: Active (39943 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:08"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:08"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 7824ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:08"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:56:08"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T16:58:00.068Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:00"}
+[32minfo[39m: 📦 Current block: 46535078 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:00"}
+[32minfo[39m: 🏷️  Total auctions in contract: 17 {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:00"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:00"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:01"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:02"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:02"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:02"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:03"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:03"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:03"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:04"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:04"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:05"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:05"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:05"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:06"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:06"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:07"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:07"}
+[32minfo[39m: 📊 Found 1 active auctions out of 17 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:07"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:07"}
+[32minfo[39m:   🕐 Auction 17: Active (39892 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:07"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:07"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 7776ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:07"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 00:58:07"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T17:00:00.258Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:00"}
+[32minfo[39m: 📦 Current block: 46535126 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:00"}
+[32minfo[39m: 🏷️  Total auctions in contract: 17 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:00"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:00"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:01"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:01"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:02"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:02"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:02"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:02"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:03"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:03"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:03"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:04"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:04"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:04"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:04"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:05"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:05"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:05"}
+[32minfo[39m: 📊 Found 1 active auctions out of 17 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:05"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:05"}
+[32minfo[39m:   🕐 Auction 17: Active (39844 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:05"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:05"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 5674ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:05"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:00:05"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T17:02:00.417Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:00"}
+[32minfo[39m: 📦 Current block: 46535173 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:00"}
+[32minfo[39m: 🏷️  Total auctions in contract: 17 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:01"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:01"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:02"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:02"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:03"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:03"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:03"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:04"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:04"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:04"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:04"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:05"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:05"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:05"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:05"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:06"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:06"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:06"}
+[32minfo[39m: 📊 Found 1 active auctions out of 17 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:06"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:06"}
+[32minfo[39m:   🕐 Auction 17: Active (39797 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:07"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:07"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 6640ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:07"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:02:07"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T17:32:00.526Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:00"}
+[32minfo[39m: 📦 Current block: 46535863 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:00"}
+[32minfo[39m: 🏷️  Total auctions in contract: 20 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:01"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:01"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:01"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:02"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:02"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:02"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:03"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:03"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:03"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:04"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:04"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:04"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:05"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:05"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:05"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:06"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:06"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:06"}
+[32minfo[39m:   📌 Auction 18: Active (ends at block 46535975) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:07"}
+[32minfo[39m:   📌 Auction 19: Active (ends at block 46557550) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:07"}
+[32minfo[39m:   📌 Auction 20: Active (ends at block 46557474) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:07"}
+[32minfo[39m: 📊 Found 4 active auctions out of 20 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:07"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:07"}
+[32minfo[39m:   🕐 Auction 17: Active (39107 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:07"}
+[32minfo[39m:   🕐 Auction 18: Active (112 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:08"}
+[32minfo[39m:   🕐 Auction 19: Active (21687 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:08"}
+[32minfo[39m:   🕐 Auction 20: Active (21611 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:08"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:08"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 8077ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:08"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:32:08"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T17:34:00.658Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:00"}
+[32minfo[39m: 📦 Current block: 46535902 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:00"}
+[32minfo[39m: 🏷️  Total auctions in contract: 20 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:01"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:01"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:01"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:03"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:03"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:04"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:04"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:04"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:04"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:05"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:05"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:05"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:05"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:06"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:06"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:06"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:06"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:07"}
+[32minfo[39m:   📌 Auction 18: Active (ends at block 46535975) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:07"}
+[32minfo[39m:   📌 Auction 19: Active (ends at block 46557550) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:07"}
+[32minfo[39m:   📌 Auction 20: Active (ends at block 46557474) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:07"}
+[32minfo[39m: 📊 Found 4 active auctions out of 20 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:07"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:07"}
+[32minfo[39m:   🕐 Auction 17: Active (39068 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:08"}
+[32minfo[39m:   🕐 Auction 18: Active (73 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:08"}
+[32minfo[39m:   🕐 Auction 19: Active (21648 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:08"}
+[32minfo[39m:   🕐 Auction 20: Active (21572 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:08"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:08"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 8217ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:08"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:34:08"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T17:36:00.780Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:00"}
+[32minfo[39m: 📦 Current block: 46535948 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:01"}
+[32minfo[39m: 🏷️  Total auctions in contract: 20 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:01"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:01"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:02"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:02"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:02"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:03"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:03"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:03"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:03"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:04"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:04"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:04"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:04"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:05"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:05"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:05"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:05"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:06"}
+[32minfo[39m:   📌 Auction 18: Active (ends at block 46535975) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:06"}
+[32minfo[39m:   📌 Auction 19: Active (ends at block 46557550) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:06"}
+[32minfo[39m:   📌 Auction 20: Active (ends at block 46557474) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:06"}
+[32minfo[39m: 📊 Found 4 active auctions out of 20 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:06"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:06"}
+[32minfo[39m:   🕐 Auction 17: Active (39022 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:07"}
+[32minfo[39m:   🕐 Auction 18: Active (27 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:07"}
+[32minfo[39m:   🕐 Auction 19: Active (21602 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:07"}
+[32minfo[39m:   🕐 Auction 20: Active (21526 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:07"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:07"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 7118ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:07"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:36:07"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T17:38:00.896Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:00"}
+[32minfo[39m: 📦 Current block: 46535987 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:01"}
+[32minfo[39m: 🏷️  Total auctions in contract: 20 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:01"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:01"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:02"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:02"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:02"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:03"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:03"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:03"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:04"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:04"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:04"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:04"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:05"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:05"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:05"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:06"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:06"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:06"}
+[32minfo[39m:   📌 Auction 18: Active (ends at block 46535975) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:06"}
+[32minfo[39m:   📌 Auction 19: Active (ends at block 46557550) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:07"}
+[32minfo[39m:   📌 Auction 20: Active (ends at block 46557474) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:07"}
+[32minfo[39m: 📊 Found 4 active auctions out of 20 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:07"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:07"}
+[32minfo[39m:   🕐 Auction 17: Active (38983 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:07"}
+[32minfo[39m:   🎯 Auction 18: ENDED without bids - processing auction {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:08"}
+[32minfo[39m:   🕐 Auction 19: Active (21563 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:08"}
+[32minfo[39m:   🕐 Auction 20: Active (21487 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:08"}
+[32minfo[39m: 🚀 Processing 1 auction(s) ready to end... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:08"}
+[32minfo[39m: 🔄 Processing auction 18... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:08"}
+[32minfo[39m: 🎯 PROCESSING ENDED AUCTION 18 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:08"}
+[32minfo[39m:    👤 Creator: 0x6daa02F03f05D7330ec10F12E66Ac3db0Cd7718d {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:08"}
+[32minfo[39m:    🏆 Winner: 0x0000000000000000000000000000000000000000 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:08"}
+[32minfo[39m:    💰 Winning bid: 0.0 AVAX {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:08"}
+[32minfo[39m: 🔗 Step 1: Ending auction 18 on blockchain... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:08"}
+[32minfo[39m: ⛽ Sending endAuction transaction for auction 18... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:08"}
+[32minfo[39m: 💼 Using wallet: 0x25FE6F74131e9d92FeB849F96427a9e7967A6b24 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:08"}
+[32minfo[39m: 📝 Transaction submitted: 0xbc7b935dcb29064e0b7efe0e7785d4b7a551e4ce3204126bceaf4e1396b2f1a3 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:09"}
+[32minfo[39m: ⏳ Waiting for confirmation... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:09"}
+[32minfo[39m: ✅ Auction 18 ended successfully! {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:14"}
+[32minfo[39m: ⛽ Gas used: 70670 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:14"}
+[32minfo[39m: 🔗 Transaction: 0xbc7b935dcb29064e0b7efe0e7785d4b7a551e4ce3204126bceaf4e1396b2f1a3 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:14"}
+[32minfo[39m: 📊 Step 2: Getting updated auction data... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:14"}
+[32minfo[39m: 🎬 Step 4: Creating Jitsi meeting... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:15"}
+[32minfo[39m: Meeting room created: auction-18-1759340295126 (expires: Thu Oct 02 2025 02:38:15 GMT+0800 (Singapore Standard Time)) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:15"}
+[31merror[39m: Failed to generate JWT token: secretOrPrivateKey must be an asymmetric key when using RS256 {"service":"meeting-auction-backend","stack":"Error: secretOrPrivateKey must be an asymmetric key when using RS256\n    at module.exports [as sign] (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/node_modules/jsonwebtoken/sign.js:130:22)\n    at JitsiService.generateToken (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/JitsiService.js:132:25)\n    at JitsiService.createAuctionMeeting (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/JitsiService.js:184:30)\n    at AuctionCronService.createMeetingForAuction (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:323:29)\n    at AuctionCronService.processSingleAuction (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:251:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async AuctionCronService.processEndedAuctions (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:209:9)\n    at async job.cron.schedule.scheduled [as _execution] (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:76:9)","timestamp":"2025-10-02 01:38:15"}
+[32minfo[39m: Auction meeting created: auction-18-1759340295126 for auction 18 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:15"}
+[31merror[39m: Failed to update database for auction 18: null value in column "creator_access_token" of relation "meetings" violates not-null constraint {"code":"23502","column":"creator_access_token","detail":"Failing row contains (11, 18, auction-18-1759340295126, {\"subject\": \"Auction 18 Meeting\", \"enableClosePage\": false, \"int..., null, null, https://8x8.vc/vpaas-magic-cookie-12e00659b2b144eebab8e26c218191..., 2025-10-01 17:38:15.272029, null, 2025-10-01 17:38:15.272029).","file":"execMain.c","length":468,"line":"2006","name":"error","routine":"ExecConstraints","schema":"public","service":"meeting-auction-backend","severity":"ERROR","stack":"error: null value in column \"creator_access_token\" of relation \"meetings\" violates not-null constraint\n    at /Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/node_modules/pg-pool/index.js:45:11\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async AuctionCronService.updateAuctionInDatabase (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:401:9)\n    at async AuctionCronService.processSingleAuction (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:264:7)\n    at async AuctionCronService.processEndedAuctions (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:209:9)\n    at async job.cron.schedule.scheduled [as _execution] (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/AuctionCronService.js:76:9)","table":"meetings","timestamp":"2025-10-02 01:38:15"}
+[32minfo[39m: Meeting scheduled on-chain for auction 18 {"meetingRoomId":"auction-18-1759340295126","service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:21","transactionHash":"0xae5f9b940a10e30b30804064c385f632a6fe766261a869c8b628246ce03141dc"}
+[32minfo[39m: Successfully processed auction 18 {"hasWinner":false,"meetingCreated":true,"nftTokenId":"0","service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:21"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 20670ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:21"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:38:21"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T17:40:00.019Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:00"}
+[32minfo[39m: 📦 Current block: 46536020 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:00"}
+[32minfo[39m: 🏷️  Total auctions in contract: 20 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:00"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:00"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:01"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:01"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:01"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:02"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:02"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:02"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:02"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:03"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:03"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:03"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:04"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:04"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:04"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:04"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:05"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:05"}
+[32minfo[39m:   ✅ Auction 18: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:05"}
+[32minfo[39m:   📌 Auction 19: Active (ends at block 46557550) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:06"}
+[32minfo[39m:   📌 Auction 20: Active (ends at block 46557474) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:06"}
+[32minfo[39m: 📊 Found 3 active auctions out of 20 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:06"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:06"}
+[32minfo[39m:   🕐 Auction 17: Active (38950 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:06"}
+[32minfo[39m:   🕐 Auction 19: Active (21530 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:06"}
+[32minfo[39m:   🕐 Auction 20: Active (21454 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:07"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:07"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 6996ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:07"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:07"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:53"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:53"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:53"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:54"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:54"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:54"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:54"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:54"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:54"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:54"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:54"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:54"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:54"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:54"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:54"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:55"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:55"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:40:55"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:41:01"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:41:01"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:41:01"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:41:11"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:41:12"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:41:12"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:41:12"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:41:12"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:41:12"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:41:12"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:41:12"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:41:12"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:41:12"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:41:12"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:41:12"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:41:12"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:41:13"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:41:13"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T17:42:00.141Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:00"}
+[32minfo[39m: 📦 Current block: 46536069 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:00"}
+[32minfo[39m: 🏷️  Total auctions in contract: 20 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:00"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:00"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:01"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:02"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:02"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:02"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:02"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:03"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:03"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:03"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:04"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:04"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:04"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:05"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:05"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:05"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:06"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:06"}
+[32minfo[39m:   ✅ Auction 18: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:06"}
+[32minfo[39m:   📌 Auction 19: Active (ends at block 46557550) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:07"}
+[32minfo[39m:   📌 Auction 20: Active (ends at block 46557474) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:07"}
+[32minfo[39m: 📊 Found 3 active auctions out of 20 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:07"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:07"}
+[32minfo[39m:   🕐 Auction 17: Active (38901 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:07"}
+[32minfo[39m:   🕐 Auction 19: Active (21481 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:07"}
+[32minfo[39m:   🕐 Auction 20: Active (21405 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:08"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:08"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 7933ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:08"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:08"}
+[31merror[39m: Failed to get meeting info: column "room_id" does not exist {"code":"42703","file":"parse_relation.c","hint":"Perhaps you meant to reference the column \"meetings.room_url\".","length":171,"line":"3729","name":"error","position":"30","routine":"errorMissingColumn","service":"meeting-auction-backend","severity":"ERROR","stack":"error: column \"room_id\" does not exist\n    at /Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/node_modules/pg-pool/index.js:45:11\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MeetingService.getMeetingInfo (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/MeetingService.js:273:22)\n    at async /Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/routes/meetings.js:182:20","timestamp":"2025-10-02 01:42:38"}
+[31merror[39m: Failed to get meeting info: column "room_id" does not exist {"code":"42703","file":"parse_relation.c","hint":"Perhaps you meant to reference the column \"meetings.room_url\".","length":171,"line":"3729","name":"error","position":"30","routine":"errorMissingColumn","service":"meeting-auction-backend","severity":"ERROR","stack":"error: column \"room_id\" does not exist\n    at /Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/node_modules/pg-pool/index.js:45:11\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async MeetingService.getMeetingInfo (/Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/services/MeetingService.js:273:22)\n    at async /Users/rohitprasad/Desktop/Work/entangled-v2/Entangle-main/backend/src/routes/meetings.js:182:20","timestamp":"2025-10-02 01:42:38"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:39"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:39"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:39"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:39"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:39"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:39"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:40"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:40"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:40"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:46"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:46"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:46"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:46"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:46"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:46"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:47"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:47"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:42:47"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T17:44:00.265Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:00"}
+[32minfo[39m: 📦 Current block: 46536119 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:00"}
+[32minfo[39m: 🏷️  Total auctions in contract: 21 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:00"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:00"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:01"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:02"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:02"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:02"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:03"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:03"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:03"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:03"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:04"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:04"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:04"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:05"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:05"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:06"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:06"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:06"}
+[32minfo[39m:   ✅ Auction 18: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:06"}
+[32minfo[39m:   📌 Auction 19: Active (ends at block 46557550) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:07"}
+[32minfo[39m:   📌 Auction 20: Active (ends at block 46557474) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:07"}
+[32minfo[39m:   📌 Auction 21: Active (ends at block 46536374) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:07"}
+[32minfo[39m: 📊 Found 4 active auctions out of 21 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:07"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:07"}
+[32minfo[39m:   🕐 Auction 17: Active (38851 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:07"}
+[32minfo[39m:   🕐 Auction 19: Active (21431 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:08"}
+[32minfo[39m:   🕐 Auction 20: Active (21355 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:08"}
+[32minfo[39m:   🕐 Auction 21: Active (255 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:08"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:08"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 8399ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:08"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:44:08"}
+[32minfo[39m: 🚀 CRON JOB TRIGGERED at 2025-10-01T17:46:00.394Z {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:00"}
+[32minfo[39m: 🔍 CHECKING FOR ENDED AUCTIONS... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:00"}
+[32minfo[39m: 📦 Current block: 46536159 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:00"}
+[32minfo[39m: 🏷️  Total auctions in contract: 21 {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:00"}
+[32minfo[39m: 📋 Scanning all auctions... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:00"}
+[32minfo[39m:   ✅ Auction 1: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:01"}
+[32minfo[39m:   ✅ Auction 2: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:01"}
+[32minfo[39m:   ✅ Auction 3: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:02"}
+[32minfo[39m:   ✅ Auction 4: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:02"}
+[32minfo[39m:   ✅ Auction 5: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:02"}
+[32minfo[39m:   ✅ Auction 6: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:03"}
+[32minfo[39m:   ✅ Auction 7: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:03"}
+[32minfo[39m:   ✅ Auction 8: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:03"}
+[32minfo[39m:   ✅ Auction 9: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:03"}
+[32minfo[39m:   ✅ Auction 10: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:04"}
+[32minfo[39m:   ✅ Auction 11: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:04"}
+[32minfo[39m:   ✅ Auction 12: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:05"}
+[32minfo[39m:   ✅ Auction 13: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:05"}
+[32minfo[39m:   ✅ Auction 14: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:05"}
+[32minfo[39m:   ✅ Auction 15: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:06"}
+[32minfo[39m:   ✅ Auction 16: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:06"}
+[32minfo[39m:   📌 Auction 17: Active (ends at block 46574970) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:06"}
+[32minfo[39m:   ✅ Auction 18: Already ended and processed {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:07"}
+[32minfo[39m:   📌 Auction 19: Active (ends at block 46557550) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:07"}
+[32minfo[39m:   📌 Auction 20: Active (ends at block 46557474) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:07"}
+[32minfo[39m:   📌 Auction 21: Active (ends at block 46536374) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:07"}
+[32minfo[39m: 📊 Found 4 active auctions out of 21 total {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:07"}
+[32minfo[39m: ⏰ Checking auctions for processing... {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:07"}
+[32minfo[39m:   🕐 Auction 17: Active (38811 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:07"}
+[32minfo[39m:   🕐 Auction 19: Active (21391 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:08"}
+[32minfo[39m:   🕐 Auction 20: Active (21315 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:08"}
+[32minfo[39m:   🕐 Auction 21: Active (215 blocks remaining) {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:08"}
+[32minfo[39m: ✨ No auctions ready to end at this time {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:08"}
+[32minfo[39m: ✅ CRON JOB COMPLETED in 8373ms {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:08"}
+[32minfo[39m: ──────────────────────────────────────────────────────────── {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:08"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:12"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:12"}
+[32minfo[39m: Para session verified for user: rohit.rajsurya10@gmail.com {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:12"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:12"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:12"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:12"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:12"}
+[32minfo[39m: Verification user stored: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:12"}
+[32minfo[39m: Para verification auth successful for user: email_cm9oaXQucmFqc3Vy {"service":"meeting-auction-backend","timestamp":"2025-10-02 01:46:12"}

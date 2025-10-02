@@ -1,0 +1,365 @@
+{
+  "info": {
+    "name": "Entangle Frontend - Essential APIs Only",
+    "description": "Complete end-to-end APIs for frontend integration. No extra APIs.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Authentication Flow",
+      "item": [
+        {
+          "name": "Para Auth - Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"verificationToken\": \"{{PARA_VERIFICATION_TOKEN}}\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/auth/para-auth",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "auth", "para-auth"]
+            },
+            "description": "**STEP 1:** Login with Para verification token. Returns JWT. Save token to AUTH_TOKEN variable."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.environment.set('AUTH_TOKEN', jsonData.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Import Para Session - With Wallet",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"session\": {\n    \"userId\": \"{{USER_PARA_ID}}\",\n    \"walletAddress\": \"{{USER_WALLET}}\",\n    \"displayName\": \"{{USER_NAME}}\",\n    \"email\": \"{{USER_EMAIL}}\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/auth/import-session",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "auth", "import-session"]
+            },
+            "description": "**STEP 2:** Import full Para session with wallet. Required for blockchain operations. Updates AUTH_TOKEN."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.environment.set('AUTH_TOKEN', jsonData.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. Auction Lifecycle",
+      "item": [
+        {
+          "name": "Record Auction After Creation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transactionHash\": \"{{AUCTION_TX_HASH}}\",\n  \"title\": \"1-on-1 Strategy Session\",\n  \"description\": \"Exclusive meeting with expert\",\n  \"duration\": 1000,\n  \"reservePrice\": 0.1,\n  \"meetingDuration\": 60,\n  \"creatorWallet\": \"{{USER_WALLET}}\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/auctions/created",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "auctions", "created"]
+            },
+            "description": "**CRITICAL:** Call IMMEDIATELY after creating auction on blockchain. This records auction in DB so backend can process it."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Auctions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/auctions/active",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "auctions", "active"]
+            },
+            "description": "Get all active auctions for marketplace display."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Auction Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/auctions/{{AUCTION_ID}}",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "auctions", "{{AUCTION_ID}}"]
+            },
+            "description": "Get specific auction details by ID. Replace {{AUCTION_ID}} with actual ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Created Auctions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/auctions/user/created",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "auctions", "user", "created"]
+            },
+            "description": "Get all auctions created by authenticated user."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "3. NFT & Meeting Access",
+      "item": [
+        {
+          "name": "Get My NFTs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/contract/nfts/{{USER_WALLET}}",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "contract", "nfts", "{{USER_WALLET}}"]
+            },
+            "description": "Get all NFTs owned by wallet. Shows which meetings user can access."
+          },
+          "response": []
+        },
+        {
+          "name": "Check Can Burn NFT",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/contract/can-burn/{{NFT_TOKEN_ID}}/{{USER_WALLET}}",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "contract", "can-burn", "{{NFT_TOKEN_ID}}", "{{USER_WALLET}}"]
+            },
+            "description": "Check if NFT can be burned for meeting access. Call before burning NFT."
+          },
+          "response": []
+        },
+        {
+          "name": "Join Meeting After NFT Burn",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nftProof\": {\n    \"tokenId\": \"{{NFT_TOKEN_ID}}\",\n    \"burnTxHash\": \"{{BURN_TX_HASH}}\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/meetings/join-gated/{{ROOM_ID}}",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "meetings", "join-gated", "{{ROOM_ID}}"]
+            },
+            "description": "**ATTENDEE:** After burning NFT on blockchain, call this to get meeting access link."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "4. Meeting Management",
+      "item": [
+        {
+          "name": "Get My Meetings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/meetings",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "meetings"]
+            },
+            "description": "**HOST:** Get all meetings for auctions you created. Returns direct access links."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Meeting Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{AUTH_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/meetings/{{ROOM_ID}}",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "meetings", "{{ROOM_ID}}"]
+            },
+            "description": "Get specific meeting details by room ID."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "5. User Dashboard",
+      "item": [
+        {
+          "name": "Get Host Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/contract/dashboard/host/{{USER_WALLET}}",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "contract", "dashboard", "host", "{{USER_WALLET}}"]
+            },
+            "description": "Get host dashboard: live auctions, upcoming meetings, past events."
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/contract/dashboard/user/{{USER_WALLET}}",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "contract", "dashboard", "user", "{{USER_WALLET}}"]
+            },
+            "description": "Get user dashboard: active bids, won auctions, available NFTs."
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "http://localhost:5009",
+      "type": "string"
+    },
+    {
+      "key": "AUTH_TOKEN",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "PARA_VERIFICATION_TOKEN",
+      "value": "1db0ccca-fcb4-42ed-8b15-1c4dbf9d95b8",
+      "type": "string"
+    },
+    {
+      "key": "USER_WALLET",
+      "value": "0x6daa02F03f05D7330ec10F12E66Ac3db0Cd7718d",
+      "type": "string"
+    },
+    {
+      "key": "USER_PARA_ID",
+      "value": "email_cm9oaXQucmFqc3Vy",
+      "type": "string"
+    },
+    {
+      "key": "USER_EMAIL",
+      "value": "rohit.rajsurya10@gmail.com",
+      "type": "string"
+    },
+    {
+      "key": "USER_NAME",
+      "value": "Rohit",
+      "type": "string"
+    },
+    {
+      "key": "AUCTION_ID",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "NFT_TOKEN_ID",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "ROOM_ID",
+      "value": "auction-5-1234567890",
+      "type": "string"
+    },
+    {
+      "key": "AUCTION_TX_HASH",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "BURN_TX_HASH",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
