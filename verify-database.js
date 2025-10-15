@@ -36,17 +36,42 @@ async function verifyDatabase() {
       console.log('⚠️  No users found in database');
     } else {
       console.log(`Found ${usersResult.rows.length} users:\n`);
-      usersResult.rows.forEach((user, index) => {
-        console.log(`User ${index + 1}:`);
-        console.log(`  ID: ${user.id}`);
-        console.log(`  Para User ID: ${user.para_user_id}`);
-        console.log(`  Wallet: ${user.wallet_address || 'Not connected'}`);
-        console.log(`  Email: ${user.email || 'N/A'}`);
-        console.log(`  Display Name: ${user.display_name || 'N/A'}`);
-        console.log(`  Auth Type: ${user.auth_type || 'N/A'}`);
-        console.log(`  Created: ${user.created_at}`);
-        console.log('');
+      
+      // Create a formatted table
+      const columns = ['ID', 'Para User ID', 'Wallet', 'Email', 'Auth Type', 'Display Name', 'Created'];
+      const colWidths = [3, 20, 15, 20, 10, 15, 20];
+      
+      // Print header
+      let header = '│';
+      columns.forEach((col, index) => {
+        header += ` ${col.padEnd(colWidths[index])} │`;
       });
+      console.log(header);
+      console.log('├' + columns.map((_, i) => '─'.repeat(colWidths[i] + 2)).join('┼') + '┤');
+      
+      // Print rows
+      usersResult.rows.forEach((user, index) => {
+        let row = '│';
+        const values = [
+          user.id.toString(),
+          user.para_user_id || 'N/A',
+          user.wallet_address || 'Not connected',
+          user.email || 'N/A',
+          user.auth_type || 'N/A',
+          user.display_name || 'N/A',
+          user.created_at
+        ];
+        
+        values.forEach((value, colIndex) => {
+          const truncated = String(value).length > colWidths[colIndex] 
+            ? String(value).substring(0, colWidths[colIndex] - 3) + '...'
+            : String(value);
+          row += ` ${truncated.padEnd(colWidths[colIndex])} │`;
+        });
+        console.log(row);
+      });
+      
+      console.log('└' + columns.map((_, i) => '─'.repeat(colWidths[i] + 2)).join('┴') + '┘');
     }
 
     // Check auctions table

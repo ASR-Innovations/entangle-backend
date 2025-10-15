@@ -128,16 +128,30 @@ class JitsiService {
         }
       };
       
-      // Sign with RS256 (simplified header like official docs)
-      const token = jwt.sign(payload, this.privateKey, { 
-        algorithm: 'RS256',
-        header: { 
-          kid: this.kid
-        }
-      });
+      // Check if private key is in PEM format for RS256
+      const isPemFormat = this.privateKey.includes('-----BEGIN') && this.privateKey.includes('-----END');
       
-      logger.info(`JWT token generated for ${userName} (${role}) in room ${roomName}`);
-      return token;
+      if (isPemFormat) {
+        // Use RS256 for PEM format keys
+        const token = jwt.sign(payload, this.privateKey, { 
+          algorithm: 'RS256',
+          header: { 
+            kid: this.kid
+          }
+        });
+        
+        logger.info(`JWT token generated for ${userName} (${role}) in room ${roomName}`);
+        return token;
+      } else {
+        // Use HS256 for non-PEM format keys (fallback)
+        logger.warn('Private key is not in PEM format, using HS256 instead of RS256');
+        const token = jwt.sign(payload, this.privateKey, { 
+          algorithm: 'HS256'
+        });
+        
+        logger.info(`JWT token generated for ${userName} (${role}) in room ${roomName} using HS256`);
+        return token;
+      }
       
     } catch (error) {
       logger.error('Failed to generate JWT token:', error);
@@ -165,13 +179,13 @@ class JitsiService {
     return url;
   }
   
-  // Create meeting for auction participants (host only initially)
-  createAuctionMeeting({ auctionId, hostData, duration = 60 }) {
+  // Create meeting for auction participants (host and winner)
+  createAuctionMeeting({ auctionId, hostData, winnerData = null, duration = 60 }) {
     try {
       // Convert BigInt to Number
       const durationNum = Number(duration);
       const auctionIdNum = Number(auctionId);
-      
+
       // Create room
       const room = this.createRoom({
         roomName: `auction-${auctionIdNum}`,
@@ -179,7 +193,7 @@ class JitsiService {
         duration: durationNum,
         maxParticipants: 2
       });
-      
+
       // Generate host token (if JWT enabled)
       const hostToken = this.generateToken({
         roomName: room.roomId,
@@ -189,17 +203,48 @@ class JitsiService {
         role: 'moderator',
         expiresIn: Math.ceil(durationNum / 60) + 1
       });
-      
+
+      // If JWT token generation failed, provide a fallback
+      const finalHostToken = hostToken || 'no-jwt-token';
+
       // Generate host URL
       const hostUrl = this.generateMeetingUrl({
         roomId: room.roomId,
-        token: hostToken,
+        token: finalHostToken,
         userName: hostData.name,
         userEmail: hostData.email
       });
-      
+
+      // Generate winner token and URL if winner data is provided
+      let winnerToken = null;
+      let winnerUrl = null;
+
+      if (winnerData) {
+        winnerToken = this.generateToken({
+          roomName: room.roomId,
+          userId: winnerData.paraId,
+          userName: winnerData.name,
+          email: winnerData.email,
+          role: 'participant',
+          expiresIn: Math.ceil(durationNum / 60) + 1
+        });
+
+        const finalWinnerToken = winnerToken || 'no-jwt-token';
+
+        winnerUrl = this.generateMeetingUrl({
+          roomId: room.roomId,
+          token: finalWinnerToken,
+          userName: winnerData.name,
+          userEmail: winnerData.email
+        });
+
+        logger.info(`Winner token generated for ${winnerData.name} in auction ${auctionId}`);
+      } else {
+        logger.warn(`No winner data provided for auction ${auctionId} - winner token not generated`);
+      }
+
       logger.info(`Auction meeting created: ${room.roomId} for auction ${auctionId}`);
-      
+
       return {
         success: true,
         meeting: {
@@ -211,18 +256,23 @@ class JitsiService {
           baseUrl: room.url
         },
         host: {
-          token: hostToken,
+          token: finalHostToken,
           url: hostUrl,
           role: 'moderator'
         },
-        // Attendee access will be generated later after verification
+        winner: winnerData ? {
+          token: winnerToken || 'no-jwt-token',
+          url: winnerUrl,
+          role: 'participant'
+        } : null,
+        // Attendee access will be generated later after verification (for users without accounts)
         attendeeAccess: {
           roomId: room.roomId,
-          available: false,
-          note: 'Attendee access granted after verification'
+          available: !winnerData, // Available if winner doesn't have account yet
+          note: winnerData ? 'Winner has direct access' : 'Attendee access granted after verification'
         }
       };
-      
+
     } catch (error) {
       logger.error('Failed to create auction meeting:', error);
       return {

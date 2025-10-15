@@ -478,7 +478,7 @@ class MeetingService {
   // Get meeting info
   async getMeetingInfo(roomId) {
     try {
-      const query = 'SELECT * FROM meetings WHERE room_id = $1';
+      const query = 'SELECT * FROM meetings WHERE jitsi_room_id = $1';
       const result = await pool.query(query, [roomId]);
 
       if (result.rows.length === 0) {
@@ -489,19 +489,19 @@ class MeetingService {
       }
 
       const meeting = result.rows[0];
-      const policy = meeting.policy ? JSON.parse(meeting.policy) : null;
+      const roomConfig = meeting.jitsi_room_config ? JSON.parse(meeting.jitsi_room_config) : {};
 
       return {
         success: true,
         meeting: {
           id: meeting.id,
-          roomId: meeting.room_id,
-          url: `https://8x8.vc/${meeting.room_id}`,
-          policy,
-          hostUserId: meeting.host_user_id,
-          guestUserId: meeting.guest_user_id,
+          roomId: meeting.jitsi_room_id,
+          url: meeting.room_url,
+          auctionId: meeting.auction_id,
+          config: roomConfig,
           expiresAt: meeting.expires_at,
-          createdAt: meeting.created_at
+          createdAt: meeting.created_at,
+          scheduledAt: meeting.scheduled_at
         }
       };
 
