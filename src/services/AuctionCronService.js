@@ -257,36 +257,19 @@ class AuctionCronService {
 
       // Step 3: Get user data for creator and winner
       const creatorData = await this.getUserDataByWallet(auction.host);
-      const winnerData = auction.highestBidder !== ethers.ZeroAddress 
-        ? await this.getUserDataByWallet(auction.highestBidder) 
+      const winnerData = auction.highestBidder !== ethers.ZeroAddress
+        ? await this.getUserDataByWallet(auction.highestBidder)
         : null;
 
-      // Step 4: Create meeting
-      logger.info(`🎬 Step 4: Creating Jitsi meeting...`);
-      const meeting = await this.createMeetingForAuction({
-        auctionId: auctionId,
-        auction: updatedAuction,
-        creatorData,
-        winnerData
-      });
-      
-      if (meeting && meeting.roomUrl) {
-        logger.info(`✅ Meeting created successfully!`);
-        logger.info(`🔗 Meeting URL: ${meeting.roomUrl}`);
-      }
-
-      // Step 5: Update database
-      await this.updateAuctionInDatabase(auctionId, updatedAuction, meeting);
-
-      // Step 6: Schedule meeting on-chain
-      if (meeting && meeting.success) {
-        await this.scheduleMeetingOnChain(auctionId, meeting.meeting.roomId);
-      }
+      // Step 4: Update database (Meeting will be created when winner burns NFT)
+      logger.info(`📝 Step 4: Updating auction in database...`);
+      logger.info(`⚠️  Meeting will be created ON-DEMAND when winner burns NFT`);
+      await this.updateAuctionInDatabase(auctionId, updatedAuction, null);
 
       logger.info(`Successfully processed auction ${auctionId}`, {
         hasWinner: !!winnerData,
         nftTokenId: updatedAuction.nftTokenId.toString(),
-        meetingCreated: meeting?.success || false
+        note: 'Meeting will be created when winner burns NFT to access'
       });
 
     } catch (error) {

@@ -416,4 +416,417 @@ router.post('/create-direct', async (req, res) => {
   }
 });
 
+// ========================================
+// NEW FLOW: ON-DEMAND MEETING CREATION
+// ========================================
+
+/**
+ * Check winner access requirements
+ * Returns whether winner needs to burn NFT to access meeting
+ */
+router.post('/access-winner', authenticateToken, async (req, res) => {
+  try {
+    const { auctionId } = req.body;
+    const user = req.user;
+
+    logger.info(`🔍 Checking winner access for auction ${auctionId}`);
+    logger.info(`   User: ${user.walletAddress}`);
+
+    if (!auctionId) {
+      return res.status(400).json({
+        error: 'Auction ID is required',
+        required: ['auctionId']
+      });
+    }
+
+    if (!user.walletAddress) {
+      return res.status(400).json({
+        error: 'Wallet address required',
+        hint: 'User must have wallet connected'
+      });
+    }
+
+    // Get contract service
+    const { getContractService } = require('../services/ContractService');
+    const contractService = getContractService();
+    await contractService.initialize();
+
+    // Get auction data from blockchain
+    const auction = await contractService.contract.getAuction(auctionId);
+
+    if (!auction || auction.id === 0) {
+      return res.status(404).json({
+        error: 'Auction not found'
+      });
+    }
+
+    // Check if user is the winner
+    const isWinner = auction.highestBidder.toLowerCase() === user.walletAddress.toLowerCase();
+
+    if (!isWinner) {
+      return res.status(403).json({
+        error: 'Only the auction winner can access this meeting',
+        details: `Winner is ${auction.highestBidder}`
+      });
+    }
+
+    // Check if meeting already exists
+    const meetingCheck = await pool.query(
+      'SELECT * FROM meetings WHERE auction_id = $1',
+      [auctionId]
+    );
+
+    if (meetingCheck.rows.length > 0) {
+      // Meeting already created - user can join directly
+      logger.info(`✅ Meeting already exists for auction ${auctionId}`);
+      return res.json({
+        success: true,
+        requiresBurn: false,
+        meetingExists: true,
+        meeting: {
+          roomId: meetingCheck.rows[0].jitsi_room_id,
+          url: meetingCheck.rows[0].room_url
+        }
+      });
+    }
+
+    // Check NFT ownership (should own the NFT to burn it)
+    const nftTokenId = Number(auction.nftTokenId);
+
+    try {
+      // Try to get NFT owner (will fail if burned)
+      const owner = await contractService.contract.ownerOf(nftTokenId);
+      const ownsNFT = owner.toLowerCase() === user.walletAddress.toLowerCase();
+
+      if (!ownsNFT) {
+        return res.status(403).json({
+          error: 'You do not own the NFT',
+          details: `NFT Token ID ${nftTokenId} is owned by ${owner}`
+        });
+      }
+
+      // User owns NFT and needs to burn it
+      logger.info(`⚠️  User must burn NFT ${nftTokenId} to access meeting`);
+      return res.json({
+        success: true,
+        requiresBurn: true,
+        meetingExists: false,
+        nftTokenId,
+        auctionId,
+        message: 'You must burn your NFT to access the meeting'
+      });
+
+    } catch (error) {
+      // NFT might already be burned
+      if (error.message && error.message.includes('ERC721: invalid token ID')) {
+        return res.status(400).json({
+          error: 'NFT has already been burned',
+          details: 'The NFT may have been burned already. Check if meeting was created.'
+        });
+      }
+      throw error;
+    }
+
+  } catch (error) {
+    logger.error('Check winner access error:', error);
+    res.status(500).json({
+      error: 'Failed to check access',
+      message: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+    });
+  }
+});
+
+/**
+ * Burn NFT and create meeting access
+ * Winner burns NFT and gets meeting URL
+ */
+router.post('/burn-nft-access', authenticateToken, async (req, res) => {
+  try {
+    const { auctionId, burnTxHash, tokenId } = req.body;
+    const user = req.user;
+
+    logger.info(`🔥 NFT burn verification for auction ${auctionId}`);
+    logger.info(`   User: ${user.walletAddress}`);
+    logger.info(`   Burn TX: ${burnTxHash}`);
+    logger.info(`   Token ID: ${tokenId}`);
+
+    if (!auctionId || !burnTxHash || !tokenId) {
+      return res.status(400).json({
+        error: 'Missing required fields',
+        required: ['auctionId', 'burnTxHash', 'tokenId']
+      });
+    }
+
+    if (!user.walletAddress) {
+      return res.status(400).json({
+        error: 'Wallet address required'
+      });
+    }
+
+    // Get contract service
+    const { getContractService } = require('../services/ContractService');
+    const contractService = getContractService();
+    await contractService.initialize();
+
+    // Verify burn transaction on blockchain
+    logger.info(`📋 Verifying burn transaction...`);
+    const receipt = await contractService.provider.getTransactionReceipt(burnTxHash);
+
+    if (!receipt || receipt.status !== 1) {
+      return res.status(400).json({
+        error: 'Invalid or failed burn transaction'
+      });
+    }
+
+    // Verify the transaction was sent by the user
+    const transaction = await contractService.provider.getTransaction(burnTxHash);
+    if (transaction.from.toLowerCase() !== user.walletAddress.toLowerCase()) {
+      logger.error(`❌ Transaction sender mismatch: ${transaction.from} vs ${user.walletAddress}`);
+      return res.status(403).json({
+        error: 'Burn transaction was not sent by you',
+        details: `Transaction was sent by ${transaction.from}`
+      });
+    }
+
+    logger.info(`✅ Transaction verified: sent by ${transaction.from}`);
+
+    // Verify NFTBurned event (contract emits NFTBurned, not NFTBurnedForMeeting)
+    const ethers = require('ethers');
+    const iface = new ethers.Interface([
+      'event NFTBurned(uint256 indexed tokenId, uint256 indexed auctionId)'
+    ]);
+
+    let burnEventFound = false;
+    logger.info(`🔍 Parsing transaction logs for NFTBurned event...`);
+    logger.info(`   Expected tokenId: ${tokenId}`);
+    logger.info(`   Expected auctionId: ${auctionId}`);
+
+    for (const log of receipt.logs) {
+      try {
+        const parsed = iface.parseLog(log);
+        if (parsed && parsed.name === 'NFTBurned') {
+          const eventTokenId = Number(parsed.args.tokenId);
+          const eventAuctionId = Number(parsed.args.auctionId);
+
+          logger.info(`   Found NFTBurned event: tokenId=${eventTokenId}, auctionId=${eventAuctionId}`);
+
+          // Verify the burn is for the correct NFT and auction
+          if (eventTokenId === Number(tokenId) && eventAuctionId === Number(auctionId)) {
+            burnEventFound = true;
+            logger.info(`✅ Valid NFT burn event verified!`);
+            logger.info(`   ✓ Token ID matches: ${eventTokenId}`);
+            logger.info(`   ✓ Auction ID matches: ${eventAuctionId}`);
+            break;
+          } else {
+            logger.warn(`   ✗ Event doesn't match: tokenId=${eventTokenId} (expected ${tokenId}), auctionId=${eventAuctionId} (expected ${auctionId})`);
+          }
+        }
+      } catch (e) {
+        // Not the event we're looking for, skip
+      }
+    }
+
+    if (!burnEventFound) {
+      logger.error(`❌ No valid NFTBurned event found in transaction`);
+      logger.error(`   Transaction hash: ${burnTxHash}`);
+      logger.error(`   Expected tokenId: ${tokenId}, auctionId: ${auctionId}`);
+      return res.status(400).json({
+        error: 'Invalid burn transaction',
+        details: 'No valid NFTBurned event found for this auction and NFT'
+      });
+    }
+
+    // Check for replay attacks
+    const existingAccess = await pool.query(
+      'SELECT * FROM meeting_access_logs WHERE transaction_hash = $1',
+      [burnTxHash]
+    );
+
+    if (existingAccess.rows.length > 0) {
+      return res.status(400).json({
+        error: 'Burn transaction already used'
+      });
+    }
+
+    // Get auction data
+    const auction = await contractService.contract.getAuction(auctionId);
+    const auctionDb = await pool.query('SELECT * FROM auctions WHERE id = $1', [auctionId]);
+
+    if (auctionDb.rows.length === 0) {
+      return res.status(404).json({
+        error: 'Auction not found in database'
+      });
+    }
+
+    // Get creator data
+    const creatorData = await pool.query(
+      'SELECT * FROM users WHERE wallet_address = $1',
+      [auction.host.toLowerCase()]
+    );
+
+    // NOW CREATE THE MEETING
+    logger.info(`🎬 Creating meeting for auction ${auctionId}...`);
+
+    const jitsiService = require('../services/JitsiService').getJitsiService();
+    const meeting = jitsiService.createAuctionMeeting({
+      auctionId: Number(auctionId),
+      hostData: {
+        paraId: creatorData.rows[0]?.para_user_id || 'unknown',
+        name: creatorData.rows[0]?.display_name || 'Auction Creator',
+        email: creatorData.rows[0]?.email || 'creator@example.com'
+      },
+      winnerData: {
+        paraId: user.paraUserId,
+        name: user.displayName,
+        email: user.email
+      },
+      duration: auctionDb.rows[0].meeting_duration || 60
+    });
+
+    if (!meeting.success) {
+      return res.status(500).json({
+        error: 'Failed to create meeting',
+        details: meeting.error
+      });
+    }
+
+    // Save meeting to database
+    await pool.query(`
+      INSERT INTO meetings (
+        auction_id, jitsi_room_id, jitsi_room_config,
+        creator_access_token, winner_access_token, room_url,
+        expires_at
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7)
+    `, [
+      auctionId,
+      meeting.meeting.roomId,
+      JSON.stringify(meeting.meeting.config),
+      meeting.host.token,
+      meeting.winner.token,
+      meeting.meeting.url,
+      meeting.meeting.expiresAt
+    ]);
+
+    // Log the access
+    await pool.query(`
+      INSERT INTO meeting_access_logs (
+        auction_id, user_para_id, wallet_address, nft_token_id,
+        transaction_hash, access_method
+      ) VALUES ($1, $2, $3, $4, $5, 'nft_burn_verified')
+    `, [
+      auctionId,
+      user.paraUserId,
+      user.walletAddress.toLowerCase(),
+      tokenId,
+      burnTxHash
+    ]);
+
+    logger.info(`✅ Meeting created and access granted for auction ${auctionId}`);
+
+    res.json({
+      success: true,
+      meeting: {
+        url: meeting.winner.url,
+        token: meeting.winner.token,
+        roomId: meeting.meeting.roomId,
+        expiresAt: meeting.meeting.expiresAt
+      },
+      message: 'NFT burned successfully. Meeting access granted.'
+    });
+
+  } catch (error) {
+    logger.error('Burn NFT access error:', error);
+    res.status(500).json({
+      error: 'Failed to process NFT burn',
+      message: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+    });
+  }
+});
+
+/**
+ * Get creator/host access to meeting
+ * Creator doesn't need to burn NFT, just verify ownership
+ */
+router.post('/access-creator', authenticateToken, async (req, res) => {
+  try {
+    const { auctionId } = req.body;
+    const user = req.user;
+
+    logger.info(`🔍 Checking creator access for auction ${auctionId}`);
+
+    if (!auctionId) {
+      return res.status(400).json({
+        error: 'Auction ID is required'
+      });
+    }
+
+    if (!user.walletAddress) {
+      return res.status(400).json({
+        error: 'Wallet address required'
+      });
+    }
+
+    // Get contract service
+    const { getContractService } = require('../services/ContractService');
+    const contractService = getContractService();
+    await contractService.initialize();
+
+    // Get auction data
+    const auction = await contractService.contract.getAuction(auctionId);
+
+    if (!auction || auction.id === 0) {
+      return res.status(404).json({
+        error: 'Auction not found'
+      });
+    }
+
+    // Verify user is the creator
+    const isCreator = auction.host.toLowerCase() === user.walletAddress.toLowerCase();
+
+    if (!isCreator) {
+      return res.status(403).json({
+        error: 'Only the auction creator can access this',
+        details: `Creator is ${auction.host}`
+      });
+    }
+
+    // Check if meeting exists
+    const meetingCheck = await pool.query(
+      'SELECT * FROM meetings WHERE auction_id = $1',
+      [auctionId]
+    );
+
+    if (meetingCheck.rows.length === 0) {
+      return res.json({
+        success: true,
+        meetingExists: false,
+        message: 'Meeting will be created when winner burns NFT'
+      });
+    }
+
+    // Meeting exists - return creator access
+    const meeting = meetingCheck.rows[0];
+
+    logger.info(`✅ Creator access granted for auction ${auctionId}`);
+
+    res.json({
+      success: true,
+      meetingExists: true,
+      meeting: {
+        url: meeting.room_url,
+        token: meeting.creator_access_token,
+        roomId: meeting.jitsi_room_id,
+        expiresAt: meeting.expires_at
+      }
+    });
+
+  } catch (error) {
+    logger.error('Creator access error:', error);
+    res.status(500).json({
+      error: 'Failed to get creator access',
+      message: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+    });
+  }
+});
+
 module.exports = router;
