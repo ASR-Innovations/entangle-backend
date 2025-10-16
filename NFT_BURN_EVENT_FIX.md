@@ -1,3 +1,4 @@
+
 # NFT Burn Event Verification Fix
 
 ## Issue Description

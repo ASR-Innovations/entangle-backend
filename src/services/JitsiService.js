@@ -128,27 +128,41 @@ class JitsiService {
         }
       };
       
-      // Check if private key is in PEM format for RS256
+      // Convert base64 RSA key to PEM format if needed
+      let privateKey = this.privateKey;
       const isPemFormat = this.privateKey.includes('-----BEGIN') && this.privateKey.includes('-----END');
-      
-      if (isPemFormat) {
-        // Use RS256 for PEM format keys
-        const token = jwt.sign(payload, this.privateKey, { 
+
+      if (!isPemFormat && this.privateKey.length > 100) {
+        // This looks like a raw RSA private key in base64 format
+        // Convert to PEM format for RS256
+        logger.info('Converting raw RSA key to PEM format');
+        privateKey = `-----BEGIN PRIVATE KEY-----\n${this.privateKey.match(/.{1,64}/g).join('\n')}\n-----END PRIVATE KEY-----`;
+      }
+
+      if (!isPemFormat || privateKey.includes('-----BEGIN')) {
+        // Use RS256 for RSA keys (JaaS requires RS256)
+        logger.info('Using RS256 algorithm for JaaS');
+        const token = jwt.sign(payload, privateKey, {
           algorithm: 'RS256',
-          header: { 
-            kid: this.kid
+          header: {
+            kid: this.kid,
+            typ: 'JWT'
           }
         });
-        
-        logger.info(`JWT token generated for ${userName} (${role}) in room ${roomName}`);
+
+        logger.info(`JWT token generated for ${userName} (${role}) in room ${roomName} using RS256`);
         return token;
       } else {
-        // Use HS256 for non-PEM format keys (fallback)
-        logger.warn('Private key is not in PEM format, using HS256 instead of RS256');
-        const token = jwt.sign(payload, this.privateKey, { 
-          algorithm: 'HS256'
+        // Fallback to HS256 for short API keys
+        logger.info('Using HS256 with short API key');
+        const token = jwt.sign(payload, this.privateKey, {
+          algorithm: 'HS256',
+          header: {
+            kid: this.kid,
+            typ: 'JWT'
+          }
         });
-        
+
         logger.info(`JWT token generated for ${userName} (${role}) in room ${roomName} using HS256`);
         return token;
       }

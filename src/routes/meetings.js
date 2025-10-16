@@ -426,11 +426,17 @@ router.post('/create-direct', async (req, res) => {
  */
 router.post('/access-winner', authenticateToken, async (req, res) => {
   try {
-    const { auctionId } = req.body;
+    const { auctionId, walletAddress } = req.body;
     const user = req.user;
 
+    // Accept wallet address from either JWT token or request body
+    const userWallet = user.walletAddress || user.wallet_address || walletAddress;
+
     logger.info(`🔍 Checking winner access for auction ${auctionId}`);
-    logger.info(`   User: ${user.walletAddress}`);
+    logger.info(`   User object: ${JSON.stringify(user)}`);
+    logger.info(`   Wallet from token: ${user.walletAddress || user.wallet_address}`);
+    logger.info(`   Wallet from body: ${walletAddress}`);
+    logger.info(`   Final wallet: ${userWallet}`);
 
     if (!auctionId) {
       return res.status(400).json({
@@ -439,10 +445,14 @@ router.post('/access-winner', authenticateToken, async (req, res) => {
       });
     }
 
-    if (!user.walletAddress) {
+    if (!userWallet) {
       return res.status(400).json({
         error: 'Wallet address required',
-        hint: 'User must have wallet connected'
+        hint: 'User must have wallet connected',
+        debug: {
+          userFromToken: user,
+          requestBody: req.body
+        }
       });
     }
 
@@ -461,12 +471,13 @@ router.post('/access-winner', authenticateToken, async (req, res) => {
     }
 
     // Check if user is the winner
-    const isWinner = auction.highestBidder.toLowerCase() === user.walletAddress.toLowerCase();
+    const isWinner = auction.highestBidder.toLowerCase() === userWallet.toLowerCase();
 
     if (!isWinner) {
       return res.status(403).json({
         error: 'Only the auction winner can access this meeting',
-        details: `Winner is ${auction.highestBidder}`
+        details: `Winner is ${auction.highestBidder}`,
+        yourWallet: userWallet
       });
     }
 
@@ -496,17 +507,19 @@ router.post('/access-winner', authenticateToken, async (req, res) => {
     try {
       // Try to get NFT owner (will fail if burned)
       const owner = await contractService.contract.ownerOf(nftTokenId);
-      const ownsNFT = owner.toLowerCase() === user.walletAddress.toLowerCase();
+      const ownsNFT = owner.toLowerCase() === userWallet.toLowerCase();
 
       if (!ownsNFT) {
         return res.status(403).json({
           error: 'You do not own the NFT',
-          details: `NFT Token ID ${nftTokenId} is owned by ${owner}`
+          details: `NFT Token ID ${nftTokenId} is owned by ${owner}`,
+          yourWallet: userWallet
         });
       }
 
       // User owns NFT and needs to burn it
       logger.info(`⚠️  User must burn NFT ${nftTokenId} to access meeting`);
+      logger.info(`   NFT owned by: ${userWallet}`);
       return res.json({
         success: true,
         requiresBurn: true,
@@ -546,7 +559,7 @@ router.post('/burn-nft-access', authenticateToken, async (req, res) => {
     const user = req.user;
 
     logger.info(`🔥 NFT burn verification for auction ${auctionId}`);
-    logger.info(`   User: ${user.walletAddress}`);
+    logger.info(`   User from JWT: ${JSON.stringify(user)}`);
     logger.info(`   Burn TX: ${burnTxHash}`);
     logger.info(`   Token ID: ${tokenId}`);
 
@@ -554,12 +567,6 @@ router.post('/burn-nft-access', authenticateToken, async (req, res) => {
       return res.status(400).json({
         error: 'Missing required fields',
         required: ['auctionId', 'burnTxHash', 'tokenId']
-      });
-    }
-
-    if (!user.walletAddress) {
-      return res.status(400).json({
-        error: 'Wallet address required'
       });
     }
 
@@ -578,17 +585,11 @@ router.post('/burn-nft-access', authenticateToken, async (req, res) => {
       });
     }
 
-    // Verify the transaction was sent by the user
+    // Get wallet address from the transaction itself (transaction sender = NFT burner)
     const transaction = await contractService.provider.getTransaction(burnTxHash);
-    if (transaction.from.toLowerCase() !== user.walletAddress.toLowerCase()) {
-      logger.error(`❌ Transaction sender mismatch: ${transaction.from} vs ${user.walletAddress}`);
-      return res.status(403).json({
-        error: 'Burn transaction was not sent by you',
-        details: `Transaction was sent by ${transaction.from}`
-      });
-    }
+    const walletAddress = transaction.from;
 
-    logger.info(`✅ Transaction verified: sent by ${transaction.from}`);
+    logger.info(`✅ Transaction verified: sent by ${walletAddress}`);
 
     // Verify NFTBurned event (contract emits NFTBurned, not NFTBurnedForMeeting)
     const ethers = require('ethers');
@@ -716,7 +717,7 @@ router.post('/burn-nft-access', authenticateToken, async (req, res) => {
     `, [
       auctionId,
       user.paraUserId,
-      user.walletAddress.toLowerCase(),
+      walletAddress.toLowerCase(),
       tokenId,
       burnTxHash
     ]);
