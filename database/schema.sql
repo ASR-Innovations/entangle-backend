@@ -18,14 +18,44 @@ CREATE TABLE IF NOT EXISTS auctions (
   contract_address VARCHAR(42) NOT NULL,
   creator_para_id VARCHAR(255) NOT NULL,
   creator_wallet VARCHAR(42) NOT NULL,
+
+  -- Auction info
   title VARCHAR(255) NOT NULL,
   description TEXT,
   metadata_ipfs VARCHAR(255),
+
+  -- Creator display info
+  twitter_id VARCHAR(255),
+  seller_name VARCHAR(255),
+  profile_picture TEXT,
+
+  -- Event details
+  event_date TIMESTAMP,
+  event_start_time TIMESTAMP,
+  event_end_time TIMESTAMP,
+
+  -- Blockchain data cache
+  bid_price VARCHAR(50), -- Reserve/starting price
+  duration_blocks INTEGER,
+  end_block INTEGER,
+  highest_bid VARCHAR(50),
+  highest_bidder VARCHAR(42),
+  blocks_remaining INTEGER,
+  time_remaining_seconds INTEGER,
+
+  -- Meeting info
   meeting_duration INTEGER DEFAULT 60,
   nft_token_id INTEGER,
   jitsi_room_id VARCHAR(255),
+
+  -- Status
   auto_ended BOOLEAN DEFAULT FALSE,
+  ended BOOLEAN DEFAULT FALSE,
+
+  -- Timestamps
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
   FOREIGN KEY (creator_wallet) REFERENCES users(wallet_address)
 );
 
@@ -98,6 +128,10 @@ CREATE TABLE IF NOT EXISTS para_sessions (
 CREATE INDEX IF NOT EXISTS idx_users_para_id ON users(para_user_id);
 CREATE INDEX IF NOT EXISTS idx_users_wallet ON users(wallet_address);
 CREATE INDEX IF NOT EXISTS idx_auctions_creator ON auctions(creator_para_id);
+CREATE INDEX IF NOT EXISTS idx_auctions_twitter_id ON auctions(twitter_id);
+CREATE INDEX IF NOT EXISTS idx_auctions_event_date ON auctions(event_date);
+CREATE INDEX IF NOT EXISTS idx_auctions_ended ON auctions(ended);
+CREATE INDEX IF NOT EXISTS idx_auctions_end_block ON auctions(end_block);
 CREATE INDEX IF NOT EXISTS idx_notifications_user ON notifications(user_para_id);
 CREATE INDEX IF NOT EXISTS idx_meetings_auction ON meetings(auction_id);
 CREATE INDEX IF NOT EXISTS idx_lit_gate_passes_nonce ON lit_gate_passes(nonce);

@@ -15,7 +15,15 @@ const createAuctionSchema = Joi.object({
   reservePrice: Joi.number().min(0.001).max(1000).required(),
   meetingDuration: Joi.number().min(15).max(180).required(),
   creatorWallet: Joi.string().pattern(/^0x[a-fA-F0-9]{40}$/).required(),
-  transactionHash: Joi.string().pattern(/^0x[a-fA-F0-9]{64}$/).required()
+  transactionHash: Joi.string().pattern(/^0x[a-fA-F0-9]{64}$/).required(),
+
+  // New fields from image
+  twitterId: Joi.string().max(255).optional().allow(''),
+  sellerName: Joi.string().max(255).optional().allow(''),
+  profilePicture: Joi.string().uri().optional().allow(''),
+  eventDate: Joi.date().iso().optional().allow(null),
+  eventStartTime: Joi.date().iso().optional().allow(null),
+  eventEndTime: Joi.date().iso().optional().allow(null)
 });
 
 // Record auction creation (after frontend creates it on blockchain)
@@ -34,9 +42,11 @@ router.post('/created', authenticateToken, async (req, res) => {
       });
     }
     
-    const { 
-      title, description, duration, reservePrice, meetingDuration, 
-      creatorWallet, transactionHash 
+    const {
+      title, description, duration, reservePrice, meetingDuration,
+      creatorWallet, transactionHash,
+      twitterId, sellerName, profilePicture,
+      eventDate, eventStartTime, eventEndTime
     } = value;
     const { paraUserId } = req.user;
     
@@ -108,18 +118,30 @@ router.post('/created', authenticateToken, async (req, res) => {
       });
     }
     
+    // Get blockchain data to cache bid price and blocks
+    logger.info('🔗 Fetching auction data from blockchain...');
+    const contractAuction = await contractService.contract.getAuction(auctionId);
+    const currentBlock = await contractService.provider.getBlockNumber();
+    const blocksRemaining = Number(contractAuction.endBlock) - currentBlock;
+    const timeRemainingSeconds = blocksRemaining * 2; // Avalanche: ~2 sec/block
+
     // Store in database
     logger.info('💾 Inserting auction into database...');
     const insertQuery = `
       INSERT INTO auctions (
         id, contract_address, creator_para_id, creator_wallet,
-        title, description, metadata_ipfs, meeting_duration
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+        title, description, metadata_ipfs, meeting_duration,
+        twitter_id, seller_name, profile_picture,
+        event_date, event_start_time, event_end_time,
+        bid_price, duration_blocks, end_block,
+        highest_bid, highest_bidder,
+        blocks_remaining, time_remaining_seconds, ended
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22)
       RETURNING *
     `;
-    
+
     const metadataIPFS = `metadata_${auctionId}_${Date.now()}`;
-    
+
     const insertParams = [
       auctionId,
       contractService.contractAddress,
@@ -128,7 +150,21 @@ router.post('/created', authenticateToken, async (req, res) => {
       title,
       description || '',
       metadataIPFS,
-      meetingDuration
+      meetingDuration,
+      twitterId || null,
+      sellerName || null,
+      profilePicture || null,
+      eventDate || null,
+      eventStartTime || null,
+      eventEndTime || null,
+      contractAuction.reservePrice.toString(),
+      duration,
+      Number(contractAuction.endBlock),
+      contractAuction.highestBid.toString(),
+      contractAuction.highestBidder,
+      blocksRemaining,
+      timeRemainingSeconds,
+      contractAuction.ended
     ];
     
     logger.info('Insert parameters:', {
