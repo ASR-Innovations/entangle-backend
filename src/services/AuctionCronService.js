@@ -197,50 +197,50 @@ class AuctionCronService {
 
       if (readyToEndAuctions.length === 0) {
         logger.info('✨ No auctions ready to end at this time');
-        return;
-      }
+        // Don't return yet - we still need to update active auctions in Step 6
+      } else {
+        logger.info(`🚀 Step 4: Processing ${readyToEndAuctions.length} auction(s)...`);
 
-      logger.info(`🚀 Step 4: Processing ${readyToEndAuctions.length} auction(s)...`);
+        // PHASE 2 OPTIMIZATION: Batch end auctions on-chain
+        const auctionsNeedingOnChainEnd = readyToEndAuctions.filter(a => a.needsOnChainEnd);
 
-      // PHASE 2 OPTIMIZATION: Batch end auctions on-chain
-      const auctionsNeedingOnChainEnd = readyToEndAuctions.filter(a => a.needsOnChainEnd);
+        if (auctionsNeedingOnChainEnd.length > 0) {
+          logger.info(`⛓️  BATCH ENDING ${auctionsNeedingOnChainEnd.length} auctions on-chain...`);
+          const idsToEnd = auctionsNeedingOnChainEnd.map(a => a.id);
 
-      if (auctionsNeedingOnChainEnd.length > 0) {
-        logger.info(`⛓️  BATCH ENDING ${auctionsNeedingOnChainEnd.length} auctions on-chain...`);
-        const idsToEnd = auctionsNeedingOnChainEnd.map(a => a.id);
-
-        try {
-          await this.batchEndAuctionsOnChain(idsToEnd);
-        } catch (error) {
-          logger.error('❌ Batch ending failed, falling back to one-by-one:', error.message);
-          // Fallback: process individually if batch fails
-          for (const { id } of auctionsNeedingOnChainEnd) {
-            try {
-              await this.endAuctionOnChain(id);
-            } catch (err) {
-              logger.error(`Failed to end auction ${id}:`, err.message);
+          try {
+            await this.batchEndAuctionsOnChain(idsToEnd);
+          } catch (error) {
+            logger.error('❌ Batch ending failed, falling back to one-by-one:', error.message);
+            // Fallback: process individually if batch fails
+            for (const { id } of auctionsNeedingOnChainEnd) {
+              try {
+                await this.endAuctionOnChain(id);
+              } catch (err) {
+                logger.error(`Failed to end auction ${id}:`, err.message);
+              }
             }
           }
+        } else {
+          logger.info('✅ All auctions already ended on-chain, just updating database...');
         }
-      } else {
-        logger.info('✅ All auctions already ended on-chain, just updating database...');
-      }
 
-      // Update database for all processed auctions
-      logger.info('📝 Step 5: Updating database for all processed auctions...');
-      for (const { id } of readyToEndAuctions) {
-        try {
-          // Get updated auction data (with NFT token ID if minted)
-          const updatedAuction = await this.contract.getAuction(id);
+        // Update database for all processed auctions
+        logger.info('📝 Step 5: Updating database for all processed auctions...');
+        for (const { id } of readyToEndAuctions) {
+          try {
+            // Get updated auction data (with NFT token ID if minted)
+            const updatedAuction = await this.contract.getAuction(id);
 
-          if (updatedAuction.nftTokenId && Number(updatedAuction.nftTokenId) > 0) {
-            logger.info(`  🎨 Auction ${id}: NFT Token ID: ${updatedAuction.nftTokenId.toString()}`);
+            if (updatedAuction.nftTokenId && Number(updatedAuction.nftTokenId) > 0) {
+              logger.info(`  🎨 Auction ${id}: NFT Token ID: ${updatedAuction.nftTokenId.toString()}`);
+            }
+
+            await this.updateAuctionInDatabase(id, updatedAuction, null);
+            logger.info(`  ✅ Auction ${id}: Database updated`);
+          } catch (error) {
+            logger.error(`  ❌ Failed to update database for auction ${id}:`, error.message);
           }
-
-          await this.updateAuctionInDatabase(id, updatedAuction, null);
-          logger.info(`  ✅ Auction ${id}: Database updated`);
-        } catch (error) {
-          logger.error(`  ❌ Failed to update database for auction ${id}:`, error.message);
         }
       }
 

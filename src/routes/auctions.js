@@ -324,6 +324,339 @@ router.get('/user/created', authenticateToken, async (req, res) => {
   }
 });
 
+// Get active auctions from database (optimized - no blockchain calls)
+router.get('/active/db', async (req, res) => {
+  try {
+    const limit = Math.min(parseInt(req.query.limit) || 50, 100);
+    const offset = parseInt(req.query.offset) || 0;
+    
+    logger.info(`📊 GET /auctions/active/db - Fetching active auctions from database (limit: ${limit}, offset: ${offset})`);
+    
+    // Get active auctions from database with user info
+    const query = `
+      SELECT 
+        a.id,
+        a.title,
+        a.seller_name,
+        a.profile_picture,
+        a.twitter_id,
+        a.event_date,
+        a.event_start_time,
+        a.event_end_time,
+        a.bid_price,
+        a.highest_bid,
+        a.highest_bidder,
+        a.blocks_remaining,
+        a.time_remaining_seconds,
+        a.ended,
+        a.created_at,
+        u.display_name as creator_name
+      FROM auctions a
+      LEFT JOIN users u ON a.creator_wallet = u.wallet_address
+      WHERE a.ended = false
+      ORDER BY a.created_at DESC
+      LIMIT $1 OFFSET $2
+    `;
+    
+    const result = await pool.query(query, [limit, offset]);
+    
+    // Format auctions for frontend cards
+    const auctions = result.rows.map(auction => {
+      // Calculate time remaining in human-readable format
+      const timeRemainingSeconds = auction.time_remaining_seconds || 0;
+      const hours = Math.floor(timeRemainingSeconds / 3600);
+      const minutes = Math.floor((timeRemainingSeconds % 3600) / 60);
+      
+      let timeLeftFormatted = '';
+      if (hours > 0) {
+        timeLeftFormatted = `${hours}h ${minutes}m`;
+      } else {
+        timeLeftFormatted = `${minutes}m`;
+      }
+      
+      // Determine if there's a highest bid
+      const hasHighestBid = auction.highest_bid && 
+                           auction.highest_bid !== '0' && 
+                           auction.highest_bidder && 
+                           auction.highest_bidder !== '0x0000000000000000000000000000000000000000';
+      
+      // Show highest bid if exists, otherwise show floor price (bid_price)
+      const displayPrice = hasHighestBid ? auction.highest_bid : auction.bid_price;
+      const priceLabel = hasHighestBid ? 'Highest Bid' : 'Floor Price';
+      
+      // Convert wei to AVAX/USDC (assuming 18 decimals)
+      const priceInToken = displayPrice ? (parseFloat(displayPrice) / 1e18).toFixed(3) : '0.000';
+      
+      // Determine badge (LIVE if no bids, HOT if has bids)
+      const badge = hasHighestBid ? 'HOT' : 'LIVE';
+      
+      return {
+        id: auction.id,
+        sellerName: auction.seller_name || auction.creator_name || 'Unknown',
+        twitterId: auction.twitter_id,
+        title: auction.title || 'Untitled',
+        profilePicture: auction.profile_picture,
+        eventDate: auction.event_date,
+        eventStartTime: auction.event_start_time,
+        eventEndTime: auction.event_end_time,
+        price: priceInToken,
+        priceLabel: priceLabel,
+        priceRaw: displayPrice,
+        timeLeft: timeLeftFormatted,
+        timeLeftSeconds: timeRemainingSeconds,
+        blocksRemaining: auction.blocks_remaining,
+        badge: badge,
+        hasHighestBid: hasHighestBid,
+        highestBidder: hasHighestBid ? auction.highest_bidder : null,
+        ended: auction.ended,
+        createdAt: auction.created_at
+      };
+    });
+    
+    logger.info(`✅ Returned ${auctions.length} active auctions from database`);
+    
+    res.json({ 
+      success: true, 
+      auctions,
+      total: auctions.length,
+      offset,
+      limit 
+    });
+    
+  } catch (error) {
+    logger.error('Get active auctions from DB error:', error);
+    res.status(500).json({ 
+      error: 'Failed to fetch auctions',
+      message: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+    });
+  }
+});
+
+// Get ended auctions from database (optimized - no blockchain calls)
+router.get('/ended/db', async (req, res) => {
+  try {
+    const limit = Math.min(parseInt(req.query.limit) || 50, 100);
+    const offset = parseInt(req.query.offset) || 0;
+    
+    logger.info(`📊 GET /auctions/ended/db - Fetching ended auctions from database (limit: ${limit}, offset: ${offset})`);
+    
+    // Get ended auctions from database with user info
+    const query = `
+      SELECT 
+        a.id,
+        a.title,
+        a.seller_name,
+        a.profile_picture,
+        a.twitter_id,
+        a.event_date,
+        a.event_start_time,
+        a.event_end_time,
+        a.bid_price,
+        a.highest_bid,
+        a.highest_bidder,
+        a.ended,
+        a.auto_ended,
+        a.nft_token_id,
+        a.created_at,
+        a.updated_at,
+        u.display_name as creator_name
+      FROM auctions a
+      LEFT JOIN users u ON a.creator_wallet = u.wallet_address
+      WHERE a.ended = true
+      ORDER BY a.id DESC
+      LIMIT $1 OFFSET $2
+    `;
+    
+    const result = await pool.query(query, [limit, offset]);
+    
+    // Format auctions for frontend cards
+    const auctions = result.rows.map(auction => {
+      // Determine if there's a highest bid (winner)
+      const hasWinner = auction.highest_bid && 
+                       auction.highest_bid !== '0' && 
+                       auction.highest_bidder && 
+                       auction.highest_bidder !== '0x0000000000000000000000000000000000000000';
+      
+      // Show winning bid if exists, otherwise show floor price
+      const displayPrice = hasWinner ? auction.highest_bid : auction.bid_price;
+      const priceLabel = hasWinner ? 'Winning Bid' : 'Reserve Price';
+      
+      // Convert wei to AVAX/USDC (assuming 18 decimals)
+      const priceInToken = displayPrice ? (parseFloat(displayPrice) / 1e18).toFixed(3) : '0.000';
+      
+      // Calculate how long ago it ended
+      const endedAt = new Date(auction.updated_at);
+      const now = new Date();
+      const timeSinceEnd = Math.floor((now - endedAt) / 1000); // seconds
+      
+      let endedAgo = '';
+      if (timeSinceEnd < 3600) {
+        const minutes = Math.floor(timeSinceEnd / 60);
+        endedAgo = `${minutes}m ago`;
+      } else if (timeSinceEnd < 86400) {
+        const hours = Math.floor(timeSinceEnd / 3600);
+        endedAgo = `${hours}h ago`;
+      } else {
+        const days = Math.floor(timeSinceEnd / 86400);
+        endedAgo = `${days}d ago`;
+      }
+      
+      return {
+        id: auction.id,
+        sellerName: auction.seller_name || auction.creator_name || 'Unknown',
+        twitterId: auction.twitter_id,
+        title: auction.title || 'Untitled',
+        profilePicture: auction.profile_picture,
+        eventDate: auction.event_date,
+        eventStartTime: auction.event_start_time,
+        eventEndTime: auction.event_end_time,
+        price: priceInToken,
+        priceLabel: priceLabel,
+        priceRaw: displayPrice,
+        endedAgo: endedAgo,
+        endedAt: auction.updated_at,
+        hasWinner: hasWinner,
+        winner: hasWinner ? auction.highest_bidder : null,
+        nftTokenId: auction.nft_token_id,
+        autoEnded: auction.auto_ended,
+        ended: auction.ended,
+        createdAt: auction.created_at
+      };
+    });
+    
+    logger.info(`✅ Returned ${auctions.length} ended auctions from database`);
+    
+    res.json({ 
+      success: true, 
+      auctions,
+      total: auctions.length,
+      offset,
+      limit 
+    });
+    
+  } catch (error) {
+    logger.error('Get ended auctions from DB error:', error);
+    res.status(500).json({ 
+      error: 'Failed to fetch ended auctions',
+      message: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+    });
+  }
+});
+
+// Get single auction from database by ID (optimized - no blockchain calls)
+router.get('/db/:auctionId', async (req, res) => {
+  try {
+    const { auctionId } = req.params;
+    
+    if (!auctionId || isNaN(auctionId)) {
+      return res.status(400).json({ error: 'Invalid auction ID' });
+    }
+    
+    logger.info(`📊 GET /auctions/db/${auctionId} - Fetching auction from database`);
+    
+    // Get auction from database with user info
+    const query = `
+      SELECT 
+        a.*,
+        u.display_name as creator_name,
+        u.auth_type,
+        u.oauth_method
+      FROM auctions a
+      LEFT JOIN users u ON a.creator_wallet = u.wallet_address
+      WHERE a.id = $1
+    `;
+    
+    const result = await pool.query(query, [auctionId]);
+    
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Auction not found' });
+    }
+    
+    const auction = result.rows[0];
+    
+    // Calculate time remaining in human-readable format
+    const timeRemainingSeconds = auction.time_remaining_seconds || 0;
+    const hours = Math.floor(timeRemainingSeconds / 3600);
+    const minutes = Math.floor((timeRemainingSeconds % 3600) / 60);
+    
+    let timeLeftFormatted = '';
+    if (hours > 0) {
+      timeLeftFormatted = `${hours}h ${minutes}m`;
+    } else {
+      timeLeftFormatted = `${minutes}m`;
+    }
+    
+    // Determine if there's a highest bid
+    const hasHighestBid = auction.highest_bid && 
+                         auction.highest_bid !== '0' && 
+                         auction.highest_bidder && 
+                         auction.highest_bidder !== '0x0000000000000000000000000000000000000000';
+    
+    // Show highest bid if exists, otherwise show floor price (bid_price)
+    const displayPrice = hasHighestBid ? auction.highest_bid : auction.bid_price;
+    const priceLabel = hasHighestBid ? 'Highest Bid' : 'Floor Price';
+    
+    // Convert wei to AVAX/USDC (assuming 18 decimals)
+    const priceInToken = displayPrice ? (parseFloat(displayPrice) / 1e18).toFixed(3) : '0.000';
+    
+    // Determine badge (LIVE if no bids, HOT if has bids)
+    const badge = hasHighestBid ? 'HOT' : 'LIVE';
+    
+    const formattedAuction = {
+      id: auction.id,
+      contractAddress: auction.contract_address,
+      creatorParaId: auction.creator_para_id,
+      creatorWallet: auction.creator_wallet,
+      creatorName: auction.creator_name,
+      authType: auction.auth_type,
+      oAuthMethod: auction.oauth_method,
+      sellerName: auction.seller_name || auction.creator_name || 'Unknown',
+      twitterId: auction.twitter_id,
+      title: auction.title || 'Untitled',
+      description: auction.description,
+      profilePicture: auction.profile_picture,
+      eventDate: auction.event_date,
+      eventStartTime: auction.event_start_time,
+      eventEndTime: auction.event_end_time,
+      meetingDuration: auction.meeting_duration,
+      price: priceInToken,
+      priceLabel: priceLabel,
+      priceRaw: displayPrice,
+      floorPrice: auction.bid_price,
+      highestBid: auction.highest_bid,
+      highestBidder: hasHighestBid ? auction.highest_bidder : null,
+      timeLeft: timeLeftFormatted,
+      timeLeftSeconds: timeRemainingSeconds,
+      blocksRemaining: auction.blocks_remaining,
+      endBlock: auction.end_block,
+      durationBlocks: auction.duration_blocks,
+      badge: badge,
+      hasHighestBid: hasHighestBid,
+      ended: auction.ended,
+      autoEnded: auction.auto_ended,
+      nftTokenId: auction.nft_token_id,
+      jitsiRoomId: auction.jitsi_room_id,
+      metadataIpfs: auction.metadata_ipfs,
+      createdAt: auction.created_at,
+      updatedAt: auction.updated_at
+    };
+    
+    logger.info(`✅ Returned auction ${auctionId} from database`);
+    
+    res.json({ 
+      success: true, 
+      auction: formattedAuction
+    });
+    
+  } catch (error) {
+    logger.error(`Get auction ${req.params.auctionId} from DB error:`, error);
+    res.status(500).json({ 
+      error: 'Failed to fetch auction',
+      message: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+    });
+  }
+});
+
 // Get auction details
 router.get('/:auctionId', async (req, res) => {
   try {
