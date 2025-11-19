@@ -4,16 +4,12 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "test": "jest",
-    "test:server": "node test-backend-server.js",
-    "test:auto": "node start-server-and-test.js",
-    "test:contract": "node test-contract-integration.js",
-    "test:meeting": "node test-meeting-nft-gating.js",
-    "test:all-functions": "node test-all-contract-functions.js",
-    "test:auction-ending": "node test-auction-ending-logic.js",
-    "test:auction-apis": "node test-auction-apis-focused.js",
-    "test:auction-apis-auto": "node start-server-and-test-auctions.js",
-    "test:comprehensive": "npm run test:auto && npm run test:all-functions && npm run test:auction-ending"
+    "test": "node tests/run-tests.js",
+    "test:comprehensive": "node tests/comprehensive.js",
+    "test:contract": "node tests/specialized/contract-deep.js",
+    "test:auction-flow": "node tests/specialized/auction-flow.js",
+    "test:utils": "node tests/test-utils.test.js",
+    "test:all": "npm run test && npm run test:comprehensive && npm run test:contract && npm run test:auction-flow"
   },
   "dependencies": {
     "@getpara/server-sdk": "2.0.0-alpha.51",

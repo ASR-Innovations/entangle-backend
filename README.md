@@ -1,12 +1,12 @@
-# Meeting Auction Backend - Para Integration
+# Meeting Auction Backend
 
 A comprehensive backend system for managing meeting auctions with Para wallet authentication and blockchain integration.
 
 ## Features
 
 - **Para Wallet Authentication**: Seamless social login integration
-- **Blockchain Integration**: Automated auction management on Ethereum/Sepolia
-- **Real-time Updates**: WebSocket integration for live auction updates
+- **Blockchain Integration**: Automated auction management on Avalanche testnet
+- **Real-time Updates**: Cached auction data updated every 10 seconds
 - **Meeting Management**: Jitsi integration for video meetings
 - **NFT Management**: Automated NFT creation and burning for meeting access
 - **Cron Jobs**: Automated auction ending and cleanup
@@ -197,6 +197,12 @@ npm test -- auction.test.js
 # Build and run with Docker Compose
 docker-compose up -d
 ```
+
+## Documentation
+
+- [Deployment Guide](docs/deployment.md) - Server setup and deployment instructions
+- [API Documentation](docs/api.md) - Complete API reference
+- [Cron Job Documentation](CRON_JOB_README.md) - Automated auction processing
 
 ## Troubleshooting
 
