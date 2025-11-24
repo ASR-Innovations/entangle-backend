@@ -13,7 +13,8 @@
     "test:auction-ending": "node test-auction-ending-logic.js",
     "test:auction-apis": "node test-auction-apis-focused.js",
     "test:auction-apis-auto": "node start-server-and-test-auctions.js",
-    "test:comprehensive": "npm run test:auto && npm run test:all-functions && npm run test:auction-ending"
+    "test:comprehensive": "npm run test:auto && npm run test:all-functions && npm run test:auction-ending",
+    "test:performance": "node test-seaport-performance.js"
   },
   "dependencies": {
     "@getpara/server-sdk": "2.0.0-alpha.51",
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "jest": "^29.6.4",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "socket.io-client": "^4.8.1"
   }
 }

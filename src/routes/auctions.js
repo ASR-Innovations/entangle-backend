@@ -11,7 +11,10 @@ const router = express.Router();
 const createAuctionSchema = Joi.object({
   title: Joi.string().min(1).max(255).required(),
   description: Joi.string().max(1000).optional().allow(''),
-  duration: Joi.number().min(30).max(1440).required(),
+  // COMMENTED OUT FOR TESTING: Accept any block duration (originally min: 30)
+  // TODO: Re-enable this validation for production - duration should be at least 30 blocks
+  // duration: Joi.number().min(30).max(1440).required(),
+  duration: Joi.number().min(1).max(1440).required(), // Temporarily accepting any duration >= 1 block
   reservePrice: Joi.number().min(0.001).max(1000).required(),
   meetingDuration: Joi.number().min(15).max(180).required(),
   creatorWallet: Joi.string().pattern(/^0x[a-fA-F0-9]{40}$/).required(),
@@ -123,7 +126,9 @@ router.post('/created', authenticateToken, async (req, res) => {
     const contractAuction = await contractService.contract.getAuction(auctionId);
     const currentBlock = await contractService.provider.getBlockNumber();
     const blocksRemaining = Number(contractAuction.endBlock) - currentBlock;
-    const timeRemainingSeconds = blocksRemaining * 2; // Avalanche: ~2 sec/block
+    const blockTime = contractService.getBlockTime();
+    const timeRemainingSeconds = blocksRemaining * blockTime;
+    logger.info(`Block time for ${contractService.network}: ${blockTime} seconds/block`);
 
     // Store in database
     logger.info('💾 Inserting auction into database...');

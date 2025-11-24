@@ -6,24 +6,28 @@ const ENTANGLED_ABI = require('../ENTANGLEDABI.js');
 
 // Contract configuration for different networks
 const CONTRACT_CONFIG = {
-  FUJI: {
-    address: '0x6fD65aE833C9679cBC571581CE0f5Cd73D565796',
-    chainId: 43113,
-    rpcUrl: 'https://api.avax-test.network/ext/bc/C/rpc',
-    explorer: 'https://testnet.snowtrace.io'
-  },
-  AVALANCHE: {
-    address: '0x6fD65aE833C9679cBC571581CE0f5Cd73D565796',
-    chainId: 43114,
-    rpcUrl: 'https://api.avax.network/ext/bc/C/rpc',
-    explorer: 'https://snowtrace.io'
+
+  SEPOLIA: {
+    address: process.env.CONTRACT_ADDRESS || '0x6783A0B48f44dd244A96e01c435CB5315C2AA5Af',
+    chainId: 11155111,
+    rpcUrl: 'https://ethereum-sepolia-rpc.publicnode.com',
+    explorer: 'https://sepolia.etherscan.io',
+    blockTime: 12 // seconds per block
   }
 };
 
 class ContractService {
-  constructor(network = 'FUJI') {
-    this.network = network;
-    this.config = CONTRACT_CONFIG[network];
+  constructor(network = null) {
+    // Auto-detect network from environment or use default
+    this.network = network || process.env.BLOCKCHAIN_NETWORK || 'SEPOLIA';
+    this.config = CONTRACT_CONFIG[this.network];
+
+    if (!this.config) {
+      logger.warn(`⚠️  Unknown network: ${this.network}, falling back to SEPOLIA`);
+      this.network = 'SEPOLIA';
+      this.config = CONTRACT_CONFIG.SEPOLIA;
+    }
+
     this.contractAddress = process.env.CONTRACT_ADDRESS || this.config.address;
     this.rpcUrl = process.env.RPC_URL || process.env.AVALANCHE_RPC || this.config.rpcUrl;
     this.provider = null;
@@ -495,6 +499,11 @@ class ContractService {
   // Get network configuration
   getNetworkConfig() {
     return this.config;
+  }
+
+  // Get block time for the current network
+  getBlockTime() {
+    return this.config.blockTime || 12; // Default to 12 seconds (Ethereum)
   }
 
   // Get wallet balance

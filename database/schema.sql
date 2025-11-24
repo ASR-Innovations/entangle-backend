@@ -136,3 +136,116 @@ CREATE INDEX IF NOT EXISTS idx_notifications_user ON notifications(user_para_id)
 CREATE INDEX IF NOT EXISTS idx_meetings_auction ON meetings(auction_id);
 CREATE INDEX IF NOT EXISTS idx_lit_gate_passes_nonce ON lit_gate_passes(nonce);
 CREATE INDEX IF NOT EXISTS idx_para_sessions_user ON para_sessions(para_user_id);
+--
+-- ============================================================================
+-- SEAPORT ORDERBOOK TABLES
+-- ============================================================================
+
+-- Seaport Orders table
+CREATE TABLE IF NOT EXISTS seaport_orders (
+  order_hash VARCHAR(66) PRIMARY KEY,
+  order_type VARCHAR(20) NOT NULL CHECK (order_type IN ('listing', 'offer')),
+  nft_contract VARCHAR(42) NOT NULL,
+  token_id VARCHAR(78) NOT NULL,
+  maker VARCHAR(42) NOT NULL,
+  taker VARCHAR(42),
+  payment_token VARCHAR(42) NOT NULL,
+  price VARCHAR(78) NOT NULL,
+  price_decimal VARCHAR(50),
+  platform_fee_amount VARCHAR(78),
+  platform_fee_recipient VARCHAR(42),
+  start_time BIGINT NOT NULL,
+  end_time BIGINT NOT NULL,
+  expires_at TIMESTAMP NOT NULL,
+  order_components JSONB NOT NULL,
+  signature TEXT NOT NULL,
+  is_active BOOLEAN DEFAULT true,
+  is_cancelled BOOLEAN DEFAULT false,
+  is_fulfilled BOOLEAN DEFAULT false,
+  fulfilled_at TIMESTAMP,
+  fulfilled_by VARCHAR(42),
+  fulfillment_tx_hash VARCHAR(66),
+  cancelled_at TIMESTAMP,
+  cancellation_tx_hash VARCHAR(66),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  para_user_id VARCHAR(255),
+  CONSTRAINT fk_seaport_orders_user FOREIGN KEY (para_user_id) 
+    REFERENCES users(para_user_id) ON DELETE SET NULL
+);
+
+-- Order Fulfillments table
+CREATE TABLE IF NOT EXISTS order_fulfillments (
+  id SERIAL PRIMARY KEY,
+  order_hash VARCHAR(66) NOT NULL,
+  fulfiller VARCHAR(42) NOT NULL,
+  transaction_hash VARCHAR(66) NOT NULL UNIQUE,
+  block_number BIGINT NOT NULL,
+  amount_paid VARCHAR(78),
+  platform_fee_paid VARCHAR(78),
+  fulfilled_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_order_fulfillments_order FOREIGN KEY (order_hash) 
+    REFERENCES seaport_orders(order_hash) ON DELETE CASCADE
+);
+
+-- Order Cancellations table
+CREATE TABLE IF NOT EXISTS order_cancellations (
+  id SERIAL PRIMARY KEY,
+  order_hash VARCHAR(66) NOT NULL,
+  cancelled_by VARCHAR(42) NOT NULL,
+  transaction_hash VARCHAR(66) UNIQUE,
+  cancellation_reason VARCHAR(255),
+  cancelled_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_order_cancellations_order FOREIGN KEY (order_hash) 
+    REFERENCES seaport_orders(order_hash) ON DELETE CASCADE
+);
+
+-- Order Events table
+CREATE TABLE IF NOT EXISTS order_events (
+  id SERIAL PRIMARY KEY,
+  order_hash VARCHAR(66),
+  event_type VARCHAR(50) NOT NULL,
+  actor VARCHAR(42),
+  event_data JSONB,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Seaport Orders indexes
+CREATE INDEX IF NOT EXISTS idx_seaport_orders_token_id ON seaport_orders(token_id, nft_contract);
+CREATE INDEX IF NOT EXISTS idx_seaport_orders_maker ON seaport_orders(maker);
+CREATE INDEX IF NOT EXISTS idx_seaport_orders_order_type ON seaport_orders(order_type);
+CREATE INDEX IF NOT EXISTS idx_seaport_orders_is_active ON seaport_orders(is_active);
+CREATE INDEX IF NOT EXISTS idx_seaport_orders_expires_at ON seaport_orders(expires_at);
+CREATE INDEX IF NOT EXISTS idx_seaport_orders_created_at ON seaport_orders(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_seaport_orders_para_user_id ON seaport_orders(para_user_id);
+CREATE INDEX IF NOT EXISTS idx_seaport_orders_active_orders ON seaport_orders(order_type, token_id, is_active, expires_at);
+CREATE INDEX IF NOT EXISTS idx_seaport_orders_marketplace ON seaport_orders(is_active, order_type, created_at DESC) WHERE is_active = true;
+
+-- Order Fulfillments indexes
+CREATE INDEX IF NOT EXISTS idx_order_fulfillments_order_hash ON order_fulfillments(order_hash);
+CREATE INDEX IF NOT EXISTS idx_order_fulfillments_fulfiller ON order_fulfillments(fulfiller);
+CREATE INDEX IF NOT EXISTS idx_order_fulfillments_tx_hash ON order_fulfillments(transaction_hash);
+
+-- Order Cancellations indexes
+CREATE INDEX IF NOT EXISTS idx_order_cancellations_order_hash ON order_cancellations(order_hash);
+CREATE INDEX IF NOT EXISTS idx_order_cancellations_cancelled_by ON order_cancellations(cancelled_by);
+
+-- Order Events indexes
+CREATE INDEX IF NOT EXISTS idx_order_events_order_hash ON order_events(order_hash);
+CREATE INDEX IF NOT EXISTS idx_order_events_event_type ON order_events(event_type);
+CREATE INDEX IF NOT EXISTS idx_order_events_created_at ON order_events(created_at DESC);
+
+-- Trigger for auto-updating updated_at on seaport_orders
+CREATE OR REPLACE FUNCTION update_seaport_orders_updated_at()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trigger_update_seaport_orders_updated_at ON seaport_orders;
+CREATE TRIGGER trigger_update_seaport_orders_updated_at
+    BEFORE UPDATE ON seaport_orders
+    FOR EACH ROW
+    EXECUTE FUNCTION update_seaport_orders_updated_at();

@@ -76,6 +76,13 @@ app.use('/api/auctions', auctionRoutes);
 app.use('/api/contract', contractRoutes);
 app.use('/api/meetings', require('./routes/meetings'));
 app.use('/api/admin', require('./routes/admin'));
+app.use('/api/orders', require('./routes/orders'));
+
+// Error handling middleware (must be after all routes)
+// Requirements: 12.1, 12.2, 12.3, 12.4, 12.5
+const { errorHandler, notFoundHandler } = require('./middleware/errorHandler');
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 // Socket.IO for real-time updates
 io.use(authenticateSocket);
@@ -96,9 +103,20 @@ io.on('connection', (socket) => {
   });
 });
 
+// Initialize Order WebSocket Service
+// Requirements: 4.1, 4.2, 4.3, 4.4, 4.5
+const { initializeOrderSocketService } = require('./services/OrderSocketService');
+initializeOrderSocketService(io);
+
 async function startServer() {
   try {
     logger.info('🚀 Starting server initialization...');
+    
+    // Validate Seaport configuration
+    logger.info('🔧 Step 0: Validating Seaport configuration...');
+    const { validateAndLogConfig } = require('./config/seaportConfig');
+    validateAndLogConfig();
+    logger.info('✅ Seaport configuration validated');
     
     // Initialize database
     logger.info('📊 Step 1: Connecting to database...');
@@ -121,6 +139,30 @@ async function startServer() {
     const auctionCron = getAuctionCronService();
     auctionCron.start();
     logger.info('✅ Auction cron service started');
+    
+    // Start order cleanup cron service
+    logger.info('🧹 Step 3.1: Starting order cleanup cron service...');
+    const { getOrderCleanupCronService } = require('./services/OrderCleanupCronService');
+    const orderCleanupCron = getOrderCleanupCronService();
+    orderCleanupCron.start();
+    logger.info('✅ Order cleanup cron service started');
+    
+    // Start order fulfillment monitor service
+    logger.info('🔍 Step 3.2: Starting order fulfillment monitor service...');
+    const enableOrderMonitoring = process.env.ENABLE_ORDER_MONITORING !== 'false';
+    if (enableOrderMonitoring) {
+      const { getOrderFulfillmentMonitorService } = require('./services/OrderFulfillmentMonitorService');
+      const orderMonitor = getOrderFulfillmentMonitorService();
+      const monitorInitialized = await orderMonitor.initialize();
+      if (monitorInitialized) {
+        await orderMonitor.start();
+        logger.info('✅ Order fulfillment monitor service started');
+      } else {
+        logger.warn('⚠️  Order fulfillment monitor service initialization failed - continuing without blockchain monitoring');
+      }
+    } else {
+      logger.info('ℹ️  Order fulfillment monitoring disabled via ENABLE_ORDER_MONITORING env var');
+    }
     
     // Initialize Jitsi service
     logger.info('📹 Step 4: Initializing Jitsi service...');
