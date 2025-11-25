@@ -36,9 +36,32 @@ logs/
 *.bak
 *.bak*
 
-# Test files (optional - uncomment if you want to exclude)
-# test-*.js
-# *-test.js
+# Test files and utility scripts
+test-*.js
+*-test.js
+check-*.js
+*-flow-test.js
+comprehensive-test.js
+simple-test.js
+start-server-and-test*.js
+database-dashboard.js
+debug-*.js
+diagnose_*.js
+extract-*.js
+fix-*.js
+manual-*.js
+query_*.js
+create-test-*.js
+create-real-*.js
+verify-*.js
+view-*.js
+clear-database.js
+dbeaver-connection-test.js
+sync-*.js
+create_robust_cron.js
+fix_cron_service.js
+end-auction-*.js
+update-contract-config.js
 
 # Build files
 dist/
