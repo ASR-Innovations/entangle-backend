@@ -11,7 +11,10 @@ const router = express.Router();
 const createAuctionSchema = Joi.object({
   title: Joi.string().min(1).max(255).required(),
   description: Joi.string().max(1000).optional().allow(''),
-  duration: Joi.number().min(30).max(1440).required(),
+  // ✅ FIX: Duration is now in BLOCKS for Arbitrum Sepolia
+  // Minimum: 720 blocks (~3 minutes at 0.25s per block)
+  // Maximum: 345600 blocks (~24 hours at 0.25s per block)
+  duration: Joi.number().integer().min(720).max(345600).required(),
   reservePrice: Joi.number().min(0.001).max(1000).required(),
   meetingDuration: Joi.number().min(15).max(180).required(),
   creatorWallet: Joi.string().pattern(/^0x[a-fA-F0-9]{40}$/).required(),
@@ -123,7 +126,31 @@ router.post('/created', authenticateToken, async (req, res) => {
     const contractAuction = await contractService.contract.getAuction(auctionId);
     const currentBlock = await contractService.provider.getBlockNumber();
     const blocksRemaining = Number(contractAuction.endBlock) - currentBlock;
-    const timeRemainingSeconds = blocksRemaining * 2; // Avalanche: ~2 sec/block
+    const blockTime = contractService.getBlockTime();
+    const timeRemainingSeconds = Math.floor(blocksRemaining * blockTime);  // ✅ FIX: Convert to integer
+    logger.info(`Block time for ${contractService.network}: ${blockTime} seconds/block`);
+
+    // ✅ FIX: Log auction timing details for debugging
+    // NOTE: Auction struct does NOT have startBlock - calculate from endBlock and duration
+    const calculatedStartBlock = Number(contractAuction.endBlock) - duration;
+    logger.info('🕐 Auction timing details:', {
+      calculatedStartBlock, // Calculated: endBlock - duration
+      endBlock: Number(contractAuction.endBlock),
+      currentBlock,
+      blocksRemaining,
+      timeRemainingSeconds,
+      durationBlocks: duration // Use duration from request body (sent by frontend)
+    });
+
+    // ✅ FIX: Warn if auction already ended
+    if (blocksRemaining < 0) {
+      logger.warn(`⚠️  WARNING: Auction ${auctionId} has already ended!`, {
+        endBlock: Number(contractAuction.endBlock),
+        currentBlock,
+        blocksInPast: Math.abs(blocksRemaining),
+        timeInPast: Math.abs(timeRemainingSeconds) + ' seconds'
+      });
+    }
 
     // Store in database
     logger.info('💾 Inserting auction into database...');
@@ -177,10 +204,10 @@ router.post('/created', authenticateToken, async (req, res) => {
     });
     
     const result = await pool.query(insertQuery, insertParams);
-    
+
     if (result.rows.length === 0) {
       logger.error('❌ Insert failed - no rows returned');
-      return res.status(500).json({ error: 'Failed to insert auction' });ou
+      return res.status(500).json({ error: 'Failed to insert auction' });
     }
     
     logger.info(`✅ Auction ${auctionId} successfully recorded for Para user ${paraUserId}`);
