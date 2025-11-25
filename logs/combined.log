@@ -17573,3 +17573,704 @@
 {"level":"info","message":"  🕐 Auction 2: Active (4397 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:08:53"}
 {"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:08:53"}
 {"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:08:53"}
+{"level":"info","message":"  ⏱️  Auction 9: No bids yet, 68 blocks remaining (endBlock: 9703580)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:08:53"}
+{"level":"info","message":"  ⏱️  Auction 8: No bids yet, 4679 blocks remaining (endBlock: 9708191)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:08:54"}
+{"level":"info","message":"  ⏱️  Auction 7: No bids yet, 4653 blocks remaining (endBlock: 9708165)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:08:54"}
+{"level":"info","message":"  ⏱️  Auction 6: No bids yet, 9502 blocks remaining (endBlock: 9713014)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:08:54"}
+{"level":"info","message":"  📊 Auction 4: Bid 0.011 AVAX by 0x6daa02F0..., 1921 blocks left (endBlock: 9705433)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:08:55"}
+{"level":"info","message":"  ⏱️  Auction 2: No bids yet, 4397 blocks remaining (endBlock: 9707909)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:08:55"}
+{"level":"info","message":"✅ Updated 6 active auction(s) with live blockchain data","service":"meeting-auction-backend","timestamp":"2025-11-25 17:08:55"}
+{"level":"info","message":"🎉 Batch processing completed successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:08:55"}
+{"level":"info","message":"✅ CRON JOB COMPLETED in 3834ms","service":"meeting-auction-backend","timestamp":"2025-11-25 17:08:55"}
+{"level":"info","message":"────────────────────────────────────────────────────────────","service":"meeting-auction-backend","timestamp":"2025-11-25 17:08:55"}
+{"level":"info","message":"🚀 CRON JOB TRIGGERED at 2025-11-25T11:39:01.585Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:01"}
+{"level":"info","message":"🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:01"}
+{"level":"info","message":"📦 Current block (L2 for Arbitrum): 9703513","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:02"}
+{"level":"info","message":"📊 Step 1: Checking database for unprocessed auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:02"}
+{"level":"info","message":"💾 Found 3 unprocessed auctions in database","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:02"}
+{"level":"info","message":"🔗 Step 2: Fetching active auctions from smart contract...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:02"}
+{"level":"info","message":"⛓️  Contract reports 6 active auctions","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:02"}
+{"level":"info","message":"🔍 Total auctions to check: 6","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:02"}
+{"level":"info","message":"   ↳ Saved 94 unnecessary RPC calls!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:02"}
+{"level":"info","message":"⏰ Step 3: Checking which auctions are ready to end...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:02"}
+{"level":"info","message":"  🕐 Auction 9: Active (67 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:02"}
+{"level":"info","message":"  🕐 Auction 8: Active (4678 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:02"}
+{"level":"info","message":"  🕐 Auction 7: Active (4652 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:03"}
+{"level":"info","message":"  🕐 Auction 6: Active (9501 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:03"}
+{"level":"info","message":"  🕐 Auction 4: Active (1920 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:03"}
+{"level":"info","message":"  🕐 Auction 2: Active (4396 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:04"}
+{"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:04"}
+{"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:04"}
+{"level":"info","message":"  ⏱️  Auction 9: No bids yet, 67 blocks remaining (endBlock: 9703580)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:04"}
+{"level":"info","message":"  ⏱️  Auction 8: No bids yet, 4678 blocks remaining (endBlock: 9708191)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:04"}
+{"level":"info","message":"  ⏱️  Auction 7: No bids yet, 4652 blocks remaining (endBlock: 9708165)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:04"}
+{"level":"info","message":"  ⏱️  Auction 6: No bids yet, 9501 blocks remaining (endBlock: 9713014)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:05"}
+{"level":"info","message":"  📊 Auction 4: Bid 0.011 AVAX by 0x6daa02F0..., 1920 blocks left (endBlock: 9705433)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:05"}
+{"level":"info","message":"  ⏱️  Auction 2: No bids yet, 4396 blocks remaining (endBlock: 9707909)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:05"}
+{"level":"info","message":"✅ Updated 6 active auction(s) with live blockchain data","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:05"}
+{"level":"info","message":"🎉 Batch processing completed successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:05"}
+{"level":"info","message":"✅ CRON JOB COMPLETED in 4188ms","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:05"}
+{"level":"info","message":"────────────────────────────────────────────────────────────","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:05"}
+{"level":"info","message":"🚀 CRON JOB TRIGGERED at 2025-11-25T11:39:11.586Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:11"}
+{"level":"info","message":"🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:11"}
+{"level":"info","message":"📦 Current block (L2 for Arbitrum): 9703514","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:12"}
+{"level":"info","message":"📊 Step 1: Checking database for unprocessed auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:12"}
+{"level":"info","message":"💾 Found 3 unprocessed auctions in database","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:12"}
+{"level":"info","message":"🔗 Step 2: Fetching active auctions from smart contract...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:12"}
+{"level":"info","message":"⛓️  Contract reports 6 active auctions","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:12"}
+{"level":"info","message":"🔍 Total auctions to check: 6","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:12"}
+{"level":"info","message":"   ↳ Saved 94 unnecessary RPC calls!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:12"}
+{"level":"info","message":"⏰ Step 3: Checking which auctions are ready to end...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:12"}
+{"level":"info","message":"  🕐 Auction 9: Active (66 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:12"}
+{"level":"info","message":"  🕐 Auction 8: Active (4677 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:12"}
+{"level":"info","message":"  🕐 Auction 7: Active (4651 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:13"}
+{"level":"info","message":"  🕐 Auction 6: Active (9500 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:13"}
+{"level":"info","message":"  🕐 Auction 4: Active (1919 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:13"}
+{"level":"info","message":"  🕐 Auction 2: Active (4395 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:13"}
+{"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:13"}
+{"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:13"}
+{"level":"info","message":"  ⏱️  Auction 9: No bids yet, 66 blocks remaining (endBlock: 9703580)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:14"}
+{"level":"info","message":"  ⏱️  Auction 8: No bids yet, 4677 blocks remaining (endBlock: 9708191)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:14"}
+{"level":"info","message":"  ⏱️  Auction 7: No bids yet, 4651 blocks remaining (endBlock: 9708165)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:14"}
+{"level":"info","message":"  ⏱️  Auction 6: No bids yet, 9500 blocks remaining (endBlock: 9713014)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:15"}
+{"level":"info","message":"  📊 Auction 4: Bid 0.011 AVAX by 0x6daa02F0..., 1919 blocks left (endBlock: 9705433)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:15"}
+{"level":"info","message":"  ⏱️  Auction 2: No bids yet, 4395 blocks remaining (endBlock: 9707909)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:15"}
+{"level":"info","message":"✅ Updated 6 active auction(s) with live blockchain data","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:15"}
+{"level":"info","message":"🎉 Batch processing completed successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:15"}
+{"level":"info","message":"✅ CRON JOB COMPLETED in 4239ms","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:15"}
+{"level":"info","message":"────────────────────────────────────────────────────────────","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:15"}
+{"level":"info","message":"🚀 CRON JOB TRIGGERED at 2025-11-25T11:39:21.587Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:21"}
+{"level":"info","message":"🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:21"}
+{"level":"info","message":"📦 Current block (L2 for Arbitrum): 9703514","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:22"}
+{"level":"info","message":"📊 Step 1: Checking database for unprocessed auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:22"}
+{"level":"info","message":"💾 Found 3 unprocessed auctions in database","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:22"}
+{"level":"info","message":"🔗 Step 2: Fetching active auctions from smart contract...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:22"}
+{"level":"info","message":"⛓️  Contract reports 6 active auctions","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:22"}
+{"level":"info","message":"🔍 Total auctions to check: 6","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:22"}
+{"level":"info","message":"   ↳ Saved 94 unnecessary RPC calls!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:22"}
+{"level":"info","message":"⏰ Step 3: Checking which auctions are ready to end...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:22"}
+{"level":"info","message":"  🕐 Auction 9: Active (66 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:22"}
+{"level":"info","message":"  🕐 Auction 8: Active (4677 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:22"}
+{"level":"info","message":"  🕐 Auction 7: Active (4651 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:23"}
+{"level":"info","message":"  🕐 Auction 6: Active (9500 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:23"}
+{"level":"info","message":"  🕐 Auction 4: Active (1919 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:23"}
+{"level":"info","message":"  🕐 Auction 2: Active (4395 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:23"}
+{"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:23"}
+{"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:23"}
+{"level":"info","message":"  ⏱️  Auction 9: No bids yet, 66 blocks remaining (endBlock: 9703580)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:24"}
+{"level":"info","message":"  ⏱️  Auction 8: No bids yet, 4677 blocks remaining (endBlock: 9708191)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:24"}
+{"level":"info","message":"  ⏱️  Auction 7: No bids yet, 4651 blocks remaining (endBlock: 9708165)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:24"}
+{"level":"info","message":"  ⏱️  Auction 6: No bids yet, 9500 blocks remaining (endBlock: 9713014)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:25"}
+{"level":"info","message":"  📊 Auction 4: Bid 0.011 AVAX by 0x6daa02F0..., 1919 blocks left (endBlock: 9705433)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:25"}
+{"level":"info","message":"  ⏱️  Auction 2: No bids yet, 4395 blocks remaining (endBlock: 9707909)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:25"}
+{"level":"info","message":"✅ Updated 6 active auction(s) with live blockchain data","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:25"}
+{"level":"info","message":"🎉 Batch processing completed successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:25"}
+{"level":"info","message":"✅ CRON JOB COMPLETED in 4010ms","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:25"}
+{"level":"info","message":"────────────────────────────────────────────────────────────","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:25"}
+{"level":"info","message":"🚀 CRON JOB TRIGGERED at 2025-11-25T11:39:31.589Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:31"}
+{"level":"info","message":"🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:31"}
+{"level":"info","message":"📦 Current block (L2 for Arbitrum): 9703515","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:32"}
+{"level":"info","message":"📊 Step 1: Checking database for unprocessed auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:32"}
+{"level":"info","message":"💾 Found 3 unprocessed auctions in database","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:32"}
+{"level":"info","message":"🔗 Step 2: Fetching active auctions from smart contract...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:32"}
+{"level":"info","message":"⛓️  Contract reports 6 active auctions","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:32"}
+{"level":"info","message":"🔍 Total auctions to check: 6","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:32"}
+{"level":"info","message":"   ↳ Saved 94 unnecessary RPC calls!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:32"}
+{"level":"info","message":"⏰ Step 3: Checking which auctions are ready to end...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:32"}
+{"level":"info","message":"  🕐 Auction 9: Active (65 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:32"}
+{"level":"info","message":"  🕐 Auction 8: Active (4676 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:32"}
+{"level":"info","message":"  🕐 Auction 7: Active (4650 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:33"}
+{"level":"info","message":"  🕐 Auction 6: Active (9499 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:33"}
+{"level":"info","message":"  🕐 Auction 4: Active (1918 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:33"}
+{"level":"info","message":"  🕐 Auction 2: Active (4394 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:34"}
+{"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:34"}
+{"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:34"}
+{"level":"info","message":"  ⏱️  Auction 9: No bids yet, 65 blocks remaining (endBlock: 9703580)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:34"}
+{"level":"info","message":"  ⏱️  Auction 8: No bids yet, 4676 blocks remaining (endBlock: 9708191)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:34"}
+{"level":"info","message":"  ⏱️  Auction 7: No bids yet, 4650 blocks remaining (endBlock: 9708165)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:34"}
+{"level":"info","message":"  ⏱️  Auction 6: No bids yet, 9499 blocks remaining (endBlock: 9713014)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:35"}
+{"level":"info","message":"  📊 Auction 4: Bid 0.011 AVAX by 0x6daa02F0..., 1918 blocks left (endBlock: 9705433)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:35"}
+{"level":"info","message":"  ⏱️  Auction 2: No bids yet, 4394 blocks remaining (endBlock: 9707909)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:35"}
+{"level":"info","message":"✅ Updated 6 active auction(s) with live blockchain data","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:35"}
+{"level":"info","message":"🎉 Batch processing completed successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:35"}
+{"level":"info","message":"✅ CRON JOB COMPLETED in 4125ms","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:35"}
+{"level":"info","message":"────────────────────────────────────────────────────────────","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:35"}
+{"level":"info","message":"🚀 CRON JOB TRIGGERED at 2025-11-25T11:39:41.590Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:41"}
+{"level":"info","message":"🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:41"}
+{"level":"info","message":"📦 Current block (L2 for Arbitrum): 9703517","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:41"}
+{"level":"info","message":"📊 Step 1: Checking database for unprocessed auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:41"}
+{"level":"info","message":"💾 Found 3 unprocessed auctions in database","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:41"}
+{"level":"info","message":"🔗 Step 2: Fetching active auctions from smart contract...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:41"}
+{"level":"info","message":"⛓️  Contract reports 6 active auctions","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:42"}
+{"level":"info","message":"🔍 Total auctions to check: 6","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:42"}
+{"level":"info","message":"   ↳ Saved 94 unnecessary RPC calls!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:42"}
+{"level":"info","message":"⏰ Step 3: Checking which auctions are ready to end...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:42"}
+{"level":"info","message":"  🕐 Auction 9: Active (63 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:42"}
+{"level":"info","message":"  🕐 Auction 8: Active (4674 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:43"}
+{"level":"info","message":"  🕐 Auction 7: Active (4648 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:43"}
+{"level":"info","message":"  🕐 Auction 6: Active (9497 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:43"}
+{"level":"info","message":"  🕐 Auction 4: Active (1916 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:43"}
+{"level":"info","message":"  🕐 Auction 2: Active (4392 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:44"}
+{"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:44"}
+{"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:44"}
+{"level":"info","message":"  ⏱️  Auction 9: No bids yet, 63 blocks remaining (endBlock: 9703580)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:44"}
+{"level":"info","message":"  ⏱️  Auction 8: No bids yet, 4674 blocks remaining (endBlock: 9708191)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:44"}
+{"level":"info","message":"  ⏱️  Auction 7: No bids yet, 4648 blocks remaining (endBlock: 9708165)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:44"}
+{"level":"info","message":"  ⏱️  Auction 6: No bids yet, 9497 blocks remaining (endBlock: 9713014)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:45"}
+{"level":"info","message":"  📊 Auction 4: Bid 0.011 AVAX by 0x6daa02F0..., 1916 blocks left (endBlock: 9705433)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:45"}
+{"level":"info","message":"  ⏱️  Auction 2: No bids yet, 4392 blocks remaining (endBlock: 9707909)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:45"}
+{"level":"info","message":"✅ Updated 6 active auction(s) with live blockchain data","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:45"}
+{"level":"info","message":"🎉 Batch processing completed successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:45"}
+{"level":"info","message":"✅ CRON JOB COMPLETED in 4263ms","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:45"}
+{"level":"info","message":"────────────────────────────────────────────────────────────","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:45"}
+{"level":"info","message":"🚀 CRON JOB TRIGGERED at 2025-11-25T11:39:51.589Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:51"}
+{"level":"info","message":"🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:51"}
+{"level":"info","message":"📦 Current block (L2 for Arbitrum): 9703517","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:52"}
+{"level":"info","message":"📊 Step 1: Checking database for unprocessed auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:52"}
+{"level":"info","message":"💾 Found 3 unprocessed auctions in database","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:52"}
+{"level":"info","message":"🔗 Step 2: Fetching active auctions from smart contract...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:52"}
+{"level":"info","message":"⛓️  Contract reports 6 active auctions","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:52"}
+{"level":"info","message":"🔍 Total auctions to check: 6","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:52"}
+{"level":"info","message":"   ↳ Saved 94 unnecessary RPC calls!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:52"}
+{"level":"info","message":"⏰ Step 3: Checking which auctions are ready to end...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:52"}
+{"level":"info","message":"  🕐 Auction 9: Active (63 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:52"}
+{"level":"info","message":"  🕐 Auction 8: Active (4674 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:52"}
+{"level":"info","message":"  🕐 Auction 7: Active (4648 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:53"}
+{"level":"info","message":"  🕐 Auction 6: Active (9497 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:53"}
+{"level":"info","message":"  🕐 Auction 4: Active (1916 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:53"}
+{"level":"info","message":"  🕐 Auction 2: Active (4392 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:53"}
+{"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:53"}
+{"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:53"}
+{"level":"info","message":"  ⏱️  Auction 9: No bids yet, 63 blocks remaining (endBlock: 9703580)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:54"}
+{"level":"info","message":"  ⏱️  Auction 8: No bids yet, 4674 blocks remaining (endBlock: 9708191)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:54"}
+{"level":"info","message":"  ⏱️  Auction 7: No bids yet, 4648 blocks remaining (endBlock: 9708165)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:54"}
+{"level":"info","message":"  ⏱️  Auction 6: No bids yet, 9497 blocks remaining (endBlock: 9713014)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:55"}
+{"level":"info","message":"  📊 Auction 4: Bid 0.011 AVAX by 0x6daa02F0..., 1916 blocks left (endBlock: 9705433)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:55"}
+{"level":"info","message":"  ⏱️  Auction 2: No bids yet, 4392 blocks remaining (endBlock: 9707909)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:55"}
+{"level":"info","message":"✅ Updated 6 active auction(s) with live blockchain data","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:55"}
+{"level":"info","message":"🎉 Batch processing completed successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:55"}
+{"level":"info","message":"✅ CRON JOB COMPLETED in 4071ms","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:55"}
+{"level":"info","message":"────────────────────────────────────────────────────────────","service":"meeting-auction-backend","timestamp":"2025-11-25 17:09:55"}
+{"level":"info","message":"🚀 ORDER CLEANUP JOB TRIGGERED at 2025-11-25T11:40:00.658Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:00"}
+{"level":"info","message":"🔍 CHECKING FOR EXPIRED ORDERS...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:00"}
+{"level":"info","message":"✨ No expired orders found - all orders are valid","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:00"}
+{"activeListings":0,"activeOffers":0,"level":"info","message":"📊 ACTIVE ORDERS SUMMARY:","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:00","totalActive":0}
+{"level":"info","message":"✅ ORDER CLEANUP JOB COMPLETED in 3ms","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:00"}
+{"level":"info","message":"────────────────────────────────────────────────────────────","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:00"}
+{"level":"info","message":"🚀 CRON JOB TRIGGERED at 2025-11-25T11:40:01.590Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:01"}
+{"level":"info","message":"🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:01"}
+{"level":"info","message":"📦 Current block (L2 for Arbitrum): 9703518","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:02"}
+{"level":"info","message":"📊 Step 1: Checking database for unprocessed auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:02"}
+{"level":"info","message":"💾 Found 3 unprocessed auctions in database","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:02"}
+{"level":"info","message":"🔗 Step 2: Fetching active auctions from smart contract...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:02"}
+{"level":"info","message":"⛓️  Contract reports 6 active auctions","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:02"}
+{"level":"info","message":"🔍 Total auctions to check: 6","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:02"}
+{"level":"info","message":"   ↳ Saved 94 unnecessary RPC calls!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:02"}
+{"level":"info","message":"⏰ Step 3: Checking which auctions are ready to end...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:02"}
+{"level":"info","message":"  🕐 Auction 9: Active (62 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:02"}
+{"level":"info","message":"  🕐 Auction 8: Active (4673 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:03"}
+{"level":"info","message":"  🕐 Auction 7: Active (4647 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:03"}
+{"level":"info","message":"  🕐 Auction 6: Active (9496 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:03"}
+{"level":"info","message":"  🕐 Auction 4: Active (1915 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:03"}
+{"level":"info","message":"  🕐 Auction 2: Active (4391 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:04"}
+{"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:04"}
+{"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:04"}
+{"level":"info","message":"  ⏱️  Auction 9: No bids yet, 62 blocks remaining (endBlock: 9703580)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:04"}
+{"level":"info","message":"  ⏱️  Auction 8: No bids yet, 4673 blocks remaining (endBlock: 9708191)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:04"}
+{"level":"info","message":"  ⏱️  Auction 7: No bids yet, 4647 blocks remaining (endBlock: 9708165)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:05"}
+{"level":"info","message":"  ⏱️  Auction 6: No bids yet, 9496 blocks remaining (endBlock: 9713014)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:05"}
+{"level":"info","message":"  📊 Auction 4: Bid 0.011 AVAX by 0x6daa02F0..., 1915 blocks left (endBlock: 9705433)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:05"}
+{"level":"info","message":"  ⏱️  Auction 2: No bids yet, 4391 blocks remaining (endBlock: 9707909)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:05"}
+{"level":"info","message":"✅ Updated 6 active auction(s) with live blockchain data","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:05"}
+{"level":"info","message":"🎉 Batch processing completed successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:05"}
+{"level":"info","message":"✅ CRON JOB COMPLETED in 4239ms","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:05"}
+{"level":"info","message":"────────────────────────────────────────────────────────────","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:05"}
+{"level":"info","message":"🚀 CRON JOB TRIGGERED at 2025-11-25T11:40:11.591Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:11"}
+{"level":"info","message":"🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:11"}
+{"level":"info","message":"📦 Current block (L2 for Arbitrum): 9703519","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:12"}
+{"level":"info","message":"📊 Step 1: Checking database for unprocessed auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:12"}
+{"level":"info","message":"💾 Found 3 unprocessed auctions in database","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:12"}
+{"level":"info","message":"🔗 Step 2: Fetching active auctions from smart contract...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:12"}
+{"level":"info","message":"⛓️  Contract reports 6 active auctions","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:12"}
+{"level":"info","message":"🔍 Total auctions to check: 6","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:12"}
+{"level":"info","message":"   ↳ Saved 94 unnecessary RPC calls!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:12"}
+{"level":"info","message":"⏰ Step 3: Checking which auctions are ready to end...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:12"}
+{"level":"info","message":"  🕐 Auction 9: Active (61 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:12"}
+{"level":"info","message":"  🕐 Auction 8: Active (4672 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:12"}
+{"level":"info","message":"  🕐 Auction 7: Active (4646 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:13"}
+{"level":"info","message":"  🕐 Auction 6: Active (9495 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:13"}
+{"level":"info","message":"  🕐 Auction 4: Active (1914 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:13"}
+{"level":"info","message":"  🕐 Auction 2: Active (4390 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:13"}
+{"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:13"}
+{"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:13"}
+{"level":"info","message":"  ⏱️  Auction 9: No bids yet, 61 blocks remaining (endBlock: 9703580)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:14"}
+{"level":"info","message":"  ⏱️  Auction 8: No bids yet, 4672 blocks remaining (endBlock: 9708191)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:14"}
+{"level":"info","message":"  ⏱️  Auction 7: No bids yet, 4646 blocks remaining (endBlock: 9708165)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:14"}
+{"level":"info","message":"  ⏱️  Auction 6: No bids yet, 9495 blocks remaining (endBlock: 9713014)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:14"}
+{"level":"info","message":"  📊 Auction 4: Bid 0.011 AVAX by 0x6daa02F0..., 1914 blocks left (endBlock: 9705433)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:15"}
+{"level":"info","message":"  ⏱️  Auction 2: No bids yet, 4390 blocks remaining (endBlock: 9707909)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:15"}
+{"level":"info","message":"✅ Updated 6 active auction(s) with live blockchain data","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:15"}
+{"level":"info","message":"🎉 Batch processing completed successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:15"}
+{"level":"info","message":"✅ CRON JOB COMPLETED in 3912ms","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:15"}
+{"level":"info","message":"────────────────────────────────────────────────────────────","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:15"}
+{"level":"info","message":"🚀 CRON JOB TRIGGERED at 2025-11-25T11:40:21.592Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:21"}
+{"level":"info","message":"🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:21"}
+{"level":"info","message":"📦 Current block (L2 for Arbitrum): 9703519","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:22"}
+{"level":"info","message":"📊 Step 1: Checking database for unprocessed auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:22"}
+{"level":"info","message":"💾 Found 3 unprocessed auctions in database","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:22"}
+{"level":"info","message":"🔗 Step 2: Fetching active auctions from smart contract...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:22"}
+{"level":"info","message":"⛓️  Contract reports 6 active auctions","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:22"}
+{"level":"info","message":"🔍 Total auctions to check: 6","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:22"}
+{"level":"info","message":"   ↳ Saved 94 unnecessary RPC calls!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:22"}
+{"level":"info","message":"⏰ Step 3: Checking which auctions are ready to end...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:22"}
+{"level":"info","message":"  🕐 Auction 9: Active (61 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:22"}
+{"level":"info","message":"  🕐 Auction 8: Active (4672 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:22"}
+{"level":"info","message":"  🕐 Auction 7: Active (4646 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:23"}
+{"level":"info","message":"  🕐 Auction 6: Active (9495 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:23"}
+{"level":"info","message":"  🕐 Auction 4: Active (1914 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:23"}
+{"level":"info","message":"  🕐 Auction 2: Active (4390 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:23"}
+{"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:23"}
+{"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:23"}
+{"level":"info","message":"  ⏱️  Auction 9: No bids yet, 61 blocks remaining (endBlock: 9703580)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:24"}
+{"level":"info","message":"  ⏱️  Auction 8: No bids yet, 4672 blocks remaining (endBlock: 9708191)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:24"}
+{"level":"info","message":"  ⏱️  Auction 7: No bids yet, 4646 blocks remaining (endBlock: 9708165)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:25"}
+{"level":"info","message":"  ⏱️  Auction 6: No bids yet, 9495 blocks remaining (endBlock: 9713014)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:25"}
+{"level":"info","message":"  📊 Auction 4: Bid 0.011 AVAX by 0x6daa02F0..., 1914 blocks left (endBlock: 9705433)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:26"}
+{"level":"info","message":"  ⏱️  Auction 2: No bids yet, 4390 blocks remaining (endBlock: 9707909)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:26"}
+{"level":"info","message":"✅ Updated 6 active auction(s) with live blockchain data","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:26"}
+{"level":"info","message":"🎉 Batch processing completed successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:26"}
+{"level":"info","message":"✅ CRON JOB COMPLETED in 4805ms","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:26"}
+{"level":"info","message":"────────────────────────────────────────────────────────────","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:26"}
+{"level":"info","message":"🚀 CRON JOB TRIGGERED at 2025-11-25T11:40:31.595Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:31"}
+{"level":"info","message":"🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:31"}
+{"level":"info","message":"📦 Current block (L2 for Arbitrum): 9703520","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:32"}
+{"level":"info","message":"📊 Step 1: Checking database for unprocessed auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:32"}
+{"level":"info","message":"💾 Found 3 unprocessed auctions in database","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:32"}
+{"level":"info","message":"🔗 Step 2: Fetching active auctions from smart contract...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:32"}
+{"level":"info","message":"⛓️  Contract reports 6 active auctions","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:32"}
+{"level":"info","message":"🔍 Total auctions to check: 6","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:32"}
+{"level":"info","message":"   ↳ Saved 94 unnecessary RPC calls!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:32"}
+{"level":"info","message":"⏰ Step 3: Checking which auctions are ready to end...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:32"}
+{"level":"info","message":"  🕐 Auction 9: Active (60 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:32"}
+{"level":"info","message":"  🕐 Auction 8: Active (4671 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:33"}
+{"level":"info","message":"  🕐 Auction 7: Active (4645 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:33"}
+{"level":"info","message":"  🕐 Auction 6: Active (9494 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:33"}
+{"level":"info","message":"  🕐 Auction 4: Active (1913 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:33"}
+{"level":"info","message":"  🕐 Auction 2: Active (4389 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:34"}
+{"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:34"}
+{"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:34"}
+{"level":"info","message":"  ⏱️  Auction 9: No bids yet, 60 blocks remaining (endBlock: 9703580)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:34"}
+{"level":"info","message":"  ⏱️  Auction 8: No bids yet, 4671 blocks remaining (endBlock: 9708191)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:34"}
+{"level":"info","message":"  ⏱️  Auction 7: No bids yet, 4645 blocks remaining (endBlock: 9708165)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:34"}
+{"level":"info","message":"  ⏱️  Auction 6: No bids yet, 9494 blocks remaining (endBlock: 9713014)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:35"}
+{"level":"info","message":"  📊 Auction 4: Bid 0.011 AVAX by 0x6daa02F0..., 1913 blocks left (endBlock: 9705433)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:35"}
+{"level":"info","message":"  ⏱️  Auction 2: No bids yet, 4389 blocks remaining (endBlock: 9707909)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:35"}
+{"level":"info","message":"✅ Updated 6 active auction(s) with live blockchain data","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:35"}
+{"level":"info","message":"🎉 Batch processing completed successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:35"}
+{"level":"info","message":"✅ CRON JOB COMPLETED in 4384ms","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:35"}
+{"level":"info","message":"────────────────────────────────────────────────────────────","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:35"}
+{"level":"info","message":"🚀 CRON JOB TRIGGERED at 2025-11-25T11:40:41.593Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:41"}
+{"level":"info","message":"🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:41"}
+{"level":"info","message":"📦 Current block (L2 for Arbitrum): 9703522","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:42"}
+{"level":"info","message":"📊 Step 1: Checking database for unprocessed auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:42"}
+{"level":"info","message":"💾 Found 3 unprocessed auctions in database","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:42"}
+{"level":"info","message":"🔗 Step 2: Fetching active auctions from smart contract...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:42"}
+{"level":"info","message":"⛓️  Contract reports 6 active auctions","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:42"}
+{"level":"info","message":"🔍 Total auctions to check: 6","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:42"}
+{"level":"info","message":"   ↳ Saved 94 unnecessary RPC calls!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:42"}
+{"level":"info","message":"⏰ Step 3: Checking which auctions are ready to end...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:42"}
+{"level":"info","message":"  🕐 Auction 9: Active (58 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:42"}
+{"level":"info","message":"  🕐 Auction 8: Active (4669 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:43"}
+{"level":"info","message":"  🕐 Auction 7: Active (4643 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:43"}
+{"level":"info","message":"  🕐 Auction 6: Active (9492 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:44"}
+{"level":"info","message":"  🕐 Auction 4: Active (1911 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:44"}
+{"level":"info","message":"  🕐 Auction 2: Active (4387 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:44"}
+{"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:44"}
+{"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:44"}
+{"level":"info","message":"  ⏱️  Auction 9: No bids yet, 58 blocks remaining (endBlock: 9703580)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:44"}
+{"level":"info","message":"  ⏱️  Auction 8: No bids yet, 4669 blocks remaining (endBlock: 9708191)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:45"}
+{"level":"info","message":"  ⏱️  Auction 7: No bids yet, 4643 blocks remaining (endBlock: 9708165)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:45"}
+{"level":"info","message":"  ⏱️  Auction 6: No bids yet, 9492 blocks remaining (endBlock: 9713014)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:45"}
+{"level":"info","message":"  📊 Auction 4: Bid 0.011 AVAX by 0x6daa02F0..., 1911 blocks left (endBlock: 9705433)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:45"}
+{"level":"info","message":"  ⏱️  Auction 2: No bids yet, 4387 blocks remaining (endBlock: 9707909)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:46"}
+{"level":"info","message":"✅ Updated 6 active auction(s) with live blockchain data","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:46"}
+{"level":"info","message":"🎉 Batch processing completed successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:46"}
+{"level":"info","message":"✅ CRON JOB COMPLETED in 4486ms","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:46"}
+{"level":"info","message":"────────────────────────────────────────────────────────────","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:46"}
+{"level":"info","message":"🚀 CRON JOB TRIGGERED at 2025-11-25T11:40:51.594Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:51"}
+{"level":"info","message":"🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:51"}
+{"level":"info","message":"📦 Current block (L2 for Arbitrum): 9703522","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:52"}
+{"level":"info","message":"📊 Step 1: Checking database for unprocessed auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:52"}
+{"level":"info","message":"💾 Found 3 unprocessed auctions in database","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:52"}
+{"level":"info","message":"🔗 Step 2: Fetching active auctions from smart contract...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:52"}
+{"level":"info","message":"⛓️  Contract reports 6 active auctions","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:52"}
+{"level":"info","message":"🔍 Total auctions to check: 6","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:52"}
+{"level":"info","message":"   ↳ Saved 94 unnecessary RPC calls!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:52"}
+{"level":"info","message":"⏰ Step 3: Checking which auctions are ready to end...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:52"}
+{"level":"info","message":"  🕐 Auction 9: Active (58 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:52"}
+{"level":"info","message":"  🕐 Auction 8: Active (4669 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:52"}
+{"level":"info","message":"  🕐 Auction 7: Active (4643 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:53"}
+{"level":"info","message":"  🕐 Auction 6: Active (9492 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:53"}
+{"level":"info","message":"  🕐 Auction 4: Active (1911 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:53"}
+{"level":"info","message":"  🕐 Auction 2: Active (4387 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:53"}
+{"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:53"}
+{"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:53"}
+{"level":"info","message":"  ⏱️  Auction 9: No bids yet, 58 blocks remaining (endBlock: 9703580)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:54"}
+{"level":"info","message":"  ⏱️  Auction 8: No bids yet, 4669 blocks remaining (endBlock: 9708191)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:54"}
+{"level":"info","message":"  ⏱️  Auction 7: No bids yet, 4643 blocks remaining (endBlock: 9708165)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:54"}
+{"level":"info","message":"  ⏱️  Auction 6: No bids yet, 9492 blocks remaining (endBlock: 9713014)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:54"}
+{"level":"info","message":"  📊 Auction 4: Bid 0.011 AVAX by 0x6daa02F0..., 1911 blocks left (endBlock: 9705433)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:55"}
+{"level":"info","message":"  ⏱️  Auction 2: No bids yet, 4387 blocks remaining (endBlock: 9707909)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:55"}
+{"level":"info","message":"✅ Updated 6 active auction(s) with live blockchain data","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:55"}
+{"level":"info","message":"🎉 Batch processing completed successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:55"}
+{"level":"info","message":"✅ CRON JOB COMPLETED in 3847ms","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:55"}
+{"level":"info","message":"────────────────────────────────────────────────────────────","service":"meeting-auction-backend","timestamp":"2025-11-25 17:10:55"}
+{"level":"info","message":"JaaS JWT configuration found - tokens will be generated","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"Meeting Service initialized","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"✅ OrderSocketService initialized with /orders namespace","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"🚀 Starting server initialization...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"🔧 Step 0: Validating Seaport configuration...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"🔍 Validating Seaport configuration...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"warn","message":"⚠️  Configuration warning: PLATFORM_FEE_RECIPIENT is not set - platform fee validation is disabled","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"✅ Seaport configuration validated successfully","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"📋 Seaport Configuration:","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"   - Contract Address: 0x0000000000000068F116a894984e2DB1123eB395","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"   - Chain ID: 421614","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"   - WebSocket RPC: wss://arbitrum-sepolia.blockpi.network/v1/ws/public","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"   - Order Monitoring: disabled","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"   - Cleanup Schedule: */5 * * * *","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"   - Platform Fee Recipient: not configured","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"   - Platform Fee: 250 basis points (2.50%)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"✅ Seaport configuration validated","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"📊 Step 1: Connecting to database...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"🔍 Checking database configuration...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"📡 Testing database connection...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"✅ PostgreSQL connection successful","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"📋 Creating/verifying database tables...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"Database tables created/verified from schema.sql","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"✅ Database tables ready","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"✅ Database connected successfully","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"📝 Step 2: Initializing contract service...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"🔗 Connecting to ARBITRUM_SEPOLIA blockchain at https://arb-sepolia.g.alchemy.com/v2/wJ4MOyRL_MQ9a3jJiFVpBGrfZf9jmVKL...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"🧪 Testing blockchain connection...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"✅ Connected to chain ID: 421614","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"✅ Contract service wallet initialized","network":"ARBITRUM_SEPOLIA","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02","walletAddress":"0x25FE6F74131e9d92FeB849F96427a9e7967A6b24"}
+{"blockTestAddress":"0x9724612244dD8fBcd15f1B8c5b82585200830eA3","level":"info","message":"✅ BlockTest contract initialized for L2 block numbers","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"contractAddress":"0xD1629AAAA65548e367a6FEB07D8eC3aF3E6eD12d","hasBlockNumberService":true,"hasWallet":true,"level":"info","message":"✅ Contract service fully initialized","network":"ARBITRUM_SEPOLIA","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"✅ Contract service initialized","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"⏰ Step 3: Starting auction cron service...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"Auction cron service wallet initialized","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02","walletAddress":"0x25FE6F74131e9d92FeB849F96427a9e7967A6b24"}
+{"contractAddress":"0xD1629AAAA65548e367a6FEB07D8eC3aF3E6eD12d","hasBlockNumberService":true,"hasWallet":true,"level":"info","message":"Auction cron service initialized","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"🤖 STARTING AUCTION CRON SERVICE","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"⏰ Schedule: Every 10 seconds","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"💼 Wallet: 0x25FE6F74131e9d92FeB849F96427a9e7967A6b24","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"📝 Contract: 0xD1629AAAA65548e367a6FEB07D8eC3aF3E6eD12d","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"============================================================","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"🎬 Running initial auction check in 5 seconds...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"🟢 Auction cron job started successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"📊 Next automatic check in 10 seconds...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"✅ Auction cron service started","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"🧹 Step 3.1: Starting order cleanup cron service...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"🧹 STARTING ORDER CLEANUP CRON SERVICE","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"⏰ Schedule: */5 * * * * (every 5 minutes)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"============================================================","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"🎬 Running initial order cleanup in 10 seconds...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"🟢 Order cleanup cron job started successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"📊 Next automatic cleanup in 5 minutes...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"✅ Order cleanup cron service started","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"🔍 Step 3.2: Starting order fulfillment monitor service...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"ℹ️  Order fulfillment monitoring disabled via ENABLE_ORDER_MONITORING env var","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"📹 Step 4: Initializing Jitsi service...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"✅ Jitsi service ready","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"🌐 Step 5: Starting HTTP server on port 5009...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"✅ Server running on port 5009","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"🎉 Para integration backend initialized successfully","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"📡 Health check available at: http://localhost:5009/health","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:02"}
+{"level":"info","message":"🔍 INITIAL CHECK at 2025-11-25T11:41:07.871Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:07"}
+{"level":"info","message":"🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:07"}
+{"level":"info","message":"📦 Current block (L2 for Arbitrum): 9703522","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:08"}
+{"level":"info","message":"📊 Step 1: Checking database for unprocessed auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:08"}
+{"level":"info","message":"💾 Found 3 unprocessed auctions in database","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:08"}
+{"level":"info","message":"🔗 Step 2: Fetching active auctions from smart contract...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:08"}
+{"level":"info","message":"⛓️  Contract reports 6 active auctions","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:08"}
+{"level":"info","message":"🔍 Total auctions to check: 6","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:08"}
+{"level":"info","message":"   ↳ Saved 94 unnecessary RPC calls!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:08"}
+{"level":"info","message":"⏰ Step 3: Checking which auctions are ready to end...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:08"}
+{"level":"info","message":"  🕐 Auction 9: Active (58 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:08"}
+{"level":"info","message":"  🕐 Auction 8: Active (4669 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:09"}
+{"level":"info","message":"  🕐 Auction 7: Active (4643 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:09"}
+{"level":"info","message":"  🕐 Auction 6: Active (9492 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:09"}
+{"level":"info","message":"  🕐 Auction 4: Active (1911 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:09"}
+{"level":"info","message":"  🕐 Auction 2: Active (4387 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:10"}
+{"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:10"}
+{"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:10"}
+{"level":"info","message":"  ⏱️  Auction 9: No bids yet, 58 blocks remaining (endBlock: 9703580)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:10"}
+{"level":"info","message":"  ⏱️  Auction 8: No bids yet, 4669 blocks remaining (endBlock: 9708191)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:11"}
+{"level":"info","message":"  ⏱️  Auction 7: No bids yet, 4643 blocks remaining (endBlock: 9708165)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:11"}
+{"level":"info","message":"  ⏱️  Auction 6: No bids yet, 9492 blocks remaining (endBlock: 9713014)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:11"}
+{"level":"info","message":"  📊 Auction 4: Bid 0.011 AVAX by 0x6daa02F0..., 1911 blocks left (endBlock: 9705433)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:11"}
+{"level":"info","message":"  ⏱️  Auction 2: No bids yet, 4387 blocks remaining (endBlock: 9707909)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:12"}
+{"level":"info","message":"✅ Updated 6 active auction(s) with live blockchain data","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:12"}
+{"level":"info","message":"🎉 Batch processing completed successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:12"}
+{"level":"info","message":"✅ Initial auction check completed","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:12"}
+{"level":"info","message":"🚀 CRON JOB TRIGGERED at 2025-11-25T11:41:12.869Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:12"}
+{"level":"info","message":"🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:12"}
+{"level":"info","message":"🔍 INITIAL CLEANUP CHECK at 2025-11-25T11:41:12.876Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:12"}
+{"level":"info","message":"🔍 CHECKING FOR EXPIRED ORDERS...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:12"}
+{"level":"info","message":"✨ No expired orders found - all orders are valid","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:12"}
+{"activeListings":0,"activeOffers":0,"level":"info","message":"📊 ACTIVE ORDERS SUMMARY:","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:12","totalActive":0}
+{"level":"info","message":"✅ Initial order cleanup completed","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:12"}
+{"level":"info","message":"📦 Current block (L2 for Arbitrum): 9703523","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:13"}
+{"level":"info","message":"📊 Step 1: Checking database for unprocessed auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:13"}
+{"level":"info","message":"💾 Found 3 unprocessed auctions in database","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:13"}
+{"level":"info","message":"🔗 Step 2: Fetching active auctions from smart contract...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:13"}
+{"level":"info","message":"⛓️  Contract reports 6 active auctions","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:13"}
+{"level":"info","message":"🔍 Total auctions to check: 6","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:13"}
+{"level":"info","message":"   ↳ Saved 94 unnecessary RPC calls!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:13"}
+{"level":"info","message":"⏰ Step 3: Checking which auctions are ready to end...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:13"}
+{"level":"info","message":"  🕐 Auction 9: Active (57 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:13"}
+{"level":"info","message":"  🕐 Auction 8: Active (4668 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:13"}
+{"level":"info","message":"  🕐 Auction 7: Active (4642 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:14"}
+{"level":"info","message":"  🕐 Auction 6: Active (9491 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:14"}
+{"level":"info","message":"  🕐 Auction 4: Active (1910 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:14"}
+{"level":"info","message":"  🕐 Auction 2: Active (4386 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:15"}
+{"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:15"}
+{"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:15"}
+{"level":"info","message":"  ⏱️  Auction 9: No bids yet, 57 blocks remaining (endBlock: 9703580)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:15"}
+{"level":"info","message":"  ⏱️  Auction 8: No bids yet, 4668 blocks remaining (endBlock: 9708191)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:15"}
+{"level":"info","message":"  ⏱️  Auction 7: No bids yet, 4642 blocks remaining (endBlock: 9708165)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:16"}
+{"level":"info","message":"  ⏱️  Auction 6: No bids yet, 9491 blocks remaining (endBlock: 9713014)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:16"}
+{"level":"info","message":"  📊 Auction 4: Bid 0.011 AVAX by 0x6daa02F0..., 1910 blocks left (endBlock: 9705433)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:16"}
+{"level":"info","message":"  ⏱️  Auction 2: No bids yet, 4386 blocks remaining (endBlock: 9707909)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:16"}
+{"level":"info","message":"✅ Updated 6 active auction(s) with live blockchain data","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:16"}
+{"level":"info","message":"🎉 Batch processing completed successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:16"}
+{"level":"info","message":"✅ CRON JOB COMPLETED in 4049ms","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:16"}
+{"level":"info","message":"────────────────────────────────────────────────────────────","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:16"}
+{"level":"info","message":"🚀 CRON JOB TRIGGERED at 2025-11-25T11:41:22.870Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:22"}
+{"level":"info","message":"🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:22"}
+{"level":"info","message":"📦 Current block (L2 for Arbitrum): 9703523","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:23"}
+{"level":"info","message":"📊 Step 1: Checking database for unprocessed auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:23"}
+{"level":"info","message":"💾 Found 3 unprocessed auctions in database","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:23"}
+{"level":"info","message":"🔗 Step 2: Fetching active auctions from smart contract...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:23"}
+{"level":"info","message":"⛓️  Contract reports 6 active auctions","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:23"}
+{"level":"info","message":"🔍 Total auctions to check: 6","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:23"}
+{"level":"info","message":"   ↳ Saved 94 unnecessary RPC calls!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:23"}
+{"level":"info","message":"⏰ Step 3: Checking which auctions are ready to end...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:23"}
+{"level":"info","message":"  🕐 Auction 9: Active (57 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:23"}
+{"level":"info","message":"  🕐 Auction 8: Active (4668 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:24"}
+{"level":"info","message":"  🕐 Auction 7: Active (4642 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:24"}
+{"level":"info","message":"  🕐 Auction 6: Active (9491 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:24"}
+{"level":"info","message":"  🕐 Auction 4: Active (1910 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:24"}
+{"level":"info","message":"  🕐 Auction 2: Active (4386 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:25"}
+{"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:25"}
+{"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:25"}
+{"level":"info","message":"JaaS JWT configuration found - tokens will be generated","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"Meeting Service initialized","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"✅ OrderSocketService initialized with /orders namespace","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"🚀 Starting server initialization...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"🔧 Step 0: Validating Seaport configuration...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"🔍 Validating Seaport configuration...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"warn","message":"⚠️  Configuration warning: PLATFORM_FEE_RECIPIENT is not set - platform fee validation is disabled","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"✅ Seaport configuration validated successfully","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"📋 Seaport Configuration:","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"   - Contract Address: 0x0000000000000068F116a894984e2DB1123eB395","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"   - Chain ID: 421614","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"   - WebSocket RPC: wss://arbitrum-sepolia.blockpi.network/v1/ws/public","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"   - Order Monitoring: disabled","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"   - Cleanup Schedule: */5 * * * *","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"   - Platform Fee Recipient: not configured","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"   - Platform Fee: 250 basis points (2.50%)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"✅ Seaport configuration validated","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"📊 Step 1: Connecting to database...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"🔍 Checking database configuration...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"📡 Testing database connection...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"✅ PostgreSQL connection successful","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"📋 Creating/verifying database tables...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"Database tables created/verified from schema.sql","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"✅ Database tables ready","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"✅ Database connected successfully","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"📝 Step 2: Initializing contract service...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"🔗 Connecting to ARBITRUM_SEPOLIA blockchain at https://arb-sepolia.g.alchemy.com/v2/wJ4MOyRL_MQ9a3jJiFVpBGrfZf9jmVKL...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"🧪 Testing blockchain connection...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"✅ Connected to chain ID: 421614","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"✅ Contract service wallet initialized","network":"ARBITRUM_SEPOLIA","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26","walletAddress":"0x25FE6F74131e9d92FeB849F96427a9e7967A6b24"}
+{"blockTestAddress":"0x9724612244dD8fBcd15f1B8c5b82585200830eA3","level":"info","message":"✅ BlockTest contract initialized for L2 block numbers","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"contractAddress":"0xD1629AAAA65548e367a6FEB07D8eC3aF3E6eD12d","hasBlockNumberService":true,"hasWallet":true,"level":"info","message":"✅ Contract service fully initialized","network":"ARBITRUM_SEPOLIA","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"✅ Contract service initialized","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"⏰ Step 3: Starting auction cron service...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"Auction cron service wallet initialized","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26","walletAddress":"0x25FE6F74131e9d92FeB849F96427a9e7967A6b24"}
+{"contractAddress":"0xD1629AAAA65548e367a6FEB07D8eC3aF3E6eD12d","hasBlockNumberService":true,"hasWallet":true,"level":"info","message":"Auction cron service initialized","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"🤖 STARTING AUCTION CRON SERVICE","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"⏰ Schedule: Every 10 seconds","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"💼 Wallet: 0x25FE6F74131e9d92FeB849F96427a9e7967A6b24","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"📝 Contract: 0xD1629AAAA65548e367a6FEB07D8eC3aF3E6eD12d","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"============================================================","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"🎬 Running initial auction check in 5 seconds...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"🟢 Auction cron job started successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"📊 Next automatic check in 10 seconds...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"✅ Auction cron service started","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"🧹 Step 3.1: Starting order cleanup cron service...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"🧹 STARTING ORDER CLEANUP CRON SERVICE","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"⏰ Schedule: */5 * * * * (every 5 minutes)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"============================================================","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"🎬 Running initial order cleanup in 10 seconds...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"🟢 Order cleanup cron job started successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"📊 Next automatic cleanup in 5 minutes...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"✅ Order cleanup cron service started","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"🔍 Step 3.2: Starting order fulfillment monitor service...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"ℹ️  Order fulfillment monitoring disabled via ENABLE_ORDER_MONITORING env var","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"📹 Step 4: Initializing Jitsi service...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"✅ Jitsi service ready","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"🌐 Step 5: Starting HTTP server on port 5009...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"✅ Server running on port 5009","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"🎉 Para integration backend initialized successfully","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"📡 Health check available at: http://localhost:5009/health","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:26"}
+{"level":"info","message":"🔍 INITIAL CHECK at 2025-11-25T11:41:31.693Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:31"}
+{"level":"info","message":"🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:31"}
+{"level":"info","message":"📦 Current block (L2 for Arbitrum): 9703524","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:32"}
+{"level":"info","message":"📊 Step 1: Checking database for unprocessed auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:32"}
+{"level":"info","message":"💾 Found 3 unprocessed auctions in database","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:32"}
+{"level":"info","message":"🔗 Step 2: Fetching active auctions from smart contract...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:32"}
+{"level":"info","message":"⛓️  Contract reports 6 active auctions","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:32"}
+{"level":"info","message":"🔍 Total auctions to check: 6","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:32"}
+{"level":"info","message":"   ↳ Saved 94 unnecessary RPC calls!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:32"}
+{"level":"info","message":"⏰ Step 3: Checking which auctions are ready to end...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:32"}
+{"level":"info","message":"  🕐 Auction 9: Active (56 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:32"}
+{"level":"info","message":"  🕐 Auction 8: Active (4667 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:32"}
+{"level":"info","message":"  🕐 Auction 7: Active (4641 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:33"}
+{"level":"info","message":"  🕐 Auction 6: Active (9490 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:33"}
+{"level":"info","message":"  🕐 Auction 4: Active (1909 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:33"}
+{"level":"info","message":"  🕐 Auction 2: Active (4385 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:34"}
+{"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:34"}
+{"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:34"}
+{"level":"info","message":"  ⏱️  Auction 9: No bids yet, 56 blocks remaining (endBlock: 9703580)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:34"}
+{"level":"info","message":"  ⏱️  Auction 8: No bids yet, 4667 blocks remaining (endBlock: 9708191)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:34"}
+{"level":"info","message":"  ⏱️  Auction 7: No bids yet, 4641 blocks remaining (endBlock: 9708165)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:34"}
+{"level":"info","message":"  ⏱️  Auction 6: No bids yet, 9490 blocks remaining (endBlock: 9713014)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:35"}
+{"level":"info","message":"  📊 Auction 4: Bid 0.011 AVAX by 0x6daa02F0..., 1909 blocks left (endBlock: 9705433)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:35"}
+{"level":"info","message":"  ⏱️  Auction 2: No bids yet, 4385 blocks remaining (endBlock: 9707909)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:35"}
+{"level":"info","message":"✅ Updated 6 active auction(s) with live blockchain data","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:35"}
+{"level":"info","message":"🎉 Batch processing completed successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:35"}
+{"level":"info","message":"✅ Initial auction check completed","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:35"}
+{"level":"info","message":"🚀 CRON JOB TRIGGERED at 2025-11-25T11:41:36.693Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:36"}
+{"level":"info","message":"🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:36"}
+{"level":"info","message":"🔍 INITIAL CLEANUP CHECK at 2025-11-25T11:41:36.695Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:36"}
+{"level":"info","message":"🔍 CHECKING FOR EXPIRED ORDERS...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:36"}
+{"level":"info","message":"✨ No expired orders found - all orders are valid","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:36"}
+{"activeListings":0,"activeOffers":0,"level":"info","message":"📊 ACTIVE ORDERS SUMMARY:","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:36","totalActive":0}
+{"level":"info","message":"✅ Initial order cleanup completed","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:36"}
+{"level":"info","message":"📦 Current block (L2 for Arbitrum): 9703524","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:36"}
+{"level":"info","message":"📊 Step 1: Checking database for unprocessed auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:36"}
+{"level":"info","message":"💾 Found 3 unprocessed auctions in database","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:36"}
+{"level":"info","message":"🔗 Step 2: Fetching active auctions from smart contract...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:36"}
+{"level":"info","message":"⛓️  Contract reports 6 active auctions","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:37"}
+{"level":"info","message":"🔍 Total auctions to check: 6","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:37"}
+{"level":"info","message":"   ↳ Saved 94 unnecessary RPC calls!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:37"}
+{"level":"info","message":"⏰ Step 3: Checking which auctions are ready to end...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:37"}
+{"level":"info","message":"  🕐 Auction 9: Active (56 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:37"}
+{"level":"info","message":"  🕐 Auction 8: Active (4667 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:37"}
+{"level":"info","message":"  🕐 Auction 7: Active (4641 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:38"}
+{"level":"info","message":"  🕐 Auction 6: Active (9490 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:38"}
+{"level":"info","message":"  🕐 Auction 4: Active (1909 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:38"}
+{"level":"info","message":"  🕐 Auction 2: Active (4385 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:38"}
+{"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:38"}
+{"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:38"}
+{"level":"info","message":"  ⏱️  Auction 9: No bids yet, 56 blocks remaining (endBlock: 9703580)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:39"}
+{"level":"info","message":"  ⏱️  Auction 8: No bids yet, 4667 blocks remaining (endBlock: 9708191)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:39"}
+{"level":"info","message":"  ⏱️  Auction 7: No bids yet, 4641 blocks remaining (endBlock: 9708165)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:39"}
+{"level":"info","message":"  ⏱️  Auction 6: No bids yet, 9490 blocks remaining (endBlock: 9713014)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:39"}
+{"level":"info","message":"  📊 Auction 4: Bid 0.011 AVAX by 0x6daa02F0..., 1909 blocks left (endBlock: 9705433)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:40"}
+{"level":"info","message":"  ⏱️  Auction 2: No bids yet, 4385 blocks remaining (endBlock: 9707909)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:40"}
+{"level":"info","message":"✅ Updated 6 active auction(s) with live blockchain data","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:40"}
+{"level":"info","message":"🎉 Batch processing completed successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:40"}
+{"level":"info","message":"✅ CRON JOB COMPLETED in 3707ms","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:40"}
+{"level":"info","message":"────────────────────────────────────────────────────────────","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:40"}
+{"level":"info","message":"🚀 CRON JOB TRIGGERED at 2025-11-25T11:41:46.695Z","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:46"}
+{"level":"info","message":"🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:46"}
+{"level":"info","message":"📦 Current block (L2 for Arbitrum): 9703526","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:47"}
+{"level":"info","message":"📊 Step 1: Checking database for unprocessed auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:47"}
+{"level":"info","message":"💾 Found 3 unprocessed auctions in database","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:47"}
+{"level":"info","message":"🔗 Step 2: Fetching active auctions from smart contract...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:47"}
+{"level":"info","message":"⛓️  Contract reports 6 active auctions","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:47"}
+{"level":"info","message":"🔍 Total auctions to check: 6","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:47"}
+{"level":"info","message":"   ↳ Saved 94 unnecessary RPC calls!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:47"}
+{"level":"info","message":"⏰ Step 3: Checking which auctions are ready to end...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:47"}
+{"level":"info","message":"  🕐 Auction 9: Active (54 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:47"}
+{"level":"info","message":"  🕐 Auction 8: Active (4665 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:48"}
+{"level":"info","message":"  🕐 Auction 7: Active (4639 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:48"}
+{"level":"info","message":"  🕐 Auction 6: Active (9488 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:48"}
+{"level":"info","message":"  🕐 Auction 4: Active (1907 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:49"}
+{"level":"info","message":"  🕐 Auction 2: Active (4383 blocks remaining)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:49"}
+{"level":"info","message":"✨ No auctions ready to end at this time","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:49"}
+{"level":"info","message":"📊 Step 6: Updating bid amounts and time remaining for active auctions...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:49"}
+{"level":"info","message":"  ⏱️  Auction 9: No bids yet, 54 blocks remaining (endBlock: 9703580)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:49"}
+{"level":"info","message":"  ⏱️  Auction 8: No bids yet, 4665 blocks remaining (endBlock: 9708191)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:49"}
+{"level":"info","message":"  ⏱️  Auction 7: No bids yet, 4639 blocks remaining (endBlock: 9708165)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:50"}
+{"level":"info","message":"  ⏱️  Auction 6: No bids yet, 9488 blocks remaining (endBlock: 9713014)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:50"}
+{"level":"info","message":"  📊 Auction 4: Bid 0.011 AVAX by 0x6daa02F0..., 1907 blocks left (endBlock: 9705433)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:50"}
+{"level":"info","message":"  ⏱️  Auction 2: No bids yet, 4383 blocks remaining (endBlock: 9707909)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:51"}
+{"level":"info","message":"✅ Updated 6 active auction(s) with live blockchain data","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:51"}
+{"level":"info","message":"🎉 Batch processing completed successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:51"}
+{"level":"info","message":"✅ CRON JOB COMPLETED in 4553ms","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:51"}
+{"level":"info","message":"────────────────────────────────────────────────────────────","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:51"}
+{"level":"info","message":"JaaS JWT configuration found - tokens will be generated","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"Meeting Service initialized","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"✅ OrderSocketService initialized with /orders namespace","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"🚀 Starting server initialization...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"🔧 Step 0: Validating Seaport configuration...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"🔍 Validating Seaport configuration...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"warn","message":"⚠️  Configuration warning: PLATFORM_FEE_RECIPIENT is not set - platform fee validation is disabled","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"✅ Seaport configuration validated successfully","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"📋 Seaport Configuration:","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"   - Contract Address: 0x0000000000000068F116a894984e2DB1123eB395","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"   - Chain ID: 421614","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"   - WebSocket RPC: wss://arbitrum-sepolia.blockpi.network/v1/ws/public","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"   - Order Monitoring: disabled","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"   - Cleanup Schedule: */5 * * * *","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"   - Platform Fee Recipient: not configured","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"   - Platform Fee: 250 basis points (2.50%)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"✅ Seaport configuration validated","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"📊 Step 1: Connecting to database...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"🔍 Checking database configuration...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"📡 Testing database connection...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"✅ PostgreSQL connection successful","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"📋 Creating/verifying database tables...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"Database tables created/verified from schema.sql","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"✅ Database tables ready","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"✅ Database connected successfully","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"📝 Step 2: Initializing contract service...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"🔗 Connecting to ARBITRUM_SEPOLIA blockchain at https://arb-sepolia.g.alchemy.com/v2/wJ4MOyRL_MQ9a3jJiFVpBGrfZf9jmVKL...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"🧪 Testing blockchain connection...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"✅ Connected to chain ID: 421614","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"✅ Contract service wallet initialized","network":"ARBITRUM_SEPOLIA","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57","walletAddress":"0x25FE6F74131e9d92FeB849F96427a9e7967A6b24"}
+{"blockTestAddress":"0x9724612244dD8fBcd15f1B8c5b82585200830eA3","level":"info","message":"✅ BlockTest contract initialized for L2 block numbers","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"contractAddress":"0xD1629AAAA65548e367a6FEB07D8eC3aF3E6eD12d","hasBlockNumberService":true,"hasWallet":true,"level":"info","message":"✅ Contract service fully initialized","network":"ARBITRUM_SEPOLIA","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"✅ Contract service initialized","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"⏰ Step 3: Starting auction cron service...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"Auction cron service wallet initialized","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57","walletAddress":"0x25FE6F74131e9d92FeB849F96427a9e7967A6b24"}
+{"contractAddress":"0xD1629AAAA65548e367a6FEB07D8eC3aF3E6eD12d","hasBlockNumberService":true,"hasWallet":true,"level":"info","message":"Auction cron service initialized","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"🤖 STARTING AUCTION CRON SERVICE","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"⏰ Schedule: Every 10 seconds","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"💼 Wallet: 0x25FE6F74131e9d92FeB849F96427a9e7967A6b24","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"📝 Contract: 0xD1629AAAA65548e367a6FEB07D8eC3aF3E6eD12d","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"============================================================","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"🎬 Running initial auction check in 5 seconds...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"🟢 Auction cron job started successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"📊 Next automatic check in 10 seconds...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"✅ Auction cron service started","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"🧹 Step 3.1: Starting order cleanup cron service...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"🧹 STARTING ORDER CLEANUP CRON SERVICE","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"⏰ Schedule: */5 * * * * (every 5 minutes)","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"============================================================","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"🎬 Running initial order cleanup in 10 seconds...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"🟢 Order cleanup cron job started successfully!","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"📊 Next automatic cleanup in 5 minutes...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"✅ Order cleanup cron service started","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"🔍 Step 3.2: Starting order fulfillment monitor service...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"ℹ️  Order fulfillment monitoring disabled via ENABLE_ORDER_MONITORING env var","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"📹 Step 4: Initializing Jitsi service...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"✅ Jitsi service ready","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"🌐 Step 5: Starting HTTP server on port 5009...","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"✅ Server running on port 5009","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"🎉 Para integration backend initialized successfully","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
+{"level":"info","message":"📡 Health check available at: http://localhost:5009/health","service":"meeting-auction-backend","timestamp":"2025-11-25 17:11:57"}
