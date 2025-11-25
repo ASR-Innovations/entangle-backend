@@ -1,26 +1,48 @@
-node_modules
+# Dependencies
 node_modules/
+
+# Logs
 logs/
+*.log
+
+# Coverage
 .coverage/
 .nyc_output/
-.env.example
-.env.production.example
-.env.development.example
-.env.test.example
-.env.staging.example
-.env.production.example
-.env.development.example
-.env.test.example
-.env.staging.example
-.env
-.env.production
-.env.development
-.env.test
-.env.staging
-.env.local
-.env.local.example
-.env.local.example
 
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Documentation (exclude all markdown files except README.md)
+*.md
+!README.md
+
+# Kiro IDE files
+.kiro/
+
+# VSCode settings
+.vscode/
+
+# OS files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Backup files
+*.backup
+*.backup.*
+*.bak
+*.bak*
+
+# Test files (optional - uncomment if you want to exclude)
+# test-*.js
+# *-test.js
+
+# Build files
+dist/
+build/
 
 
 
