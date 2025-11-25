@@ -12,7 +12,7 @@ const CONTRACT_CONFIG = {
     chainId: 421614,
     rpcUrl: 'https://sepolia-rollup.arbitrum.io/rpc',
     explorer: 'https://sepolia.arbiscan.io',
-    blockTime: 10.0 // seconds per block (Measured actual: 10s/block on L2)
+    blockTime: 12.0 // seconds per block (Measured actual: 10s/block on L2)
   },
   SEPOLIA: {
     address: process.env.CONTRACT_ADDRESS || '0x6783A0B48f44dd244A96e01c435CB5315C2AA5Af',

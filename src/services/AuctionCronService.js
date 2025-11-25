@@ -574,7 +574,7 @@ class AuctionCronService {
           // NOTE: Arbitrum Sepolia L2 is currently producing blocks at ~10s/block
           // This is much slower than the theoretical 0.25s/block
           const network = process.env.BLOCKCHAIN_NETWORK || 'ARBITRUM_SEPOLIA';
-          const blockTime = network.includes('ARBITRUM') ? 10.0 :  // Actual measured: 10s/block
+          const blockTime = network.includes('ARBITRUM') ? 12.0 :  // Actual measured: 10s/block
                            network.includes('AVALANCHE') ? 2.0 : 12.0;
           const timeRemainingSeconds = Math.round(blocksRemaining * blockTime);
 
