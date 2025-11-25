@@ -3,6 +3,7 @@ const logger = require('../utils/logger');
 
 // Import the updated ABI
 const ENTANGLED_ABI = require('../ENTANGLEDABI.js');
+const BlockNumberService = require('./BlockNumberService');
 
 // Contract configuration for different networks
 const CONTRACT_CONFIG = {
@@ -11,7 +12,7 @@ const CONTRACT_CONFIG = {
     chainId: 421614,
     rpcUrl: 'https://sepolia-rollup.arbitrum.io/rpc',
     explorer: 'https://sepolia.arbiscan.io',
-    blockTime: 0.25 // seconds per block (Arbitrum is much faster)
+    blockTime: 10.0 // seconds per block (Measured actual: 10s/block on L2)
   },
   SEPOLIA: {
     address: process.env.CONTRACT_ADDRESS || '0x6783A0B48f44dd244A96e01c435CB5315C2AA5Af',
@@ -39,6 +40,7 @@ class ContractService {
     this.provider = null;
     this.contract = null;
     this.wallet = null;
+    this.blockNumberService = null;
     this.initialized = false;
   }
 
@@ -78,11 +80,24 @@ class ContractService {
         this.wallet || this.provider
       );
 
+      // Initialize BlockNumberService for L2 block number support (Arbitrum)
+      const blockTestAddress = process.env.BLOCKTEST_CONTRACT_ADDRESS;
+      this.blockNumberService = new BlockNumberService(this.provider, blockTestAddress);
+
+      if (this.network.includes('ARBITRUM') && blockTestAddress) {
+        logger.info('✅ BlockTest contract initialized for L2 block numbers', {
+          blockTestAddress
+        });
+      } else if (this.network.includes('ARBITRUM') && !blockTestAddress) {
+        logger.warn('⚠️  BLOCKTEST_CONTRACT_ADDRESS not set - L2 block numbers may be incorrect');
+      }
+
       this.initialized = true;
       logger.info('✅ Contract service fully initialized', {
         contractAddress: this.contractAddress,
         network: this.network,
-        hasWallet: !!this.wallet
+        hasWallet: !!this.wallet,
+        hasBlockNumberService: !!this.blockNumberService
       });
 
       return true;
@@ -102,6 +117,15 @@ class ContractService {
     if (!this.initialized) {
       await this.initialize();
     }
+  }
+
+  /**
+   * Get current block number (L2 for Arbitrum, regular for others)
+   * Uses BlockNumberService to ensure correct block number on L2 networks
+   */
+  async getCurrentBlock() {
+    await this.ensureInitialized();
+    return await this.blockNumberService.getCurrentBlock();
   }
 
   // ========================================

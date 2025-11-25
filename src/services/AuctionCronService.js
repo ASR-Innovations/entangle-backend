@@ -4,6 +4,7 @@ const logger = require('../utils/logger');
 const { pool } = require('../config/database');
 const MeetingAuctionABI = require('../contracts/MeetingAuction.json');
 const { getJitsiService } = require('./JitsiService');
+const BlockNumberService = require('./BlockNumberService');
 
 class AuctionCronService {
   constructor() {
@@ -12,8 +13,9 @@ class AuctionCronService {
     this.contract = null;
     this.provider = null;
     this.wallet = null;
+    this.blockNumberService = null;
     this.isRunning = false;
-    
+
     this.initialize();
   }
 
@@ -41,9 +43,14 @@ class AuctionCronService {
         this.wallet || this.provider
       );
 
+      // Initialize BlockNumberService for L2 block number support (Arbitrum)
+      const blockTestAddress = process.env.BLOCKTEST_CONTRACT_ADDRESS;
+      this.blockNumberService = new BlockNumberService(this.provider, blockTestAddress);
+
       logger.info('Auction cron service initialized', {
         contractAddress: this.contractAddress,
-        hasWallet: !!this.wallet
+        hasWallet: !!this.wallet,
+        hasBlockNumberService: !!this.blockNumberService
       });
 
     } catch (error) {
@@ -123,9 +130,9 @@ class AuctionCronService {
     try {
       logger.info('🔍 CHECKING FOR ENDED AUCTIONS (OPTIMIZED)...');
 
-      // Get current block number
-      const currentBlock = await this.provider.getBlockNumber();
-      logger.info(`📦 Current block: ${currentBlock}`);
+      // Get current block number using BlockNumberService (handles L2 for Arbitrum)
+      const currentBlock = await this.blockNumberService.getCurrentBlock();
+      logger.info(`📦 Current block (L2 for Arbitrum): ${currentBlock}`);
 
       // PHASE 1 OPTIMIZATION: Database-first filtering
       logger.info('📊 Step 1: Checking database for unprocessed auctions...');
@@ -563,7 +570,13 @@ class AuctionCronService {
           // Calculate time remaining
           const endBlock = Number(auction.endBlock);
           const blocksRemaining = Math.max(0, endBlock - currentBlock);
-          const timeRemainingSeconds = blocksRemaining * 2; // Avalanche: ~2 sec/block
+          // Get network-specific block time
+          // NOTE: Arbitrum Sepolia L2 is currently producing blocks at ~10s/block
+          // This is much slower than the theoretical 0.25s/block
+          const network = process.env.BLOCKCHAIN_NETWORK || 'ARBITRUM_SEPOLIA';
+          const blockTime = network.includes('ARBITRUM') ? 10.0 :  // Actual measured: 10s/block
+                           network.includes('AVALANCHE') ? 2.0 : 12.0;
+          const timeRemainingSeconds = Math.round(blocksRemaining * blockTime);
 
           // Update database with ALL current blockchain data
           await pool.query(`
