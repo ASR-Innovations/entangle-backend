@@ -11,7 +11,10 @@ const router = express.Router();
 const createAuctionSchema = Joi.object({
   title: Joi.string().min(1).max(255).required(),
   description: Joi.string().max(1000).optional().allow(''),
-  duration: Joi.number().min(30).max(1440).required(),
+  // ✅ FIX: Duration is now in BLOCKS for Arbitrum Sepolia
+  // Minimum: 720 blocks (~3 minutes at 0.25s per block)
+  // Maximum: 345600 blocks (~24 hours at 0.25s per block)
+  duration: Joi.number().integer().min(720).max(345600).required(),
   reservePrice: Joi.number().min(0.001).max(1000).required(),
   meetingDuration: Joi.number().min(15).max(180).required(),
   creatorWallet: Joi.string().pattern(/^0x[a-fA-F0-9]{40}$/).required(),
@@ -121,9 +124,37 @@ router.post('/created', authenticateToken, async (req, res) => {
     // Get blockchain data to cache bid price and blocks
     logger.info('🔗 Fetching auction data from blockchain...');
     const contractAuction = await contractService.contract.getAuction(auctionId);
-    const currentBlock = await contractService.provider.getBlockNumber();
+
+    // Get current block - uses BlockNumberService to get L2 block on Arbitrum
+    const currentBlock = await contractService.getCurrentBlock();
+    logger.info(`✅ Current block (L2 for Arbitrum): ${currentBlock}`);
+    
     const blocksRemaining = Number(contractAuction.endBlock) - currentBlock;
-    const timeRemainingSeconds = blocksRemaining * 2; // Avalanche: ~2 sec/block
+    const blockTime = contractService.getBlockTime();
+    const timeRemainingSeconds = Math.floor(blocksRemaining * blockTime);  // ✅ FIX: Convert to integer
+    logger.info(`Block time for ${contractService.network}: ${blockTime} seconds/block`);
+
+    // ✅ FIX: Log auction timing details for debugging
+    // NOTE: Auction struct does NOT have startBlock - calculate from endBlock and duration
+    const calculatedStartBlock = Number(contractAuction.endBlock) - duration;
+    logger.info('🕐 Auction timing details:', {
+      calculatedStartBlock, // Calculated: endBlock - duration
+      endBlock: Number(contractAuction.endBlock),
+      currentBlock,
+      blocksRemaining,
+      timeRemainingSeconds,
+      durationBlocks: duration // Use duration from request body (sent by frontend)
+    });
+
+    // ✅ FIX: Warn if auction already ended
+    if (blocksRemaining < 0) {
+      logger.warn(`⚠️  WARNING: Auction ${auctionId} has already ended!`, {
+        endBlock: Number(contractAuction.endBlock),
+        currentBlock,
+        blocksInPast: Math.abs(blocksRemaining),
+        timeInPast: Math.abs(timeRemainingSeconds) + ' seconds'
+      });
+    }
 
     // Store in database
     logger.info('💾 Inserting auction into database...');
@@ -177,10 +208,10 @@ router.post('/created', authenticateToken, async (req, res) => {
     });
     
     const result = await pool.query(insertQuery, insertParams);
-    
+
     if (result.rows.length === 0) {
       logger.error('❌ Insert failed - no rows returned');
-      return res.status(500).json({ error: 'Failed to insert auction' });ou
+      return res.status(500).json({ error: 'Failed to insert auction' });
     }
     
     logger.info(`✅ Auction ${auctionId} successfully recorded for Para user ${paraUserId}`);
@@ -324,17 +355,25 @@ router.get('/user/created', authenticateToken, async (req, res) => {
   }
 });
 
-// Get active auctions from database (optimized - no blockchain calls)
+// Get active auctions from database (optimized - no blockchain calls per auction)
 router.get('/active/db', async (req, res) => {
   try {
     const limit = Math.min(parseInt(req.query.limit) || 50, 100);
     const offset = parseInt(req.query.offset) || 0;
-    
+
     logger.info(`📊 GET /auctions/active/db - Fetching active auctions from database (limit: ${limit}, offset: ${offset})`);
-    
+
+    // Initialize contract service to get current L2 block
+    const contractService = getContractService();
+    await contractService.initialize();
+    const currentL2Block = await contractService.getCurrentBlock();
+    const blockTime = contractService.getBlockTime(); // 0.25s for Arbitrum
+
+    logger.info(`✅ Current L2 Block: ${currentL2Block}, Block Time: ${blockTime}s`);
+
     // Get active auctions from database with user info
     const query = `
-      SELECT 
+      SELECT
         a.id,
         a.title,
         a.seller_name,
@@ -346,8 +385,7 @@ router.get('/active/db', async (req, res) => {
         a.bid_price,
         a.highest_bid,
         a.highest_bidder,
-        a.blocks_remaining,
-        a.time_remaining_seconds,
+        a.end_block,
         a.ended,
         a.created_at,
         u.display_name as creator_name
@@ -357,39 +395,42 @@ router.get('/active/db', async (req, res) => {
       ORDER BY a.created_at DESC
       LIMIT $1 OFFSET $2
     `;
-    
+
     const result = await pool.query(query, [limit, offset]);
-    
+
     // Format auctions for frontend cards
     const auctions = result.rows.map(auction => {
+      // ✅ FIX: Calculate time remaining DYNAMICALLY from blockchain
+      const blocksRemaining = Math.max(0, auction.end_block - currentL2Block);
+      const timeRemainingSeconds = Math.floor(blocksRemaining * blockTime);
+
       // Calculate time remaining in human-readable format
-      const timeRemainingSeconds = auction.time_remaining_seconds || 0;
       const hours = Math.floor(timeRemainingSeconds / 3600);
       const minutes = Math.floor((timeRemainingSeconds % 3600) / 60);
-      
+
       let timeLeftFormatted = '';
       if (hours > 0) {
         timeLeftFormatted = `${hours}h ${minutes}m`;
       } else {
         timeLeftFormatted = `${minutes}m`;
       }
-      
+
       // Determine if there's a highest bid
-      const hasHighestBid = auction.highest_bid && 
-                           auction.highest_bid !== '0' && 
-                           auction.highest_bidder && 
+      const hasHighestBid = auction.highest_bid &&
+                           auction.highest_bid !== '0' &&
+                           auction.highest_bidder &&
                            auction.highest_bidder !== '0x0000000000000000000000000000000000000000';
-      
+
       // Show highest bid if exists, otherwise show floor price (bid_price)
       const displayPrice = hasHighestBid ? auction.highest_bid : auction.bid_price;
       const priceLabel = hasHighestBid ? 'Highest Bid' : 'Floor Price';
-      
+
       // Convert wei to AVAX/USDC (assuming 18 decimals)
       const priceInToken = displayPrice ? (parseFloat(displayPrice) / 1e18).toFixed(3) : '0.000';
-      
+
       // Determine badge (LIVE if no bids, HOT if has bids)
       const badge = hasHighestBid ? 'HOT' : 'LIVE';
-      
+
       return {
         id: auction.id,
         sellerName: auction.seller_name || auction.creator_name || 'Unknown',
@@ -404,7 +445,8 @@ router.get('/active/db', async (req, res) => {
         priceRaw: displayPrice,
         timeLeft: timeLeftFormatted,
         timeLeftSeconds: timeRemainingSeconds,
-        blocksRemaining: auction.blocks_remaining,
+        blocksRemaining: blocksRemaining,
+        endBlock: auction.end_block,
         badge: badge,
         hasHighestBid: hasHighestBid,
         highestBidder: hasHighestBid ? auction.highest_bidder : null,
@@ -412,20 +454,20 @@ router.get('/active/db', async (req, res) => {
         createdAt: auction.created_at
       };
     });
-    
-    logger.info(`✅ Returned ${auctions.length} active auctions from database`);
-    
-    res.json({ 
-      success: true, 
+
+    logger.info(`✅ Returned ${auctions.length} active auctions with real-time calculations`);
+
+    res.json({
+      success: true,
       auctions,
       total: auctions.length,
       offset,
-      limit 
+      limit
     });
-    
+
   } catch (error) {
     logger.error('Get active auctions from DB error:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       error: 'Failed to fetch auctions',
       message: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
     });
@@ -543,20 +585,28 @@ router.get('/ended/db', async (req, res) => {
   }
 });
 
-// Get single auction from database by ID (optimized - no blockchain calls)
+// Get single auction from database by ID (with real-time calculations)
 router.get('/db/:auctionId', async (req, res) => {
   try {
     const { auctionId } = req.params;
-    
+
     if (!auctionId || isNaN(auctionId)) {
       return res.status(400).json({ error: 'Invalid auction ID' });
     }
-    
+
     logger.info(`📊 GET /auctions/db/${auctionId} - Fetching auction from database`);
-    
+
+    // Initialize contract service to get current L2 block
+    const contractService = getContractService();
+    await contractService.initialize();
+    const currentL2Block = await contractService.getCurrentBlock();
+    const blockTime = contractService.getBlockTime(); // 0.25s for Arbitrum
+
+    logger.info(`✅ Current L2 Block: ${currentL2Block}, Block Time: ${blockTime}s`);
+
     // Get auction from database with user info
     const query = `
-      SELECT 
+      SELECT
         a.*,
         u.display_name as creator_name,
         u.auth_type,
@@ -565,43 +615,46 @@ router.get('/db/:auctionId', async (req, res) => {
       LEFT JOIN users u ON a.creator_wallet = u.wallet_address
       WHERE a.id = $1
     `;
-    
+
     const result = await pool.query(query, [auctionId]);
-    
+
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Auction not found' });
     }
-    
+
     const auction = result.rows[0];
-    
+
+    // ✅ FIX: Calculate time remaining DYNAMICALLY from blockchain
+    const blocksRemaining = Math.max(0, auction.end_block - currentL2Block);
+    const timeRemainingSeconds = Math.floor(blocksRemaining * blockTime);
+
     // Calculate time remaining in human-readable format
-    const timeRemainingSeconds = auction.time_remaining_seconds || 0;
     const hours = Math.floor(timeRemainingSeconds / 3600);
     const minutes = Math.floor((timeRemainingSeconds % 3600) / 60);
-    
+
     let timeLeftFormatted = '';
     if (hours > 0) {
       timeLeftFormatted = `${hours}h ${minutes}m`;
     } else {
       timeLeftFormatted = `${minutes}m`;
     }
-    
+
     // Determine if there's a highest bid
-    const hasHighestBid = auction.highest_bid && 
-                         auction.highest_bid !== '0' && 
-                         auction.highest_bidder && 
+    const hasHighestBid = auction.highest_bid &&
+                         auction.highest_bid !== '0' &&
+                         auction.highest_bidder &&
                          auction.highest_bidder !== '0x0000000000000000000000000000000000000000';
-    
+
     // Show highest bid if exists, otherwise show floor price (bid_price)
     const displayPrice = hasHighestBid ? auction.highest_bid : auction.bid_price;
     const priceLabel = hasHighestBid ? 'Highest Bid' : 'Floor Price';
-    
+
     // Convert wei to AVAX/USDC (assuming 18 decimals)
     const priceInToken = displayPrice ? (parseFloat(displayPrice) / 1e18).toFixed(3) : '0.000';
-    
+
     // Determine badge (LIVE if no bids, HOT if has bids)
     const badge = hasHighestBid ? 'HOT' : 'LIVE';
-    
+
     const formattedAuction = {
       id: auction.id,
       contractAddress: auction.contract_address,
@@ -627,7 +680,7 @@ router.get('/db/:auctionId', async (req, res) => {
       highestBidder: hasHighestBid ? auction.highest_bidder : null,
       timeLeft: timeLeftFormatted,
       timeLeftSeconds: timeRemainingSeconds,
-      blocksRemaining: auction.blocks_remaining,
+      blocksRemaining: blocksRemaining,
       endBlock: auction.end_block,
       durationBlocks: auction.duration_blocks,
       badge: badge,
@@ -640,17 +693,17 @@ router.get('/db/:auctionId', async (req, res) => {
       createdAt: auction.created_at,
       updatedAt: auction.updated_at
     };
-    
-    logger.info(`✅ Returned auction ${auctionId} from database`);
-    
-    res.json({ 
-      success: true, 
+
+    logger.info(`✅ Returned auction ${auctionId} with real-time calculations`);
+
+    res.json({
+      success: true,
       auction: formattedAuction
     });
-    
+
   } catch (error) {
     logger.error(`Get auction ${req.params.auctionId} from DB error:`, error);
-    res.status(500).json({ 
+    res.status(500).json({
       error: 'Failed to fetch auction',
       message: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
     });

@@ -3,32 +3,44 @@ const logger = require('../utils/logger');
 
 // Import the updated ABI
 const ENTANGLED_ABI = require('../ENTANGLEDABI.js');
+const BlockNumberService = require('./BlockNumberService');
 
 // Contract configuration for different networks
 const CONTRACT_CONFIG = {
-  FUJI: {
-    address: '0x6fD65aE833C9679cBC571581CE0f5Cd73D565796',
-    chainId: 43113,
-    rpcUrl: 'https://api.avax-test.network/ext/bc/C/rpc',
-    explorer: 'https://testnet.snowtrace.io'
+  ARBITRUM_SEPOLIA: {
+    address: process.env.CONTRACT_ADDRESS || '0xC189A7E4Aa1dD9eD9a93758898E64aDe8bda5486',
+    chainId: 421614,
+    rpcUrl: 'https://sepolia-rollup.arbitrum.io/rpc',
+    explorer: 'https://sepolia.arbiscan.io',
+    blockTime: 12.0 // seconds per block (Measured actual: 10s/block on L2)
   },
-  AVALANCHE: {
-    address: '0x6fD65aE833C9679cBC571581CE0f5Cd73D565796',
-    chainId: 43114,
-    rpcUrl: 'https://api.avax.network/ext/bc/C/rpc',
-    explorer: 'https://snowtrace.io'
+  SEPOLIA: {
+    address: process.env.CONTRACT_ADDRESS || '0x6783A0B48f44dd244A96e01c435CB5315C2AA5Af',
+    chainId: 11155111,
+    rpcUrl: 'https://ethereum-sepolia-rpc.publicnode.com',
+    explorer: 'https://sepolia.etherscan.io',
+    blockTime: 12 // seconds per block
   }
 };
 
 class ContractService {
-  constructor(network = 'FUJI') {
-    this.network = network;
-    this.config = CONTRACT_CONFIG[network];
+  constructor(network = null) {
+    // Auto-detect network from environment or use default
+    this.network = network || process.env.BLOCKCHAIN_NETWORK || 'ARBITRUM_SEPOLIA';
+    this.config = CONTRACT_CONFIG[this.network];
+
+    if (!this.config) {
+      logger.warn(`⚠️  Unknown network: ${this.network}, falling back to ARBITRUM_SEPOLIA`);
+      this.network = 'ARBITRUM_SEPOLIA';
+      this.config = CONTRACT_CONFIG.ARBITRUM_SEPOLIA;
+    }
+
     this.contractAddress = process.env.CONTRACT_ADDRESS || this.config.address;
     this.rpcUrl = process.env.RPC_URL || process.env.AVALANCHE_RPC || this.config.rpcUrl;
     this.provider = null;
     this.contract = null;
     this.wallet = null;
+    this.blockNumberService = null;
     this.initialized = false;
   }
 
@@ -68,11 +80,24 @@ class ContractService {
         this.wallet || this.provider
       );
 
+      // Initialize BlockNumberService for L2 block number support (Arbitrum)
+      const blockTestAddress = process.env.BLOCKTEST_CONTRACT_ADDRESS;
+      this.blockNumberService = new BlockNumberService(this.provider, blockTestAddress);
+
+      if (this.network.includes('ARBITRUM') && blockTestAddress) {
+        logger.info('✅ BlockTest contract initialized for L2 block numbers', {
+          blockTestAddress
+        });
+      } else if (this.network.includes('ARBITRUM') && !blockTestAddress) {
+        logger.warn('⚠️  BLOCKTEST_CONTRACT_ADDRESS not set - L2 block numbers may be incorrect');
+      }
+
       this.initialized = true;
       logger.info('✅ Contract service fully initialized', {
         contractAddress: this.contractAddress,
         network: this.network,
-        hasWallet: !!this.wallet
+        hasWallet: !!this.wallet,
+        hasBlockNumberService: !!this.blockNumberService
       });
 
       return true;
@@ -94,6 +119,15 @@ class ContractService {
     }
   }
 
+  /**
+   * Get current block number (L2 for Arbitrum, regular for others)
+   * Uses BlockNumberService to ensure correct block number on L2 networks
+   */
+  async getCurrentBlock() {
+    await this.ensureInitialized();
+    return await this.blockNumberService.getCurrentBlock();
+  }
+
   // ========================================
   // AUCTION FUNCTIONS
   // ========================================
@@ -107,7 +141,7 @@ class ContractService {
       return {
         id: Number(auction.id),
         host: auction.host,
-        startBlock: Number(auction.startBlock),
+        // NOTE: Auction struct does NOT have startBlock field - removed to fix bug
         endBlock: Number(auction.endBlock),
         reservePrice: ethers.formatEther(auction.reservePrice),
         highestBid: ethers.formatEther(auction.highestBid),
@@ -420,7 +454,7 @@ class ContractService {
     return {
       id: Number(auction.id),
       host: auction.host,
-      startBlock: Number(auction.startBlock),
+      // NOTE: Auction struct does NOT have startBlock field - removed to fix bug
       endBlock: Number(auction.endBlock),
       reservePrice: ethers.formatEther(auction.reservePrice),
       highestBid: ethers.formatEther(auction.highestBid),
@@ -495,6 +529,11 @@ class ContractService {
   // Get network configuration
   getNetworkConfig() {
     return this.config;
+  }
+
+  // Get block time for the current network
+  getBlockTime() {
+    return this.config.blockTime || 12; // Default to 12 seconds (Ethereum)
   }
 
   // Get wallet balance

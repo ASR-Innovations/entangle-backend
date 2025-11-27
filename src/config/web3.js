@@ -2,18 +2,18 @@ require('dotenv').config();
 
 const web3Config = {
   // WebSocket provider for real-time events
-  provider: process.env.ETH_WSS_ENDPOINT || 'wss://eth-sepolia.g.alchemy.com/v2/demo',
+  provider: process.env.ETH_WSS_ENDPOINT || 'wss://arbitrum-sepolia.blockpi.network/v1/ws/public',
   
   // HTTP provider for transactions and queries
-  httpProvider: process.env.ETH_HTTP_ENDPOINT || 'https://eth-sepolia.g.alchemy.com/v2/demo',
+  httpProvider: process.env.ETH_HTTP_ENDPOINT || 'https://sepolia-rollup.arbitrum.io/rpc',
   
   // Contract address
-  contractAddress: process.env.AUCTION_CONTRACT_ADDRESS || '0x6fD65aE833C9679cBC571581CE0f5Cd73D565796',
+  contractAddress: process.env.AUCTION_CONTRACT_ADDRESS || '0xC189A7E4Aa1dD9eD9a93758898E64aDe8bda5486',
   
   // Network configuration
   network: {
-    chainId: process.env.CHAIN_ID || 11155111, // Sepolia testnet
-    name: process.env.NETWORK_NAME || 'Sepolia Testnet'
+    chainId: process.env.CHAIN_ID || 421614, // Arbitrum Sepolia testnet
+    name: process.env.NETWORK_NAME || 'Arbitrum Sepolia Testnet'
   },
   
   // Gas settings
