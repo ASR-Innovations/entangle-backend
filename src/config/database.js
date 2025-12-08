@@ -18,9 +18,12 @@ const dbConfig = process.env.DATABASE_URL ? {
 
 const pool = new Pool({
   ...dbConfig,
-  connectionTimeoutMillis: 5000, // 5 second timeout
-  query_timeout: 5000,
-  statement_timeout: 5000
+  connectionTimeoutMillis: 30000, // 30 second timeout (increased for stability)
+  query_timeout: 30000,
+  statement_timeout: 30000,
+  max: 20, // Connection pool size
+  idleTimeoutMillis: 30000,
+  allowExitOnIdle: false // Important for cron jobs
 });
 
 async function setupDatabase() {

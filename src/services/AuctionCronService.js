@@ -13,8 +13,25 @@ class AuctionCronService {
     this.provider = null;
     this.wallet = null;
     this.isRunning = false;
-    
+
+    // Network configuration for block time
+    this.network = process.env.BLOCKCHAIN_NETWORK || 'SEPOLIA';
+    this.blockTime = this.getBlockTimeForNetwork(this.network);
+
     this.initialize();
+  }
+
+  /**
+   * Get block time for the current network
+   */
+  getBlockTimeForNetwork(network) {
+    const blockTimes = {
+      'SEPOLIA': 12,      // Ethereum Sepolia: 12 seconds/block
+      'ETHEREUM': 12,     // Ethereum mainnet: 12 seconds/block
+      'AVALANCHE': 2,     // Avalanche C-Chain: 2 seconds/block
+      'FUJI': 2          // Avalanche Fuji testnet: 2 seconds/block
+    };
+    return blockTimes[network] || 12; // Default to 12 seconds (Ethereum standard)
   }
 
   async initialize() {
@@ -63,6 +80,7 @@ class AuctionCronService {
     // Enhanced startup logging
     logger.info('🤖 STARTING AUCTION CRON SERVICE');
     logger.info(`⏰ Schedule: Every 10 seconds`);
+    logger.info(`🌐 Network: ${this.network} (${this.blockTime} sec/block)`);
     logger.info(`💼 Wallet: ${this.wallet ? this.wallet.address : 'NONE (read-only mode)'}`);
     logger.info(`📝 Contract: ${this.contractAddress}`);
     logger.info('='.repeat(60));
@@ -269,7 +287,7 @@ class AuctionCronService {
   async processSingleAuction(auctionId, auction) {
     try {
       // Check if this is a known problematic auction
-      const PROBLEMATIC_AUCTIONS = [35, 36];
+      const PROBLEMATIC_AUCTIONS = [18, 35, 36]; // Auctions with "Token transfer failed" error
       if (PROBLEMATIC_AUCTIONS.includes(auctionId)) {
         logger.warn(`⚠️  Auction ${auctionId}: Known problematic auction with "Token transfer failed" error, skipping...`);
         logger.info(`📝 Manual intervention required for auction ${auctionId}`);
@@ -378,7 +396,7 @@ class AuctionCronService {
     }
 
     // Check for problematic auctions and filter them out
-    const PROBLEMATIC_AUCTIONS = [35, 36];
+    const PROBLEMATIC_AUCTIONS = [18, 35, 36]; // Auctions with "Token transfer failed" error
     const validIds = [];
     const skippedIds = [];
 
@@ -563,7 +581,7 @@ class AuctionCronService {
           // Calculate time remaining
           const endBlock = Number(auction.endBlock);
           const blocksRemaining = Math.max(0, endBlock - currentBlock);
-          const timeRemainingSeconds = blocksRemaining * 2; // Avalanche: ~2 sec/block
+          const timeRemainingSeconds = blocksRemaining * this.blockTime; // Use network-specific block time
 
           // Update database with ALL current blockchain data
           await pool.query(`
@@ -608,10 +626,11 @@ class AuctionCronService {
           updatedCount++;
 
           // Enhanced logging
+          const timeMinutes = Math.floor(timeRemainingSeconds / 60);
           if (auction.highestBidder !== ethers.ZeroAddress) {
-            logger.info(`  📊 Auction ${auctionId}: Bid ${ethers.formatEther(auction.highestBid)} AVAX by ${auction.highestBidder.slice(0, 10)}..., ${blocksRemaining} blocks left (endBlock: ${endBlock})`);
+            logger.info(`  📊 Auction ${auctionId}: Bid ${ethers.formatEther(auction.highestBid)} ETH by ${auction.highestBidder.slice(0, 10)}..., ${blocksRemaining} blocks left (~${timeMinutes} min)`);
           } else {
-            logger.info(`  ⏱️  Auction ${auctionId}: No bids yet, ${blocksRemaining} blocks remaining (endBlock: ${endBlock})`);
+            logger.info(`  ⏱️  Auction ${auctionId}: No bids yet, ${blocksRemaining} blocks remaining (~${timeMinutes} min)`);
           }
 
         } catch (error) {
