@@ -45,7 +45,7 @@ async function checkAuction96() {
     
     const endBlock = Number(auction.endBlock);
     const blocksRemaining = Math.max(0, endBlock - currentBlock);
-    const timeRemainingSeconds = blocksRemaining * 2; // Avalanche: ~2 sec/block
+    const timeRemainingSeconds = blocksRemaining * 12; // Ethereum Sepolia: 12 seconds/block
     const hasWinner = auction.highestBidder !== ethers.ZeroAddress;
     
     console.log(`Auction ID: ${auctionId}`);

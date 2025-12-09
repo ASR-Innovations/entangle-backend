@@ -84,7 +84,7 @@ async function syncAllAuctions() {
         // Calculate time remaining
         const endBlock = Number(auction.endBlock);
         const blocksRemaining = Math.max(0, endBlock - currentBlock);
-        const timeRemainingSeconds = blocksRemaining * 2; // Avalanche: ~2 sec/block
+        const timeRemainingSeconds = blocksRemaining * 12; // Ethereum Sepolia: 12 seconds/block
 
         // Prepare update data
         const updateData = {

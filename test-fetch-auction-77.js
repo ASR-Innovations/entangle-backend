@@ -48,7 +48,7 @@ async function testFetchAuction77() {
     console.log('⏰ TIMING INFO:');
     console.log(`   End Block: ${auction.endBlock ? auction.endBlock.toString() : 'N/A'}`);
     const blocksRemaining = auction.endBlock ? Number(auction.endBlock) - currentBlock : 0;
-    const timeRemainingSeconds = blocksRemaining * 2; // Avalanche: ~2 sec/block
+    const timeRemainingSeconds = blocksRemaining * 12; // Ethereum Sepolia: 12 seconds/block
     console.log(`   Blocks Remaining: ${blocksRemaining}`);
     console.log(`   Time Remaining: ${Math.floor(timeRemainingSeconds / 60)} minutes (${timeRemainingSeconds} seconds)`);
     console.log('');

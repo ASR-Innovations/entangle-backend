@@ -15,7 +15,7 @@ async function testCronUpdateFields() {
 
     const endBlock = Number(auction.endBlock);
     const blocksRemaining = Math.max(0, endBlock - currentBlock);
-    const timeRemainingSeconds = blocksRemaining * 2;
+    const timeRemainingSeconds = blocksRemaining * 12; // Ethereum Sepolia: 12 seconds/block
 
     console.log('WHAT THE CRON JOB WILL UPDATE IN DATABASE EVERY 2 MINUTES');
     console.log('='.repeat(80));
