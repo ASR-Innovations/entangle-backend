@@ -77,6 +77,7 @@ app.use('/api/contract', contractRoutes);
 app.use('/api/meetings', require('./routes/meetings'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/orders', require('./routes/orders'));
+app.use('/api/creators', require('./routes/creators'));
 
 // Error handling middleware (must be after all routes)
 // Requirements: 12.1, 12.2, 12.3, 12.4, 12.5
