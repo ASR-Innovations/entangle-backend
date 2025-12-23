@@ -1,6 +1,7 @@
 const express = require('express');
 const { pool } = require('../config/database');
 const logger = require('../utils/logger');
+const { getTokenPriceCronService } = require('../services/TokenPriceCronService');
 
 const router = express.Router();
 
@@ -89,6 +90,132 @@ router.get('/users', async (req, res) => {
       success: false,
       error: error.message,
       note: 'Database not available'
+    });
+  }
+});
+
+// Manual blockchain sync endpoint
+router.post('/sync-tokens', async (req, res) => {
+  try {
+    logger.info('🔄 Manual blockchain sync triggered via API');
+
+    const cronService = getTokenPriceCronService(pool);
+
+    // Run full sync in background
+    cronService.runFullSync()
+      .then(result => {
+        logger.info('✅ Manual sync completed:', result);
+      })
+      .catch(error => {
+        logger.error('❌ Manual sync failed:', error);
+      });
+
+    res.json({
+      success: true,
+      message: 'Full blockchain sync started in background',
+      note: 'This will scan all users and check for creator tokens. Check logs for progress.'
+    });
+
+  } catch (error) {
+    logger.error('Manual sync error:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+// Manual price update endpoint
+router.post('/update-prices', async (req, res) => {
+  try {
+    logger.info('💰 Manual price update triggered via API');
+
+    const cronService = getTokenPriceCronService(pool);
+
+    // Run price update in background
+    cronService.runPriceUpdate()
+      .then(() => {
+        logger.info('✅ Manual price update completed');
+      })
+      .catch(error => {
+        logger.error('❌ Manual price update failed:', error);
+      });
+
+    res.json({
+      success: true,
+      message: 'Token price update started in background',
+      note: 'This will update all token prices from blockchain. Check logs for progress.'
+    });
+
+  } catch (error) {
+    logger.error('Manual price update error:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+// Get creator token stats
+router.get('/creator-stats', async (req, res) => {
+  try {
+    const client = await pool.connect();
+
+    // Get token counts
+    const tokenStats = await client.query(`
+      SELECT
+        COUNT(DISTINCT ct.id) as total_tokens,
+        COUNT(DISTINCT CASE WHEN ct.liquidity_pool_address IS NOT NULL THEN ct.id END) as tokens_with_pools,
+        COUNT(DISTINCT cp.id) as total_creators,
+        SUM(CAST(ct.volume_24h AS NUMERIC)) as total_volume_24h
+      FROM creator_tokens ct
+      INNER JOIN creator_profiles cp ON ct.creator_profile_id = cp.id
+    `);
+
+    // Get recent token updates
+    const recentTokens = await client.query(`
+      SELECT
+        ct.contract_address,
+        ct.symbol,
+        ct.name,
+        ct.current_price,
+        ct.price_change_24h,
+        ct.volume_24h,
+        ct.updated_at,
+        cp.wallet_address
+      FROM creator_tokens ct
+      INNER JOIN creator_profiles cp ON ct.creator_profile_id = cp.id
+      ORDER BY ct.updated_at DESC
+      LIMIT 10
+    `);
+
+    client.release();
+
+    res.json({
+      success: true,
+      stats: {
+        totalTokens: parseInt(tokenStats.rows[0].total_tokens) || 0,
+        tokensWithPools: parseInt(tokenStats.rows[0].tokens_with_pools) || 0,
+        totalCreators: parseInt(tokenStats.rows[0].total_creators) || 0,
+        totalVolume24h: tokenStats.rows[0].total_volume_24h || '0'
+      },
+      recentTokens: recentTokens.rows.map(token => ({
+        address: token.contract_address,
+        symbol: token.symbol,
+        name: token.name,
+        price: token.current_price,
+        priceChange24h: token.price_change_24h,
+        volume24h: token.volume_24h,
+        creator: token.wallet_address,
+        lastUpdated: token.updated_at
+      }))
+    });
+
+  } catch (error) {
+    logger.error('Creator stats error:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message
     });
   }
 });

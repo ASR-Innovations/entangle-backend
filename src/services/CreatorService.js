@@ -27,6 +27,7 @@ class CreatorService {
       console.log(`📊 Fetching trending creators (limit: ${limit}, sortBy: ${sortBy})`);
 
       // Get trending creators from database
+      // ✅ IMPORTANT: Only show creators who have BOTH token AND pool
       const result = await this.db.query(`
         SELECT
           cp.wallet_address as id,
@@ -46,7 +47,7 @@ class CreatorService {
         FROM creator_profiles cp
         INNER JOIN creator_tokens ct ON cp.id = ct.creator_profile_id
         WHERE ct.contract_address IS NOT NULL
-          AND ct.total_transactions > 0
+          AND ct.liquidity_pool_address IS NOT NULL
         ORDER BY
           CASE
             WHEN $1 = 'volume' THEN CAST(ct.volume_24h AS NUMERIC)
@@ -87,7 +88,7 @@ class CreatorService {
             address: row.token_address,
             symbol: row.token_symbol,
             name: row.token_name,
-            price: parseFloat(row.current_price || '0').toFixed(4),
+            price: parseFloat(row.current_price || '0'), // Send raw price, let frontend format it
             priceChange24h: parseFloat(row.price_change_24h || '0'),
             volume24h: row.volume_24h || '0',
             marketCap: row.market_cap || '0',
@@ -237,6 +238,100 @@ class CreatorService {
   }
 
   /**
+   * Follow or unfollow a creator
+   * @param {string} identifier Creator wallet address or username
+   * @param {Object} followData Follow action data
+   * @returns {Promise<Object>} Follow result
+   */
+  async toggleFollow(identifier, followData) {
+    try {
+      const { action, userParaId, walletAddress, enableNotifications = true } = followData;
+
+      console.log(`${action === 'follow' ? '➕' : '➖'} ${action} creator: ${identifier}`);
+
+      // Get creator profile ID
+      const isAddress = identifier.startsWith('0x');
+      const creatorQuery = isAddress
+        ? 'SELECT id FROM creator_profiles WHERE LOWER(wallet_address) = $1'
+        : 'SELECT id FROM creator_profiles WHERE LOWER(twitter_username) = $1';
+
+      const creatorResult = await this.db.query(creatorQuery, [identifier.toLowerCase()]);
+
+      if (creatorResult.rows.length === 0) {
+        throw new Error('Creator not found');
+      }
+
+      const creatorProfileId = creatorResult.rows[0].id;
+
+      if (action === 'follow') {
+        // Add follower
+        await this.db.query(`
+          INSERT INTO creator_followers (
+            creator_profile_id,
+            follower_para_id,
+            follower_wallet,
+            notifications_enabled
+          ) VALUES ($1, $2, $3, $4)
+          ON CONFLICT (creator_profile_id, follower_para_id)
+          DO UPDATE SET
+            notifications_enabled = EXCLUDED.notifications_enabled,
+            followed_at = CURRENT_TIMESTAMP
+        `, [creatorProfileId, userParaId, walletAddress.toLowerCase(), enableNotifications]);
+
+        // Update follower count
+        await this.db.query(`
+          UPDATE creator_profiles
+          SET total_followers = (
+            SELECT COUNT(*)
+            FROM creator_followers
+            WHERE creator_profile_id = $1
+          )
+          WHERE id = $1
+        `, [creatorProfileId]);
+
+      } else if (action === 'unfollow') {
+        // Remove follower
+        await this.db.query(`
+          DELETE FROM creator_followers
+          WHERE creator_profile_id = $1
+            AND follower_para_id = $2
+        `, [creatorProfileId, userParaId]);
+
+        // Update follower count
+        await this.db.query(`
+          UPDATE creator_profiles
+          SET total_followers = (
+            SELECT COUNT(*)
+            FROM creator_followers
+            WHERE creator_profile_id = $1
+          )
+          WHERE id = $1
+        `, [creatorProfileId]);
+      }
+
+      // Get updated follower count
+      const countResult = await this.db.query(`
+        SELECT total_followers
+        FROM creator_profiles
+        WHERE id = $1
+      `, [creatorProfileId]);
+
+      const followerCount = countResult.rows[0]?.total_followers || 0;
+
+      console.log(`✅ ${action} successful. New follower count: ${followerCount}`);
+
+      return {
+        following: action === 'follow',
+        notificationsEnabled: action === 'follow' ? enableNotifications : false,
+        followerCount
+      };
+    } catch (error) {
+      console.error('❌ Error toggling follow:', error);
+      throw error;
+    }
+  }
+
+  /**
    * Get creator events/auctions
    * @param {string} address Creator wallet address
    * @param {Object} options Query options
@@ -255,9 +350,14 @@ class CreatorService {
       // Build status condition
       let statusCondition = '';
       if (status === 'upcoming') {
-        statusCondition = 'AND a.start_time > NOW() AND a.ended = false';
+        // Original: Auctions that haven't ended yet and meeting is in future
+        statusCondition = 'AND a.event_start_time > NOW() AND a.ended = false';
+      } else if (status === 'upcoming_calls' || status === 'awaiting_meeting') {
+        // NEW: Auctions that have ended but meeting hasn't started yet
+        // This is the window between auction end and meeting start
+        statusCondition = 'AND a.ended = true AND a.event_start_time > NOW()';
       } else if (status === 'live') {
-        statusCondition = 'AND a.start_time <= NOW() AND a.end_time > NOW() AND a.ended = false';
+        statusCondition = 'AND a.event_start_time <= NOW() AND a.event_end_time > NOW() AND a.ended = false';
       } else if (status === 'ended') {
         statusCondition = 'AND a.ended = true';
       }
@@ -268,34 +368,32 @@ class CreatorService {
           a.id,
           a.title,
           a.metadata_ipfs as description,
-          a.start_time,
-          a.end_time,
-          a.duration,
-          a.reserve_price,
-          a.current_bid as highest_bid,
-          a.winner,
+          a.event_start_time as start_time,
+          a.event_end_time as end_time,
+          a.meeting_duration as duration,
+          a.bid_price as reserve_price,
+          a.highest_bid,
+          a.highest_bidder as winner,
           a.ended as auction_ended,
           a.nft_token_id,
-          COUNT(DISTINCT b.id) as bid_count,
+          0 as bid_count,
           CASE
-            WHEN a.start_time > NOW() THEN 'upcoming'
-            WHEN a.start_time <= NOW() AND a.end_time > NOW() THEN 'live'
+            WHEN a.event_start_time > NOW() THEN 'upcoming'
+            WHEN a.event_start_time <= NOW() AND a.event_end_time > NOW() THEN 'live'
             ELSE 'ended'
           END as status
         FROM auctions a
-        LEFT JOIN bids b ON a.id = b.auction_id
-        WHERE LOWER(a.creator_address) = $1
+        WHERE LOWER(a.creator_wallet) = $1
           ${statusCondition}
-        GROUP BY a.id
-        ORDER BY a.start_time ASC
+        ORDER BY a.event_start_time ASC
         LIMIT $2 OFFSET $3
       `, [address.toLowerCase(), limit, offset]);
 
       // Get total count
       const countResult = await this.db.query(`
-        SELECT COUNT(*) as total
+        SELECT COUNT(*)::integer as total
         FROM auctions a
-        WHERE LOWER(a.creator_address) = $1
+        WHERE LOWER(a.creator_wallet) = $1
           ${statusCondition}
       `, [address.toLowerCase()]);
 

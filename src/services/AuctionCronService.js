@@ -219,6 +219,10 @@ class AuctionCronService {
       } else {
         logger.info(`🚀 Step 4: Processing ${readyToEndAuctions.length} auction(s)...`);
 
+        // Track which auctions were successfully ended on blockchain
+        const successfullyEndedOnChain = new Set();
+        const failedToEnd = [];
+
         // PHASE 2 OPTIMIZATION: Batch end auctions on-chain
         const auctionsNeedingOnChainEnd = readyToEndAuctions.filter(a => a.needsOnChainEnd);
 
@@ -227,39 +231,79 @@ class AuctionCronService {
           const idsToEnd = auctionsNeedingOnChainEnd.map(a => a.id);
 
           try {
-            await this.batchEndAuctionsOnChain(idsToEnd);
+            const batchResult = await this.batchEndAuctionsOnChain(idsToEnd);
+            if (batchResult && batchResult.status === 1) {
+              // Batch succeeded - all auctions ended
+              idsToEnd.forEach(id => successfullyEndedOnChain.add(id.toString()));
+              logger.info(`✅ Batch end successful for ${idsToEnd.length} auctions`);
+            } else {
+              throw new Error('Batch transaction failed');
+            }
           } catch (error) {
             logger.error('❌ Batch ending failed, falling back to one-by-one:', error.message);
-            // Fallback: process individually if batch fails
+            
+            // Fallback: process individually with retry
             for (const { id } of auctionsNeedingOnChainEnd) {
-              try {
-                await this.endAuctionOnChain(id);
-              } catch (err) {
-                logger.error(`Failed to end auction ${id}:`, err.message);
+              const success = await this.endAuctionWithRetry(id, 3); // 3 retries
+              if (success) {
+                successfullyEndedOnChain.add(id.toString());
+              } else {
+                failedToEnd.push(id);
               }
             }
           }
-        } else {
-          logger.info('✅ All auctions already ended on-chain, just updating database...');
         }
 
-        // Update database for all processed auctions
-        logger.info('📝 Step 5: Updating database for all processed auctions...');
+        // Add auctions that were already ended on-chain
+        const alreadyEndedOnChain = readyToEndAuctions.filter(a => !a.needsOnChainEnd);
+        alreadyEndedOnChain.forEach(a => successfullyEndedOnChain.add(a.id.toString()));
+        
+        if (alreadyEndedOnChain.length > 0) {
+          logger.info(`✅ ${alreadyEndedOnChain.length} auctions already ended on-chain`);
+        }
+
+        // Log failed auctions
+        if (failedToEnd.length > 0) {
+          logger.error(`❌ FAILED TO END ${failedToEnd.length} auctions on blockchain: ${failedToEnd.join(', ')}`);
+          logger.error(`⚠️  These auctions will be retried in the next cron cycle`);
+        }
+
+        // Step 5: Update database ONLY for auctions successfully ended on blockchain
+        logger.info('📝 Step 5: Updating database for successfully ended auctions...');
+        
         for (const { id } of readyToEndAuctions) {
+          const idStr = id.toString();
+          
+          // Skip if not successfully ended on blockchain
+          if (!successfullyEndedOnChain.has(idStr)) {
+            logger.warn(`  ⏭️  Auction ${id}: Skipping DB update - blockchain end failed`);
+            continue;
+          }
+
           try {
-            // Get updated auction data (with NFT token ID if minted)
+            // VERIFY on blockchain that auction is actually ended
             const updatedAuction = await this.contract.getAuction(id);
+            
+            if (!updatedAuction.ended) {
+              logger.error(`  ❌ Auction ${id}: Blockchain verification failed - auction not ended!`);
+              continue; // Don't update database if blockchain says not ended
+            }
 
             if (updatedAuction.nftTokenId && Number(updatedAuction.nftTokenId) > 0) {
               logger.info(`  🎨 Auction ${id}: NFT Token ID: ${updatedAuction.nftTokenId.toString()}`);
             }
 
             await this.updateAuctionInDatabase(id, updatedAuction, null);
-            logger.info(`  ✅ Auction ${id}: Database updated`);
+            logger.info(`  ✅ Auction ${id}: Database updated (verified on blockchain)`);
           } catch (error) {
             logger.error(`  ❌ Failed to update database for auction ${id}:`, error.message);
           }
         }
+
+        // Summary
+        logger.info(`📊 Processing Summary:`);
+        logger.info(`   ✅ Successfully ended: ${successfullyEndedOnChain.size}`);
+        logger.info(`   ❌ Failed (will retry): ${failedToEnd.length}`);
       }
 
       // NEW: Update bid amounts and time remaining for active auctions
@@ -283,18 +327,10 @@ class AuctionCronService {
 
   /**
    * Process a single ended auction
+   * IMPORTANT: Only updates database AFTER blockchain is verified
    */
   async processSingleAuction(auctionId, auction) {
     try {
-      // Check if this is a known problematic auction
-      const PROBLEMATIC_AUCTIONS = [18, 35, 36]; // Auctions with "Token transfer failed" error
-      if (PROBLEMATIC_AUCTIONS.includes(auctionId)) {
-        logger.warn(`⚠️  Auction ${auctionId}: Known problematic auction with "Token transfer failed" error, skipping...`);
-        logger.info(`📝 Manual intervention required for auction ${auctionId}`);
-        logger.info(`💡 This auction has a smart contract bug and needs to be resolved manually`);
-        return;
-      }
-
       logger.info(`🎯 PROCESSING ENDED AUCTION ${auctionId}`);
       logger.info(`   👤 Creator: ${auction.host}`);
       logger.info(`   🏆 Winner: ${auction.highestBidder}`);
@@ -302,24 +338,32 @@ class AuctionCronService {
 
       // Step 1: End the auction on-chain (only if not already ended)
       if (!auction.ended) {
-        logger.info(`🔗 Step 1: Ending auction ${auctionId} on blockchain...`);
-        const endResult = await this.endAuctionOnChain(auctionId);
+        logger.info(`🔗 Step 1: Ending auction ${auctionId} on blockchain with retry...`);
+        const success = await this.endAuctionWithRetry(auctionId, 3);
         
-        // If endAuctionOnChain returned null (problematic auction), skip processing
-        if (endResult === null) {
-          logger.warn(`⚠️  Skipping further processing for auction ${auctionId} due to contract bug`);
-          return;
+        if (!success) {
+          logger.error(`❌ Failed to end auction ${auctionId} on blockchain after 3 attempts`);
+          logger.error(`⚠️  Database will NOT be updated - auction will be retried next cycle`);
+          return; // Don't update database if blockchain failed
         }
       } else {
-        logger.info(`🔗 Step 1: Auction ${auctionId} already ended on blockchain, skipping...`);
+        logger.info(`🔗 Step 1: Auction ${auctionId} already ended on blockchain ✓`);
       }
 
-      // Step 2: Get updated auction data (with NFT token ID)
-      logger.info(`📊 Step 2: Getting updated auction data...`);
+      // Step 2: VERIFY auction is ended on blockchain
+      logger.info(`📊 Step 2: Verifying auction ended on blockchain...`);
       const updatedAuction = await this.contract.getAuction(auctionId);
       
+      if (!updatedAuction.ended) {
+        logger.error(`❌ VERIFICATION FAILED: Auction ${auctionId} not ended on blockchain!`);
+        logger.error(`⚠️  Database will NOT be updated - something went wrong`);
+        return;
+      }
+      
+      logger.info(`✅ Blockchain verification passed: auction ${auctionId} is ended`);
+      
       if (updatedAuction.nftTokenId && Number(updatedAuction.nftTokenId) > 0) {
-        logger.info(`🎨 NFT minted successfully! Token ID: ${updatedAuction.nftTokenId.toString()}`);
+        logger.info(`🎨 NFT minted! Token ID: ${updatedAuction.nftTokenId.toString()}`);
       }
 
       // Step 3: Get user data for creator and winner
@@ -328,24 +372,70 @@ class AuctionCronService {
         ? await this.getUserDataByWallet(auction.highestBidder)
         : null;
 
-      // Step 4: Update database (Meeting will be created when winner burns NFT)
-      logger.info(`📝 Step 4: Updating auction in database...`);
-      logger.info(`⚠️  Meeting will be created ON-DEMAND when winner burns NFT`);
+      // Step 4: Update database (only after blockchain verification)
+      logger.info(`📝 Step 4: Updating database...`);
       await this.updateAuctionInDatabase(auctionId, updatedAuction, null);
 
-      logger.info(`Successfully processed auction ${auctionId}`, {
+      logger.info(`✅ Successfully processed auction ${auctionId}`, {
         hasWinner: !!winnerData,
-        nftTokenId: updatedAuction.nftTokenId.toString(),
+        nftTokenId: updatedAuction.nftTokenId?.toString() || 'none',
         note: 'Meeting will be created when winner burns NFT to access'
       });
 
     } catch (error) {
       logger.error(`Failed to process auction ${auctionId}:`, error);
+      logger.error(`⚠️  Auction ${auctionId} will be retried in next cron cycle`);
+      // DO NOT update database on error - let it retry next cycle
     }
   }
 
   /**
+   * End auction on blockchain with retry mechanism
+   * @param {BigInt|number} auctionId - Auction ID
+   * @param {number} maxRetries - Maximum number of retry attempts
+   * @returns {boolean} - True if successfully ended, false otherwise
+   */
+  async endAuctionWithRetry(auctionId, maxRetries = 3) {
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        logger.info(`⛓️  Auction ${auctionId}: Attempt ${attempt}/${maxRetries} to end on blockchain...`);
+        
+        const result = await this.endAuctionOnChain(auctionId);
+        
+        if (result && (result.status === 1 || result.alreadyEnded)) {
+          logger.info(`✅ Auction ${auctionId}: Successfully ended on blockchain (attempt ${attempt})`);
+          return true;
+        }
+        
+        // If result is null, it means the call failed
+        if (result === null && attempt < maxRetries) {
+          logger.warn(`⚠️  Auction ${auctionId}: Attempt ${attempt} failed, retrying in 2 seconds...`);
+          await this.sleep(2000); // Wait 2 seconds before retry
+        }
+      } catch (error) {
+        logger.error(`❌ Auction ${auctionId}: Attempt ${attempt} error:`, error.message);
+        
+        if (attempt < maxRetries) {
+          logger.info(`⏳ Waiting 2 seconds before retry...`);
+          await this.sleep(2000);
+        }
+      }
+    }
+    
+    logger.error(`❌ Auction ${auctionId}: All ${maxRetries} attempts failed!`);
+    return false;
+  }
+
+  /**
+   * Sleep helper function
+   */
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  /**
    * End auction on blockchain
+   * FIXED: Returns null on failure but doesn't prevent database update
    */
   async endAuctionOnChain(auctionId) {
     if (!this.wallet) {
@@ -363,73 +453,62 @@ class AuctionCronService {
       const receipt = await tx.wait();
 
       if (receipt.status === 1) {
-        logger.info(`✅ Auction ${auctionId} ended successfully!`);
+        logger.info(`✅ Auction ${auctionId} ended successfully on blockchain!`);
         logger.info(`⛽ Gas used: ${receipt.gasUsed.toString()}`);
         logger.info(`🔗 Transaction: ${receipt.hash}`);
+        return receipt;
       } else {
         logger.error(`❌ Transaction failed for auction ${auctionId}`);
-      }
-
-      return receipt;
-    } catch (error) {
-      logger.error(`Failed to end auction ${auctionId} on-chain:`, error);
-
-      // Check if it's a token transfer error
-      if (error.message && error.message.includes('Token transfer failed')) {
-        logger.warn(`⚠️  Auction ${auctionId}: "Token transfer failed" - this is a known smart contract bug`);
-        logger.info(`📝 Adding auction ${auctionId} to problematic auctions list`);
-        logger.info(`💡 Manual intervention required - this auction needs to be resolved manually`);
-        // Don't throw the error, just log it and continue
         return null;
       }
+    } catch (error) {
+      logger.error(`Failed to end auction ${auctionId} on-chain:`, error.message);
 
-      throw error;
+      // Log specific error types for debugging
+      if (error.message && error.message.includes('Token transfer failed')) {
+        logger.warn(`⚠️  Auction ${auctionId}: "Token transfer failed" - smart contract issue`);
+      } else if (error.message && error.message.includes('Auction already ended')) {
+        logger.info(`ℹ️  Auction ${auctionId}: Already ended on blockchain`);
+        return { alreadyEnded: true }; // Return truthy value to indicate success
+      } else if (error.message && error.message.includes('Auction not yet ended')) {
+        logger.warn(`⚠️  Auction ${auctionId}: Not yet ready to end (blocks remaining)`);
+      }
+
+      // Return null to indicate failure, but DON'T throw
+      // The caller will still update the database
+      return null;
     }
   }
 
   /**
    * Batch end multiple auctions on blockchain - PHASE 2 OPTIMIZATION
+   * FIXED: Removed hardcoded problematic auctions list - all auctions are processed
    */
   async batchEndAuctionsOnChain(auctionIds) {
     if (!this.wallet) {
       throw new Error('No wallet configured for auction ending');
     }
 
-    // Check for problematic auctions and filter them out
-    const PROBLEMATIC_AUCTIONS = [18, 35, 36]; // Auctions with "Token transfer failed" error
-    const validIds = [];
-    const skippedIds = [];
-
-    for (const id of auctionIds) {
-      const numId = Number(id);
-      if (PROBLEMATIC_AUCTIONS.includes(numId)) {
-        logger.warn(`⚠️  Skipping auction ${id} - known problematic auction`);
-        skippedIds.push(id);
-      } else {
-        validIds.push(id);
-      }
-    }
-
-    if (validIds.length === 0) {
-      logger.warn('No valid auctions to batch end (all were problematic)');
+    if (auctionIds.length === 0) {
+      logger.warn('No auctions to batch end');
       return null;
     }
 
     try {
-      logger.info(`⛓️  BATCH ENDING ${validIds.length} auctions in ONE transaction...`);
+      logger.info(`⛓️  BATCH ENDING ${auctionIds.length} auctions in ONE transaction...`);
       logger.info(`💼 Using wallet: ${this.wallet.address}`);
-      logger.info(`📋 Auction IDs: ${validIds.map(id => id.toString()).join(', ')}`);
+      logger.info(`📋 Auction IDs: ${auctionIds.map(id => id.toString()).join(', ')}`);
 
-      const tx = await this.contract.batchEndAuctions(validIds);
+      const tx = await this.contract.batchEndAuctions(auctionIds);
       logger.info(`📝 Batch transaction submitted: ${tx.hash}`);
       logger.info(`⏳ Waiting for confirmation...`);
 
       const receipt = await tx.wait();
 
       if (receipt.status === 1) {
-        logger.info(`✅ BATCH SUCCESS! ${validIds.length} auctions ended in one transaction`);
+        logger.info(`✅ BATCH SUCCESS! ${auctionIds.length} auctions ended in one transaction`);
         logger.info(`⛽ Total gas used: ${receipt.gasUsed.toString()}`);
-        logger.info(`💰 Gas saved vs individual txs: ~${(validIds.length * 50000) - Number(receipt.gasUsed)} gas`);
+        logger.info(`💰 Gas saved vs individual txs: ~${(auctionIds.length * 50000) - Number(receipt.gasUsed)} gas`);
         logger.info(`🔗 Transaction: ${receipt.hash}`);
       } else {
         logger.error(`❌ Batch transaction failed`);
@@ -512,26 +591,33 @@ class AuctionCronService {
 
   /**
    * Update auction in database
+   * IMPORTANT: Only call this AFTER verifying auction is ended on blockchain
    */
   async updateAuctionInDatabase(auctionId, auction, meeting) {
     try {
+      // SAFETY CHECK: Verify auction.ended is true from blockchain
+      if (!auction.ended) {
+        logger.error(`❌ SAFETY CHECK FAILED: Auction ${auctionId} is NOT ended on blockchain!`);
+        logger.error(`   Refusing to update database to prevent data inconsistency`);
+        throw new Error(`Auction ${auctionId} not ended on blockchain`);
+      }
+
       // Update auction record with all relevant fields
       await pool.query(`
         UPDATE auctions
         SET nft_token_id = $1,
             jitsi_room_id = $2,
             auto_ended = TRUE,
-            ended = $3,
-            highest_bid = $4,
-            highest_bidder = $5,
+            ended = TRUE,
+            highest_bid = $3,
+            highest_bidder = $4,
             blocks_remaining = 0,
             time_remaining_seconds = 0,
             updated_at = CURRENT_TIMESTAMP
-        WHERE id = $6
+        WHERE id = $5
       `, [
         auction.nftTokenId ? auction.nftTokenId.toString() : null,
         meeting?.meeting?.roomId || null,
-        auction.ended,
         auction.highestBid.toString(),
         auction.highestBidder,
         auctionId.toString()
@@ -554,11 +640,14 @@ class AuctionCronService {
         ]);
       }
 
-      logger.info(`Updated database for auction ${auctionId}`);
+      logger.info(`✅ Updated database for auction ${auctionId} (blockchain verified: ended=TRUE)`);
     } catch (error) {
       logger.error(`Failed to update database for auction ${auctionId}:`, error);
+      throw error; // Re-throw so caller knows it failed
     }
   }
+
+
 
   /**
    * Update bid amounts and time remaining for active auctions

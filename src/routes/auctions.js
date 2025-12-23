@@ -215,6 +215,7 @@ router.get('/active', async (req, res) => {
     const offset = parseInt(req.query.offset) || 0;
     
     // Get active auctions from database with user info
+    // FIXED: Check BOTH auto_ended AND ended flags to prevent showing ended auctions
     const query = `
       SELECT 
         a.*, 
@@ -223,7 +224,7 @@ router.get('/active', async (req, res) => {
         u.oauth_method
       FROM auctions a
       JOIN users u ON a.creator_para_id = u.para_user_id
-      WHERE a.auto_ended = false
+      WHERE a.auto_ended = false AND a.ended = false
       ORDER BY a.created_at DESC
       LIMIT $1 OFFSET $2
     `;
@@ -358,7 +359,7 @@ router.get('/active/db', async (req, res) => {
         u.display_name as creator_name
       FROM auctions a
       LEFT JOIN users u ON a.creator_wallet = u.wallet_address
-      WHERE a.ended = false
+      WHERE a.ended = false AND a.auto_ended = false
       ORDER BY a.created_at DESC
       LIMIT $1 OFFSET $2
     `;

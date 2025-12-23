@@ -147,7 +147,15 @@ async function startServer() {
     const orderCleanupCron = getOrderCleanupCronService();
     orderCleanupCron.start();
     logger.info('✅ Order cleanup cron service started');
-    
+
+    // Start token price cron service
+    logger.info('💰 Step 3.2: Starting token price cron service...');
+    const { pool } = require('./config/database');
+    const { getTokenPriceCronService } = require('./services/TokenPriceCronService');
+    const tokenPriceCron = getTokenPriceCronService(pool);
+    tokenPriceCron.start();
+    logger.info('✅ Token price cron service started (runs hourly)');
+
     // Start order fulfillment monitor service
     logger.info('🔍 Step 3.2: Starting order fulfillment monitor service...');
     const enableOrderMonitoring = process.env.ENABLE_ORDER_MONITORING !== 'false';
